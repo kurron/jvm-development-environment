@@ -1,0 +1,10 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=IntelliJ
+Comment=Java IDE
+Exec=/home/vagrant/Software/idea/bin/idea.sh
+Icon=/home/vagrant/Software/idea/bin/idea.png
+Path=
+Terminal=false
+StartupNotify=true

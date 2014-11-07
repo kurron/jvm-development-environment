@@ -1,0 +1,237 @@
+- hosts: all
+  sudo: yes
+  gather_facts: yes
+  tasks:
+      - name: Upgrade currently installed packages
+        apt: "upgrade=dist state=present update_cache=true cache_valid_time=600"
+
+      - name: Install common packages
+        apt: "name={{ item }} state=present update_cache=true cache_valid_time=600"
+        with_items:
+           - tree
+           - aptitude
+           - iftop
+           - python-apt
+           - curl
+           - telnet
+           - apt-transport-https
+
+      - name: Install Webmin keys
+        apt_key: url='http://www.webmin.com/jcameron-key.asc' state=present
+      - name: Install primary Webmin repository
+        apt_repository: repo='deb http://download.webmin.com/download/repository sarge contrib' state=present 
+      - name: Install secondary Webmin repository
+        apt_repository: repo='deb http://webmin.mirror.somersettechsolutions.co.uk/repository sarge contrib' state=present 
+      - name: Install Webmin software
+        apt: name=webmin state=latest update_cache=true cache_valid_time=600
+
+      - name: Add haproxy to hosts file
+        shell: echo 192.168.44.10 haproxy | tee -a /etc/hosts 
+      - name: Add rabbitmq to hosts file
+        shell: echo 192.168.44.20 rabbitmq | tee -a /etc/hosts 
+      - name: Add mongodb to hosts file
+        shell: echo 192.168.44.30 mongodb | tee -a /etc/hosts 
+      - name: Add redis to hosts file
+        shell: echo 192.168.44.40 redis | tee -a /etc/hosts 
+      - name: Add mysql to hosts file
+        shell: echo 192.168.44.50 mysql | tee -a /etc/hosts 
+      - name: Add docker to hosts file
+        shell: echo 192.168.44.60 docker | tee -a /etc/hosts 
+      - name: Add logstash to hosts file
+        shell: echo 192.168.44.70 logstash | tee -a /etc/hosts 
+      - name: Add rundeck to hosts file
+        shell: echo 192.168.44.80 rundeck | tee -a /etc/hosts 
+      - name: Add elasticsearch to hosts file
+        shell: echo 192.168.44.90 elasticsearch | tee -a /etc/hosts 
+      - name: Add nginx to hosts file
+        shell: echo 192.168.44.100 nginx | tee -a /etc/hosts 
+      - name: Add varnish to hosts file
+        shell: echo 192.168.44.110 varnish | tee -a /etc/hosts 
+      - name: Add postgresql to hosts file
+        shell: echo 192.168.44.120 postgresql | tee -a /etc/hosts 
+      - name: Add desktop to hosts file
+        shell: echo 192.168.44.130 desktop | tee -a /etc/hosts 
+
+      - name: Configure RSyslog to send all messages to logstash 
+        copy: src=files/forward-to-logstash.conf dest=/etc/rsyslog.d owner=root group=root mode=644 backup=yes
+      - name: Restart RSyslog 
+        service: name=rsyslog state=restarted 
+
+- hosts: logging-servers:search-engines:job-launchers:desktops
+  sudo: yes
+  gather_facts: yes
+  tasks:
+      - name: Install WebUpd8 keys
+        apt_key: state=present keyserver=keyserver.ubuntu.com id=EEA14886
+      - name: Install WebUpd8 repository
+        apt_repository: repo='deb http://ppa.launchpad.net/webupd8team/java/ubuntu trusty main' state=present
+      - name: Automatically select the Oracle License
+        shell: echo debconf shared/accepted-oracle-license-v1-1 select true | sudo debconf-set-selections
+        changed_when: false
+      - name: Install Oracle JDK 8 
+        apt: name=oracle-java8-installer state=latest update_cache=true cache_valid_time=600
+      - name: Set Oracle JDK 8 environment variables
+        apt: name=oracle-java8-set-default state=latest update_cache=true cache_valid_time=600
+
+- hosts: logging-servers 
+  sudo: yes
+  gather_facts: yes
+  tasks:
+      - name: Install Logstash key 
+        apt_key: url='http://packages.elasticsearch.org/GPG-KEY-elasticsearch' state=present
+      - name: Install Logstash repository
+        apt_repository: repo='deb http://packages.elasticsearch.org/logstash/1.4/debian stable main' state=present
+      - name: Install Logstash 
+        apt: name=logstash state=latest update_cache=true cache_valid_time=600
+      - name: Copy Logstash configuration file
+        copy: src=files/central.conf dest=/etc/logstash/conf.d owner=root group=root mode=644 backup=yes
+      - name: Start Logstash 
+        service: name=logstash state=restarted 
+
+- hosts: key-value-stores 
+  sudo: yes
+  gather_facts: yes
+  tasks:
+      - name: Install Redis 
+        apt: name=redis-server state=latest update_cache=true cache_valid_time=600
+      - name: Allow Redis to listen on all network interfaces
+        command: /bin/sed --in-place --expression '/bind 127.0.0.1/s/^/# /' /etc/redis/redis.conf 
+      - name: Restart Redis 
+        service: name=redis-server state=restarted 
+
+- hosts: search-engines 
+  sudo: yes
+  gather_facts: yes
+  tasks:
+      - name: Install Elastisearch key 
+        apt_key: url='http://packages.elasticsearch.org/GPG-KEY-elasticsearch' state=present
+      - name: Install Elastisearch repository
+        apt_repository: repo='deb http://packages.elasticsearch.org/elasticsearch/1.3/debian stable main' state=present
+      - name: Install Elastisearch 
+        apt: name=elasticsearch state=latest update_cache=true cache_valid_time=600
+      - name: Configuring Elastisearch
+        script: scripts/fix-elasticsearch.sh
+      - name: Restart Elastisearch 
+        service: name=elasticsearch state=restarted 
+
+- hosts: load-balancers 
+  sudo: yes
+  gather_facts: yes
+  tasks:
+      - name: Install HAProxy 
+        apt: name=haproxy state=latest update_cache=true cache_valid_time=600
+      - name: Install HATop 
+        apt: name=hatop state=latest update_cache=true cache_valid_time=600
+      - name: Vim HAProxy support 
+        apt: name=vim-haproxy state=latest update_cache=true cache_valid_time=600
+      - name: Vim HAProxy documentation 
+        apt: name=haproxy-doc state=latest update_cache=true cache_valid_time=600
+
+- hosts: message-brokers 
+  sudo: yes
+  gather_facts: yes
+  tasks:
+      - name: Install RabbitMQ key 
+        apt_key: url='http://www.rabbitmq.com/rabbitmq-signing-key-public.asc' state=present
+      - name: Install RabbitMQ repository
+        apt_repository: repo='deb http://www.rabbitmq.com/debian/ testing main' state=present
+      - name: Install RabbitMQ 
+        apt: name=rabbitmq-server state=latest update_cache=true cache_valid_time=600
+      - name: Copy RabbitMQ configuration file
+        copy: src=files/rabbitmq.config dest=/etc/rabbitmq owner=root group=root mode=644 backup=yes
+      - name: Activate RabbitMQ administration plug-in 
+        command: rabbitmq-plugins enable rabbitmq_management 
+      - name: Restart RabbitMQ 
+        service: name=rabbitmq-server state=restarted 
+
+- hosts: document-stores 
+  sudo: yes
+  gather_facts: yes
+  tasks:
+      - name: Install MongoDB keys
+        apt_key: state=present keyserver=keyserver.ubuntu.com id=7F0CEB10
+      - name: Install MongoDB repository
+        apt_repository: repo='deb http://downloads-distro.mongodb.org/repo/ubuntu-upstart dist 10gen' state=present
+      - name: Install MongoDB 
+        apt: name=mongodb-org state=latest update_cache=true cache_valid_time=600
+      - name: Allow MongoDB to listen on all network interfaces
+        command: /bin/sed --in-place --expression '/bind_ip = 127.0.0.1/s/^/# /' /etc/mongod.conf 
+      - name: Restart MongoDB 
+        service: name=mongod state=restarted 
+
+- hosts: mysql-stores 
+  sudo: yes
+  gather_facts: yes
+  tasks:
+      - name: Install MySQL 
+        apt: name=mysql-server state=latest update_cache=true cache_valid_time=600
+      - name: Install MyTop 
+        apt: name=mytop state=latest update_cache=true cache_valid_time=600
+
+- hosts: postgresql-stores 
+  sudo: yes
+  gather_facts: yes
+  tasks:
+      - name: Install PostgreSQL 
+        apt: name=postgresql state=latest update_cache=true cache_valid_time=600
+      - name: Install MyTop 
+        apt: name=mytop state=latest update_cache=true cache_valid_time=600
+
+- hosts: web-proxies 
+  sudo: yes
+  gather_facts: yes
+  tasks:
+      - name: Install nginx keys
+        apt_key: url='http://nginx.org/keys/nginx_signing.key' state=present
+      - name: Install nginx repository
+        apt_repository: repo='deb http://nginx.org/packages/ubuntu/ trusty nginx' state=present
+      - name: Install nginx 
+        apt: name=nginx state=latest update_cache=true cache_valid_time=600
+
+- hosts: application-containers 
+  sudo: yes
+  gather_facts: yes
+  tasks:
+      - name: Install Docker keys
+        apt_key: state=present keyserver=keyserver.ubuntu.com id=36A1D7869245C8950F966E92D8576A8BA88D21E9
+      - name: Install Docker repository
+        apt_repository: repo='deb https://get.docker.io/ubuntu docker main' state=present
+      - name: Install Docker 
+        apt: name=lxc-docker state=latest update_cache=true cache_valid_time=600
+      - name: Add vagrant to the docker group
+        user: name=vagrant state=present groups=docker
+      - name: Restart Docker 
+        service: name=docker state=restarted 
+
+- hosts: job-launchers 
+  sudo: yes
+  gather_facts: yes
+  tasks:
+      - name: Download Rundeck package 
+        get_url: url=http://dl.bintray.com/rundeck/rundeck-maven/rundeck-launcher-2.2.1.jar dest=/tmp mode=0444 
+#     - name: Install Rundeck 
+#       apt: deb=/tmp/rundeck-2.2.1-1-GA.deb state=installed
+
+- hosts: desktops 
+  sudo: yes
+  gather_facts: yes
+  tasks:
+      - name: Install desktop packages
+        apt: "name={{ item }} state=present update_cache=true cache_valid_time=600"
+        with_items:
+           - wireshark
+           - chromium-browser
+      - name: Create Software directory 
+        file: path=/home/vagrant/Software owner=vagrant group=vagrant state=directory mode=755
+      - name: Download IntelliJ IDEA 
+        get_url: url=http://download.jetbrains.com/idea/ideaIU-13.1.5.tar.gz dest=/tmp mode=444 
+      - name: Unpack IntelliJ IDEA 
+        unarchive: src=/tmp/ideaIU-13.1.5.tar.gz dest=/home/vagrant/Software copy=no 
+      - name: Soft-link IntelliJ 
+        file: src=/home/vagrant/Software/idea-IU-135.1289 path=/home/vagrant/Software/idea state=link
+      - name: Create Desktop directory 
+        file: path=/home/vagrant/Desktop owner=vagrant group=vagrant state=directory mode=755
+      - name: Copy desktop IntelliJ file  
+        copy: src=files/InjelliJ.desktop dest=/home/vagrant/Desktop/InjelliJ.desktop owner=vagrant group=vagrant backup=no
+      - name: Set permissions on the home directory 
+        file: path=/home/vagrant owner=vagrant group=vagrant recurse=true state=directory
