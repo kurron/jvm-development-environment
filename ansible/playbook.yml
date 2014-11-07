@@ -68,9 +68,9 @@
       - name: Create GVM directory 
         file: path=/home/vagrant/.gvm/etc owner=vagrant group=vagrant state=directory mode=755
       - name: Copy GVM configuration file
-        copy: src=files/gvm.config dest=.gvm/etc/config owner=vagrant group=vagrant mode=644 backup=no
+        copy: src=files/gvm.config dest=/home/vagrant/.gvm/etc/config owner=vagrant group=vagrant mode=644 backup=no
       - name: Install GVM 
-        shell: sudo -u vagrant -H -n -i files/install-gvm.sh -- 
+        command: sudo -u vagrant -H -n -i files/install-gvm.sh -- 
       - name: Create Software directory 
         file: path=/home/vagrant/Software owner=vagrant group=vagrant state=directory mode=755
       - name: Download IntelliJ IDEA 
