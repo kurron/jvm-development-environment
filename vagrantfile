@@ -44,107 +44,10 @@ Vagrant.configure("2") do |config|
         v.customize ["modifyvm", :id, "--vtxvpid", "on"]
         v.customize ["modifyvm", :id, "--largepages", "on"]
         v.customize ["modifyvm", :id, "--acpi", "on"]
-        v.customize ["modifyvm", :id, "--groups", "/Example"]
+        v.customize ["modifyvm", :id, "--groups", "/JVM"]
     end
 
     config.vm.provision "shell", path: "ansible/scripts/run-ansible.sh"
-
-    config.vm.define "haproxy" do |haproxy|
-        haproxy.vm.hostname = "haproxy"
-        haproxy.vm.network :private_network, ip: "192.168.44.10"
-        haproxy.vm.provider "virtualbox" do |v|
-            v.name = "example.haproxy"
-        end
-    end
-
-    config.vm.define "rabbitmq" do |rabbitmq|
-        rabbitmq.vm.hostname = "rabbitmq"
-        rabbitmq.vm.network :private_network, ip: "192.168.44.20"
-        rabbitmq.vm.provider "virtualbox" do |v|
-            v.name = "example.rabbitmq"
-        end
-    end
-
-    config.vm.define "mongodb" do |mongodb|
-        mongodb.vm.hostname = "mongodb"
-        mongodb.vm.network :private_network, ip: "192.168.44.30"
-        mongodb.vm.provider "virtualbox" do |v|
-            v.name = "example.mongodb"
-        end
-    end
-
-    config.vm.define "redis" do |redis|
-        redis.vm.hostname = "redis"
-        redis.vm.network :private_network, ip: "192.168.44.40"
-        redis.vm.provider "virtualbox" do |v|
-            v.name = "example.redis"
-        end
-    end
-
-    config.vm.define "mysql" do |mysql|
-        mysql.vm.hostname = "mysql"
-        mysql.vm.network :private_network, ip: "192.168.44.50"
-        mysql.vm.provider "virtualbox" do |v|
-            v.name = "example.mysql"
-        end
-    end
-
-    config.vm.define "docker" do |docker|
-        docker.vm.hostname = "docker"
-        docker.vm.network :private_network, ip: "192.168.44.60"
-        docker.vm.provider "virtualbox" do |v|
-            v.name = "example.docker"
-        end
-    end
-
-    config.vm.define "logstash" do |logstash|
-        logstash.vm.hostname = "logstash"
-        logstash.vm.network :private_network, ip: "192.168.44.70"
-        logstash.vm.provider "virtualbox" do |v|
-            v.name = "example.logstash"
-        end
-    end
-
-    config.vm.define "rundeck" do |rundeck|
-        rundeck.vm.hostname = "rundeck"
-        rundeck.vm.network :private_network, ip: "192.168.44.80"
-#       rundeck.vm.network :private_network, type: "dhcp" 
-        rundeck.vm.provider "virtualbox" do |v|
-            v.name = "example.rundeck"
-        end
-    end
-
-    config.vm.define "elasticsearch" do |elasticsearch|
-        elasticsearch.vm.hostname = "elasticsearch"
-        elasticsearch.vm.network :private_network, ip: "192.168.44.90"
-        elasticsearch.vm.provider "virtualbox" do |v|
-            v.name = "example.elasticsearch"
-        end
-    end
-
-    config.vm.define "nginx" do |nginx|
-        nginx.vm.hostname = "nginx"
-        nginx.vm.network :private_network, ip: "192.168.44.100"
-        nginx.vm.provider "virtualbox" do |v|
-            v.name = "example.nginx"
-        end
-    end
-
-    config.vm.define "varnish" do |varnish|
-        varnish.vm.hostname = "varnish"
-        varnish.vm.network :private_network, ip: "192.168.44.110"
-        varnish.vm.provider "virtualbox" do |v|
-            v.name = "example.varnish"
-        end
-    end
-
-    config.vm.define "postgresql" do |postgresql|
-        postgresql.vm.hostname = "postgresql"
-        postgresql.vm.network :private_network, ip: "192.168.44.120"
-        postgresql.vm.provider "virtualbox" do |v|
-            v.name = "example.postgresql"
-        end
-    end
 
     config.vm.define "desktop" do |desktop|
         desktop.vm.box = "packer/trusty-x64-desktop"
