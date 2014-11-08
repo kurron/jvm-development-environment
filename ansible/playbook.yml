@@ -44,8 +44,23 @@
       - name: soft-link the JDK to a normalized location
         file: src=/usr/lib/jvm/jdk1.8.0_25 dest=/usr/lib/jvm/oracle-jdk-8 owner=root group=root state=link
 
+- hosts: java-7
+  sudo: yes
+  gather_facts: yes
+  tasks:
+      - name: Create destination directory 
+        file: path=/usr/lib/jvm owner=root group=root state=directory mode=755
+      - name: Copy JDK 7 download script to a safe place
+        copy: src=scripts/download-jdk-7.sh dest=/tmp/download-jdk-7.sh owner=root group=root mode=755 backup=no
+      - name: Execute download script 
+        command: /tmp/download-jdk-7.sh
+      - name: unpack the archive
+        unarchive: src=/tmp/jdk-7.tar.gz dest=/usr/lib/jvm copy=no owner=root group=root mode=755
+      - name: soft-link the JDK to a normalized location
+        file: src=/usr/lib/jvm/jdk1.7.0_71 dest=/usr/lib/jvm/oracle-jdk-7 owner=root group=root state=link
 
-- hosts: desktopsX
+
+- hosts: groovy-developer
   sudo: yes
   gather_facts: yes
   tasks:
@@ -53,26 +68,10 @@
         file: path=/home/vagrant/.gvm/etc owner=vagrant group=vagrant state=directory mode=755
       - name: Copy GVM configuration file
         copy: src=files/gvm.config dest=/home/vagrant/.gvm/etc/config owner=vagrant group=vagrant mode=644 backup=no
-      - name: Copy GVM installation file
-        copy: src=files/install-gvm.sh dest=/tmp/install-gvm.sh owner=vagrant group=vagrant mode=755 backup=no
+      - name: Copy GVM installation file to a safe place
+        copy: src=scripts/install-gvm.sh dest=/tmp/install-gvm.sh owner=vagrant group=vagrant mode=755 backup=no
       - name: Install GVM 
         command: sudo -u vagrant -H -n -i /tmp/install-gvm.sh -- 
-
-- hosts: desktopsX
-  sudo: yes
-  gather_facts: yes
-  tasks:
-      - name: Install WebUpd8 keys
-        apt_key: state=present keyserver=keyserver.ubuntu.com id=EEA14886
-      - name: Install WebUpd8 repository
-        apt_repository: repo='deb http://ppa.launchpad.net/webupd8team/java/ubuntu trusty main' state=present
-      - name: Automatically select the Oracle License
-        shell: echo debconf shared/accepted-oracle-license-v1-1 select true | sudo debconf-set-selections
-        changed_when: false
-      - name: Install Oracle JDK 8 
-        apt: name=oracle-java8-installer state=latest update_cache=true cache_valid_time=600
-      - name: Set Oracle JDK 8 environment variables
-        apt: name=oracle-java8-set-default state=latest update_cache=true cache_valid_time=600
 
 - hosts: desktopsX
   sudo: yes
