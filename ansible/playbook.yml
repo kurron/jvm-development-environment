@@ -6,7 +6,7 @@
         apt: "upgrade=dist state=present update_cache=true cache_valid_time=600"
 
       - name: Install common packages
-        apt: "name={{ item }} state=present update_cache=true cache_valid_time=600"
+        apt: "name={{ item }} state=present"
         with_items:
            - tree
            - aptitude
@@ -16,6 +16,10 @@
            - telnet
            - apt-transport-https
 
+- hosts: remote-managed
+  sudo: yes
+  gather_facts: yes
+  tasks:
       - name: Install Webmin keys
         apt_key: url='http://www.webmin.com/jcameron-key.asc' state=present
       - name: Install primary Webmin repository
@@ -25,7 +29,23 @@
       - name: Install Webmin software
         apt: name=webmin state=latest update_cache=true cache_valid_time=600
 
-- hosts: desktops
+- hosts: java-8
+  sudo: yes
+  gather_facts: yes
+  tasks:
+      - name: Create destination directory 
+        file: path=/usr/lib/jvm owner=root group=root state=directory mode=755
+      - name: Copy JDK 8 download script to a safe place
+        copy: src=scripts/download-jdk-8.sh dest=/tmp/download-jdk-8.sh owner=root group=root mode=755 backup=no
+      - name: Execute download script 
+        command: /tmp/download-jdk-8.sh
+      - name: unpack the archive
+        unarchive: src=/tmp/jdk-8.tar.gz dest=/usr/lib/jvm copy=no owner=root group=root mode=755
+      - name: soft-link the JDK to a normalized location
+        file: src=/usr/lib/jvm/jdk1.8.0_25 dest=/usr/lib/jvm/oracle-jdk-8 owner=root group=root state=link
+
+
+- hosts: desktopsX
   sudo: yes
   gather_facts: yes
   tasks:
@@ -38,7 +58,7 @@
       - name: Install GVM 
         command: sudo -u vagrant -H -n -i /tmp/install-gvm.sh -- 
 
-- hosts: desktops
+- hosts: desktopsX
   sudo: yes
   gather_facts: yes
   tasks:
@@ -54,7 +74,7 @@
       - name: Set Oracle JDK 8 environment variables
         apt: name=oracle-java8-set-default state=latest update_cache=true cache_valid_time=600
 
-- hosts: desktops 
+- hosts: desktopsX
   sudo: yes
   gather_facts: yes
   tasks:
@@ -69,7 +89,7 @@
       - name: Restart Docker 
         service: name=docker state=restarted 
 
-- hosts: desktops 
+- hosts: desktopsX
   sudo: yes
   gather_facts: yes
   tasks:
