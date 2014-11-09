@@ -148,6 +148,23 @@
       - name: Set permissions on the home directory
         file: path=/home/vagrant owner=vagrant group=vagrant recurse=true state=directory
 
+- hosts: charles-user
+  sudo: yes
+  gather_facts: yes
+  tasks:
+      - name: Create Software directory 
+        file: path=/home/vagrant/Software owner=vagrant group=vagrant state=directory mode=755
+      - name: Download Charles 
+        get_url: url=http://www.charlesproxy.com/assets/release/3.9.3/charles-proxy-3.9.3.tar.gz dest=/tmp/charles.tar.gz mode=444 
+      - name: Unpack Charles 
+        unarchive: src=/tmp/charles.tar.gz dest=/home/vagrant/Software copy=no owner=vagrant group=vagrant creates=/home/vagrant/Software/charles/icon/charles_icon16.png
+      - name: Create Desktop directory 
+        file: path=/home/vagrant/Desktop owner=vagrant group=vagrant state=directory mode=755
+      - name: Copy desktop Charles file  
+        copy: src=files/Charles.desktop dest=/home/vagrant/Desktop/Charles.desktop owner=vagrant group=vagrant backup=no mode=755
+      - name: Set permissions on the home directory
+        file: path=/home/vagrant owner=vagrant group=vagrant recurse=true state=directory
+
 - hosts: docker-box
   sudo: yes
   gather_facts: yes
