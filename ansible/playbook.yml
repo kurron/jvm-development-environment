@@ -16,7 +16,7 @@
            - telnet
            - apt-transport-https
 
-- hosts: passwordless-sudo
+- hosts: passwordless-sudo-box
   sudo: yes
   gather_facts: yes
   tasks:
@@ -36,7 +36,7 @@
       - name: Install Webmin software
         apt: name=webmin state=latest update_cache=true cache_valid_time=600
 
-- hosts: java-8
+- hosts: java-8-box
   sudo: yes
   gather_facts: yes
   tasks:
@@ -55,7 +55,7 @@
       - name: Execute JDK export script 
         command: /tmp/export-java-home.sh
 
-- hosts: java-7
+- hosts: java-7-box
   sudo: yes
   gather_facts: yes
   tasks:
@@ -103,7 +103,7 @@
         command: /tmp/export-idea-jdk.sh
 
 
-- hosts: desktopsX
+- hosts: docker-box
   sudo: yes
   gather_facts: yes
   tasks:
@@ -115,10 +115,14 @@
         apt: name=lxc-docker state=latest update_cache=true cache_valid_time=600
       - name: Add vagrant to the docker group
         user: name=vagrant state=present groups=docker
+      - name: Set Memory and Swap Accounting
+        lineinfile: dest=/etc/default/grub regexp='^GRUB_CMDLINE_LINUX=""' line='GRUB_CMDLINE_LINUX="cgroup_enable=memory swapaccount=1"'
+      - name: Rebuild GRUB 
+        command: update-grub
       - name: Restart Docker 
         service: name=docker state=restarted 
 
-- hosts: desktopsX
+- hosts: desktops
   sudo: yes
   gather_facts: yes
   tasks:
@@ -127,18 +131,6 @@
         with_items:
            - wireshark
            - chromium-browser
-      - name: Create Software directory 
-        file: path=/home/vagrant/Software owner=vagrant group=vagrant state=directory mode=755
-      - name: Download IntelliJ IDEA 
-        get_url: url=http://download.jetbrains.com/idea/ideaIU-14.tar.gz dest=/tmp mode=444 
-      - name: Unpack IntelliJ IDEA 
-        unarchive: src=/tmp/ideaIU-14.tar.gz dest=/home/vagrant/Software copy=no 
-      - name: Soft-link IntelliJ 
-        file: src=/home/vagrant/Software/idea-IU-139.224.1 path=/home/vagrant/Software/idea state=link
-      - name: Create Desktop directory 
-        file: path=/home/vagrant/Desktop owner=vagrant group=vagrant state=directory mode=755
-      - name: Copy desktop IntelliJ file  
-        copy: src=files/InjelliJ.desktop dest=/home/vagrant/Desktop/InjelliJ.desktop owner=vagrant group=vagrant backup=no
-      - name: Set permissions on the home directory 
-        file: path=/home/vagrant owner=vagrant group=vagrant recurse=true state=directory
+      - name: Copy login icon  
+        copy: src=files/brock.png dest=/home/vagrant/.face owner=vagrant group=vagrant backup=no mode=644
 
