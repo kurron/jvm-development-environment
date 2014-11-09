@@ -7,7 +7,7 @@ if [ -f "${DONEFILE}" ]; then
     exit 0
 fi
 
-curl -s get.gvmtool.net | bash
+curl --silent get.gvmtool.net | bash
 
 # signal a successful provision
-touch ${DONEFILE}
+sudo touch ${DONEFILE}
