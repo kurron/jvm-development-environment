@@ -47,7 +47,7 @@
       - name: Execute download script 
         command: /tmp/download-jdk-8.sh
       - name: unpack the archive
-        unarchive: src=/tmp/jdk-8.tar.gz dest=/usr/lib/jvm copy=no owner=root group=root mode=755 creates=/usr/lib/jvm/jdk1.8.0_25/COPYRIGHT
+        unarchive: src=/root/jdk-8.tar.gz dest=/usr/lib/jvm copy=no owner=root group=root mode=755 creates=/usr/lib/jvm/jdk1.8.0_25/COPYRIGHT
       - name: soft-link the JDK to a normalized location
         file: src=/usr/lib/jvm/jdk1.8.0_25 dest=/usr/lib/jvm/oracle-jdk-8 owner=root group=root state=link
       - name: Copy export script to a safe place
@@ -66,7 +66,7 @@
       - name: Execute download script 
         command: /tmp/download-jdk-7.sh
       - name: unpack the archive
-        unarchive: src=/tmp/jdk-7.tar.gz dest=/usr/lib/jvm copy=no owner=root group=root mode=755 creates=/usr/lib/jvm/jdk1.7.0_71/COPYRIGHT
+        unarchive: src=/root/jdk-7.tar.gz dest=/usr/lib/jvm copy=no owner=root group=root mode=755 creates=/usr/lib/jvm/jdk1.7.0_71/COPYRIGHT
       - name: soft-link the JDK to a normalized location
         file: src=/usr/lib/jvm/jdk1.7.0_71 dest=/usr/lib/jvm/oracle-jdk-7 owner=root group=root state=link
 
@@ -90,9 +90,9 @@
       - name: Create Software directory 
         file: path=/home/vagrant/Software owner=vagrant group=vagrant state=directory mode=755
       - name: Download IntelliJ IDEA 
-        get_url: url=http://download.jetbrains.com/idea/ideaIU-14.tar.gz dest=/tmp/idea.tar.gz mode=444 
+        get_url: url=http://download.jetbrains.com/idea/ideaIU-14.tar.gz dest=/root/idea.tar.gz mode=444 
       - name: Unpack IntelliJ IDEA 
-        unarchive: src=/tmp/idea.tar.gz dest=/home/vagrant/Software copy=no owner=vagrant group=vagrant creates=/home/vagrant/Software/idea-IU-139.224.1/build.txt
+        unarchive: src=/root/idea.tar.gz dest=/home/vagrant/Software copy=no owner=vagrant group=vagrant creates=/home/vagrant/Software/idea-IU-139.224.1/build.txt
       - name: Soft-link IntelliJ 
         file: src=/home/vagrant/Software/idea-IU-139.224.1 path=/home/vagrant/Software/idea state=link
       - name: Create Desktop directory 
@@ -113,9 +113,9 @@
       - name: Create Software directory 
         file: path=/home/vagrant/Software owner=vagrant group=vagrant state=directory mode=755
       - name: Download STS 
-        get_url: url=http://download.springsource.com/release/STS/3.6.2/dist/e4.4/spring-tool-suite-3.6.2.RELEASE-e4.4.1-linux-gtk-x86_64.tar.gz dest=/tmp/sts.tar.gz mode=444 
+        get_url: url=http://download.springsource.com/release/STS/3.6.2/dist/e4.4/spring-tool-suite-3.6.2.RELEASE-e4.4.1-linux-gtk-x86_64.tar.gz dest=/root/sts.tar.gz mode=444 
       - name: Unpack STS 
-        unarchive: src=/tmp/sts.tar.gz dest=/home/vagrant/Software copy=no owner=vagrant group=vagrant creates=/home/vagrant/Software/sts-bundle/sts-3.6.2.RELEASE/readme
+        unarchive: src=/root/sts.tar.gz dest=/home/vagrant/Software copy=no owner=vagrant group=vagrant creates=/home/vagrant/Software/sts-bundle/sts-3.6.2.RELEASE/readme
       - name: Soft-link STS 
         file: src=/home/vagrant/Software/sts-bundle/sts-3.6.2.RELEASE path=/home/vagrant/Software/sts state=link
       - name: Soft-link JRE 
@@ -134,9 +134,9 @@
       - name: Create Software directory 
         file: path=/home/vagrant/Software owner=vagrant group=vagrant state=directory mode=755
       - name: Download GGTS 
-        get_url: url=http://download.springsource.com/release/STS/3.6.2/dist/e4.4/groovy-grails-tool-suite-3.6.2.RELEASE-e4.4.1-linux-gtk-x86_64.tar.gz dest=/tmp/ggts.tar.gz mode=444 
+        get_url: url=http://download.springsource.com/release/STS/3.6.2/dist/e4.4/groovy-grails-tool-suite-3.6.2.RELEASE-e4.4.1-linux-gtk-x86_64.tar.gz dest=/root/ggts.tar.gz mode=444 
       - name: Unpack GGTS 
-        unarchive: src=/tmp/ggts.tar.gz dest=/home/vagrant/Software copy=no owner=vagrant group=vagrant creates=/home/vagrant/Software/ggts-bundle/ggts-3.6.2.RELEASE/readme
+        unarchive: src=/root/ggts.tar.gz dest=/home/vagrant/Software copy=no owner=vagrant group=vagrant creates=/home/vagrant/Software/ggts-bundle/ggts-3.6.2.RELEASE/readme
       - name: Soft-link GGTS 
         file: src=/home/vagrant/Software/ggts-bundle/ggts-3.6.2.RELEASE path=/home/vagrant/Software/ggts state=link
       - name: Soft-link JRE 
@@ -144,7 +144,7 @@
       - name: Create Desktop directory 
         file: path=/home/vagrant/Desktop owner=vagrant group=vagrant state=directory mode=755
       - name: Copy desktop GGTS file  
-        copy: src=files/STS.desktop dest=/home/vagrant/Desktop/GGTS.desktop owner=vagrant group=vagrant backup=no mode=755
+        copy: src=files/GGTS.desktop dest=/home/vagrant/Desktop/GGTS.desktop owner=vagrant group=vagrant backup=no mode=755
       - name: Set permissions on the home directory
         file: path=/home/vagrant owner=vagrant group=vagrant recurse=true state=directory
 
@@ -155,9 +155,9 @@
       - name: Create Software directory 
         file: path=/home/vagrant/Software owner=vagrant group=vagrant state=directory mode=755
       - name: Download Charles 
-        get_url: url=http://www.charlesproxy.com/assets/release/3.9.3/charles-proxy-3.9.3.tar.gz dest=/tmp/charles.tar.gz mode=444 
+        get_url: url=http://www.charlesproxy.com/assets/release/3.9.3/charles-proxy-3.9.3.tar.gz dest=/root/charles.tar.gz mode=444 
       - name: Unpack Charles 
-        unarchive: src=/tmp/charles.tar.gz dest=/home/vagrant/Software copy=no owner=vagrant group=vagrant creates=/home/vagrant/Software/charles/icon/charles_icon16.png
+        unarchive: src=/root/charles.tar.gz dest=/home/vagrant/Software copy=no owner=vagrant group=vagrant creates=/home/vagrant/Software/charles/icon/charles_icon16.png
       - name: Create Desktop directory 
         file: path=/home/vagrant/Desktop owner=vagrant group=vagrant state=directory mode=755
       - name: Copy desktop Charles file  
@@ -172,9 +172,9 @@
       - name: Create Software directory 
         file: path=/home/vagrant/Software owner=vagrant group=vagrant state=directory mode=755
       - name: Download DbVisualizer 
-        get_url: url=http://www.dbvis.com/product_download/dbvis-9.1.11/media/dbvis_unix_9_1_11.tar.gz dest=/tmp/dbvis.tar.gz mode=444 
+        get_url: url=http://www.dbvis.com/product_download/dbvis-9.1.11/media/dbvis_unix_9_1_11.tar.gz dest=/root/dbvis.tar.gz mode=444 
       - name: Unpack Charles 
-        unarchive: src=/tmp/dbvis.tar.gz dest=/home/vagrant/Software copy=no owner=vagrant group=vagrant creates=/home/vagrant/Software/DbVisualizer
+        unarchive: src=/root/dbvis.tar.gz dest=/home/vagrant/Software copy=no owner=vagrant group=vagrant creates=/home/vagrant/Software/DbVisualizer
       - name: Create Desktop directory 
         file: path=/home/vagrant/Desktop owner=vagrant group=vagrant state=directory mode=755
       - name: Copy desktop DbVisualizer file  
