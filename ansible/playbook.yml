@@ -47,7 +47,7 @@
       - name: Execute download script 
         command: /tmp/download-jdk-8.sh
       - name: unpack the archive
-        unarchive: src=/tmp/jdk-8.tar.gz dest=/usr/lib/jvm copy=no owner=root group=root mode=755
+        unarchive: src=/tmp/jdk-8.tar.gz dest=/usr/lib/jvm copy=no owner=root group=root mode=755 creates=/usr/lib/jvm/jdk1.8.0_25/COPYRIGHT
       - name: soft-link the JDK to a normalized location
         file: src=/usr/lib/jvm/jdk1.8.0_25 dest=/usr/lib/jvm/oracle-jdk-8 owner=root group=root state=link
       - name: Copy export script to a safe place
@@ -66,7 +66,7 @@
       - name: Execute download script 
         command: /tmp/download-jdk-7.sh
       - name: unpack the archive
-        unarchive: src=/tmp/jdk-7.tar.gz dest=/usr/lib/jvm copy=no owner=root group=root mode=755
+        unarchive: src=/tmp/jdk-7.tar.gz dest=/usr/lib/jvm copy=no owner=root group=root mode=755 creates=/usr/lib/jvm/jdk1.7.0_71/COPYRIGHT
       - name: soft-link the JDK to a normalized location
         file: src=/usr/lib/jvm/jdk1.7.0_71 dest=/usr/lib/jvm/oracle-jdk-7 owner=root group=root state=link
 
@@ -92,7 +92,7 @@
       - name: Download IntelliJ IDEA 
         get_url: url=http://download.jetbrains.com/idea/ideaIU-14.tar.gz dest=/tmp/idea.tar.gz mode=444 
       - name: Unpack IntelliJ IDEA 
-        unarchive: src=/tmp/idea.tar.gz dest=/home/vagrant/Software copy=no owner=vagrant group=vagrant
+        unarchive: src=/tmp/idea.tar.gz dest=/home/vagrant/Software copy=no owner=vagrant group=vagrant creates=/home/vagrant/Software/idea-IU-139.224.1/build.txt
       - name: Soft-link IntelliJ 
         file: src=/home/vagrant/Software/idea-IU-139.224.1 path=/home/vagrant/Software/idea state=link
       - name: Create Desktop directory 
@@ -115,15 +115,36 @@
       - name: Download STS 
         get_url: url=http://download.springsource.com/release/STS/3.6.2/dist/e4.4/spring-tool-suite-3.6.2.RELEASE-e4.4.1-linux-gtk-x86_64.tar.gz dest=/tmp/sts.tar.gz mode=444 
       - name: Unpack STS 
-        unarchive: src=/tmp/sts.tar.gz dest=/home/vagrant/Software copy=no owner=vagrant group=vagrant
+        unarchive: src=/tmp/sts.tar.gz dest=/home/vagrant/Software copy=no owner=vagrant group=vagrant creates=/home/vagrant/Software/sts-bundle/sts-3.6.2.RELEASE/readme
       - name: Soft-link STS 
         file: src=/home/vagrant/Software/sts-bundle/sts-3.6.2.RELEASE path=/home/vagrant/Software/sts state=link
       - name: Soft-link JRE 
-        file: src=/usr/lib/jvm/oracle-jdk-8/jre path=/home/vagrant/Software/sts-bundle/sts-3.6.2.RELEASE state=link
+        file: src=/usr/lib/jvm/oracle-jdk-8/jre path=/home/vagrant/Software/sts-bundle/sts-3.6.2.RELEASE/jre state=link
       - name: Create Desktop directory 
         file: path=/home/vagrant/Desktop owner=vagrant group=vagrant state=directory mode=755
       - name: Copy desktop STS file  
         copy: src=files/STS.desktop dest=/home/vagrant/Desktop/STS.desktop owner=vagrant group=vagrant backup=no mode=755
+      - name: Set permissions on the home directory
+        file: path=/home/vagrant owner=vagrant group=vagrant recurse=true state=directory
+
+- hosts: ggts-user
+  sudo: yes
+  gather_facts: yes
+  tasks:
+      - name: Create Software directory 
+        file: path=/home/vagrant/Software owner=vagrant group=vagrant state=directory mode=755
+      - name: Download GGTS 
+        get_url: url=http://download.springsource.com/release/STS/3.6.2/dist/e4.4/groovy-grails-tool-suite-3.6.2.RELEASE-e4.4.1-linux-gtk-x86_64.tar.gz dest=/tmp/ggts.tar.gz mode=444 
+      - name: Unpack GGTS 
+        unarchive: src=/tmp/ggts.tar.gz dest=/home/vagrant/Software copy=no owner=vagrant group=vagrant creates=/home/vagrant/Software/ggts-bundle/ggts-3.6.2.RELEASE/readme
+      - name: Soft-link GGTS 
+        file: src=/home/vagrant/Software/ggts-bundle/ggts-3.6.2.RELEASE path=/home/vagrant/Software/ggts state=link
+      - name: Soft-link JRE 
+        file: src=/usr/lib/jvm/oracle-jdk-8/jre path=/home/vagrant/Software/ggts-bundle/ggts-3.6.2.RELEASE/jre state=link
+      - name: Create Desktop directory 
+        file: path=/home/vagrant/Desktop owner=vagrant group=vagrant state=directory mode=755
+      - name: Copy desktop GGTS file  
+        copy: src=files/STS.desktop dest=/home/vagrant/Desktop/GGTS.desktop owner=vagrant group=vagrant backup=no mode=755
       - name: Set permissions on the home directory
         file: path=/home/vagrant owner=vagrant group=vagrant recurse=true state=directory
 
@@ -157,6 +178,10 @@
            - chromium-browser
       - name: Copy login icon  
         copy: src=files/brock.png dest=/home/vagrant/.face owner=vagrant group=vagrant backup=no mode=644
+      - name: Create bin directory 
+        file: path=/home/vagrant/bin owner=vagrant group=vagrant state=directory mode=755
+      - name: Copy Git intialization script  
+        copy: src=scripts/intialize-git.sh dest=/home/vagrant/bin/intialize-git.sh owner=vagrant group=vagrant backup=no mode=744
       - name: Set permissions on the home directory
         file: path=/home/vagrant owner=vagrant group=vagrant recurse=true state=directory
 

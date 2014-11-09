@@ -1,0 +1,10 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=GGTS
+Comment=Groovy Grails Tool Suite
+Exec=/home/vagrant/Software/ggts/GGTS
+Icon=/home/vagrant/Software/ggts/icon.xpm
+Path=
+Terminal=false
+StartupNotify=true
