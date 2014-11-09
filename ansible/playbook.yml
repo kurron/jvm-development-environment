@@ -165,6 +165,23 @@
       - name: Set permissions on the home directory
         file: path=/home/vagrant owner=vagrant group=vagrant recurse=true state=directory
 
+- hosts: dbvisualizer-user
+  sudo: yes
+  gather_facts: yes
+  tasks:
+      - name: Create Software directory 
+        file: path=/home/vagrant/Software owner=vagrant group=vagrant state=directory mode=755
+      - name: Download DbVisualizer 
+        get_url: url=http://www.dbvis.com/product_download/dbvis-9.1.11/media/dbvis_unix_9_1_11.tar.gz dest=/tmp/dbvis.tar.gz mode=444 
+      - name: Unpack Charles 
+        unarchive: src=/tmp/dbvis.tar.gz dest=/home/vagrant/Software copy=no owner=vagrant group=vagrant creates=/home/vagrant/Software/DbVisualizer
+      - name: Create Desktop directory 
+        file: path=/home/vagrant/Desktop owner=vagrant group=vagrant state=directory mode=755
+      - name: Copy desktop DbVisualizer file  
+        copy: src=files/Database.desktop dest=/home/vagrant/Desktop/Database.desktop owner=vagrant group=vagrant backup=no mode=755
+      - name: Set permissions on the home directory
+        file: path=/home/vagrant owner=vagrant group=vagrant recurse=true state=directory
+
 - hosts: docker-box
   sudo: yes
   gather_facts: yes

@@ -1,0 +1,10 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=Database
+Comment=Database Browser
+Exec=/home/vagrant/Software/DbVisualizer/dbvis
+Icon=/home/vagrant/Software/DbVisualizer/.install4j/i4j_extf_6_1bd0g0g_gi8hmy.ico
+Path=
+Terminal=false
+StartupNotify=true
