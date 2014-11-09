@@ -80,6 +80,8 @@
         shell: sudo --user vagrant --set-home --non-interactive --login /tmp/install-gvm.sh --
       - name: Copy GVM configuration file
         copy: src=files/gvm.config dest=/home/vagrant/.gvm/etc/config owner=vagrant group=vagrant mode=644 backup=no
+      - name: Set permissions on the home directory
+        file: path=/home/vagrant owner=vagrant group=vagrant recurse=true state=directory
 
 - hosts: intellij-user
   sudo: yes
@@ -88,9 +90,9 @@
       - name: Create Software directory 
         file: path=/home/vagrant/Software owner=vagrant group=vagrant state=directory mode=755
       - name: Download IntelliJ IDEA 
-        get_url: url=http://download.jetbrains.com/idea/ideaIU-14.tar.gz dest=/tmp mode=444 
+        get_url: url=http://download.jetbrains.com/idea/ideaIU-14.tar.gz dest=/tmp/idea.tar.gz mode=444 
       - name: Unpack IntelliJ IDEA 
-        unarchive: src=/tmp/ideaIU-14.tar.gz dest=/home/vagrant/Software copy=no owner=vagrant group=vagrant
+        unarchive: src=/tmp/idea.tar.gz dest=/home/vagrant/Software copy=no owner=vagrant group=vagrant
       - name: Soft-link IntelliJ 
         file: src=/home/vagrant/Software/idea-IU-139.224.1 path=/home/vagrant/Software/idea state=link
       - name: Create Desktop directory 
@@ -101,7 +103,29 @@
         copy: src=scripts/export-idea-jdk.sh dest=/tmp/export-idea-jdk.sh owner=root group=root mode=755 backup=no
       - name: Execute IDEA export script 
         command: /tmp/export-idea-jdk.sh
+      - name: Set permissions on the home directory
+        file: path=/home/vagrant owner=vagrant group=vagrant recurse=true state=directory
 
+- hosts: sts-user
+  sudo: yes
+  gather_facts: yes
+  tasks:
+      - name: Create Software directory 
+        file: path=/home/vagrant/Software owner=vagrant group=vagrant state=directory mode=755
+      - name: Download STS 
+        get_url: url=http://download.springsource.com/release/STS/3.6.2/dist/e4.4/spring-tool-suite-3.6.2.RELEASE-e4.4.1-linux-gtk-x86_64.tar.gz dest=/tmp/sts.tar.gz mode=444 
+      - name: Unpack STS 
+        unarchive: src=/tmp/sts.tar.gz dest=/home/vagrant/Software copy=no owner=vagrant group=vagrant
+      - name: Soft-link STS 
+        file: src=/home/vagrant/Software/sts-bundle/sts-3.6.2.RELEASE path=/home/vagrant/Software/sts state=link
+      - name: Soft-link JRE 
+        file: src=/usr/lib/jvm/oracle-jdk-8/jre path=/home/vagrant/Software/sts-bundle/sts-3.6.2.RELEASE state=link
+      - name: Create Desktop directory 
+        file: path=/home/vagrant/Desktop owner=vagrant group=vagrant state=directory mode=755
+      - name: Copy desktop STS file  
+        copy: src=files/STS.desktop dest=/home/vagrant/Desktop/STS.desktop owner=vagrant group=vagrant backup=no mode=755
+      - name: Set permissions on the home directory
+        file: path=/home/vagrant owner=vagrant group=vagrant recurse=true state=directory
 
 - hosts: docker-box
   sudo: yes
@@ -133,4 +157,6 @@
            - chromium-browser
       - name: Copy login icon  
         copy: src=files/brock.png dest=/home/vagrant/.face owner=vagrant group=vagrant backup=no mode=644
+      - name: Set permissions on the home directory
+        file: path=/home/vagrant owner=vagrant group=vagrant recurse=true state=directory
 

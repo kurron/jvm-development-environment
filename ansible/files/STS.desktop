@@ -1,0 +1,10 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=STS
+Comment=Spring Tool Suite
+Exec=/home/vagrant/Software/sts/STS
+Icon=/home/vagrant/Software/sts/icon.xpm
+Path=
+Terminal=false
+StartupNotify=true
