@@ -216,6 +216,12 @@
         file: path=/home/vagrant/bin owner=vagrant group=vagrant state=directory mode=755
       - name: Copy Git intialization script  
         copy: src=scripts/intialize-git.sh dest=/home/vagrant/bin/intialize-git.sh owner=vagrant group=vagrant backup=no mode=744
+      - name: Create GitHub directory 
+        file: path=/home/vagrant/GitHub owner=vagrant group=vagrant state=directory mode=755
+      - name: Create Bitbucket directory 
+        file: path=/home/vagrant/Bitbucket owner=vagrant group=vagrant state=directory mode=755
+      - name: Create Stash directory 
+        file: path=/home/vagrant/Stash owner=vagrant group=vagrant state=directory mode=755
       - name: Set permissions on the home directory
         file: path=/home/vagrant owner=vagrant group=vagrant recurse=true state=directory
 
