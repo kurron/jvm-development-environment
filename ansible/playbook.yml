@@ -225,3 +225,19 @@
       - name: Set permissions on the home directory
         file: path=/home/vagrant owner=vagrant group=vagrant recurse=true state=directory
 
+- hosts: rabbitmq-boxes 
+  sudo: yes
+  gather_facts: yes
+  tasks:
+      - name: Install RabbitMQ key 
+        apt_key: url='http://www.rabbitmq.com/rabbitmq-signing-key-public.asc' state=present
+      - name: Install RabbitMQ repository
+        apt_repository: repo='deb http://www.rabbitmq.com/debian/ testing main' state=present
+      - name: Install RabbitMQ 
+        apt: name=rabbitmq-server state=latest update_cache=true cache_valid_time=600
+      - name: Copy RabbitMQ configuration file
+        copy: src=files/rabbitmq.config dest=/etc/rabbitmq owner=root group=root mode=644 backup=yes
+      - name: Activate RabbitMQ administration plug-in 
+        command: rabbitmq-plugins enable rabbitmq_management 
+      - name: Restart RabbitMQ 
+        service: name=rabbitmq-server state=restarted 
