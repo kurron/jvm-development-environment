@@ -51,16 +51,24 @@ Vagrant.configure("2") do |config|
 
 	config.vm.define "rabbitmq" do |rabbitmq|
         rabbitmq.vm.hostname = "rabbitmq"
-        rabbitmq.vm.network :private_network, ip: "192.168.44.120"
+        rabbitmq.vm.network :private_network, ip: "192.168.44.10"
         rabbitmq.vm.provider "virtualbox" do |v|
             v.name = "example.rabbitmq"
+        end
+    end
+	
+	config.vm.define "mysql" do |mysql|
+        mysql.vm.hostname = "mysql"
+        mysql.vm.network :private_network, ip: "192.168.44.20"
+        mysql.vm.provider "virtualbox" do |v|
+            v.name = "example.mysql"
         end
     end
 	
     config.vm.define "desktop" do |desktop|
         desktop.vm.box = "packer/trusty-x64-desktop"
         desktop.vm.hostname = "desktop"
-        desktop.vm.network :private_network, ip: "192.168.44.130"
+        desktop.vm.network :private_network, ip: "192.168.44.30"
         desktop.vm.provider "virtualbox" do |v|
             v.gui = true
             v.name = "example.desktop"

@@ -2,9 +2,10 @@
   sudo: yes
   gather_facts: yes
   tasks:
+      - name: Copy the sudoers file
+        copy: src=files/passwordless-sudo dest=/etc/sudoers.d/passwordless-sudo owner=root group=root mode=0440 backup=no
       - name: Upgrade currently installed packages
         apt: "upgrade=dist state=present update_cache=true cache_valid_time=600"
-
       - name: Install common packages
         apt: "name={{ item }} state=present"
         with_items:
@@ -15,13 +16,6 @@
            - curl
            - telnet
            - apt-transport-https
-
-- hosts: passwordless-sudo-box
-  sudo: yes
-  gather_facts: yes
-  tasks:
-      - name: Copy the sudoers file
-        copy: src=files/passwordless-sudo dest=/etc/sudoers.d/passwordless-sudo owner=root group=root mode=0440 backup=no
 
 - hosts: remote-managed
   sudo: yes
@@ -34,7 +28,7 @@
       - name: Install secondary Webmin repository
         apt_repository: repo='deb http://webmin.mirror.somersettechsolutions.co.uk/repository sarge contrib' state=present 
       - name: Install Webmin software
-        apt: name=webmin state=latest update_cache=true cache_valid_time=600
+        apt: name=webmin state=latest
 
 - hosts: java-8-box
   sudo: yes
@@ -224,7 +218,16 @@
         file: path=/home/vagrant/Stash owner=vagrant group=vagrant state=directory mode=755
       - name: Set permissions on the home directory
         file: path=/home/vagrant owner=vagrant group=vagrant recurse=true state=directory
-
+		
+- hosts: mysql-boxes 
+  sudo: yes
+  gather_facts: yes
+  tasks:
+      - name: Install MySQL 
+        apt: name=mysql-server state=latest update_cache=true cache_valid_time=600
+      - name: Install MyTop 
+        apt: name=mytop state=latest update_cache=true cache_valid_time=600
+		
 - hosts: rabbitmq-boxes 
   sudo: yes
   gather_facts: yes
@@ -232,12 +235,12 @@
       - name: Install RabbitMQ key 
         apt_key: url='http://www.rabbitmq.com/rabbitmq-signing-key-public.asc' state=present
       - name: Install RabbitMQ repository
-        apt_repository: repo='deb http://www.rabbitmq.com/debian/ testing main' state=present
+        apt_repository: repo='deb http://www.rabbitmq.com/debian/ testing main' state=present update_cache=yes
       - name: Install RabbitMQ 
-        apt: name=rabbitmq-server state=latest update_cache=true cache_valid_time=600
+        apt: name=rabbitmq-server state=latest update_cache=true
       - name: Copy RabbitMQ configuration file
         copy: src=files/rabbitmq.config dest=/etc/rabbitmq owner=root group=root mode=644 backup=yes
       - name: Activate RabbitMQ administration plug-in 
         command: rabbitmq-plugins enable rabbitmq_management 
-      - name: Restart RabbitMQ 
-        service: name=rabbitmq-server state=restarted 
+      - name: Restart RabbitMQ
+        service: name=rabbitmq-server state=restarted
