@@ -346,6 +346,8 @@
         unarchive: src=/root/ant.tar.gz dest=/home/vagrant/Software copy=no owner=vagrant group=vagrant creates=/home/vagrant/Software/apache-ant-1.9.4/README
       - name: Soft-link Ant 
         file: src=/home/vagrant/Software/apache-ant-1.9.4 path=/home/vagrant/Software/ant state=link
+      - name: Set permissions on the home directory
+        file: path=/home/vagrant owner=vagrant group=vagrant recurse=true state=directory
 
 - hosts: tomcat-7-boxes
   sudo: yes
@@ -359,6 +361,8 @@
         unarchive: src=/root/tomcat-7.tar.gz dest=/home/vagrant/Software copy=no owner=vagrant group=vagrant creates=/home/vagrant/Software/apache-tomcat-7.0.57/NOTICE
       - name: Soft-link Tomcat 7 
         file: src=/home/vagrant/Software/apache-tomcat-7.0.57 path=/home/vagrant/Software/tomcat-7 state=link
+      - name: Set permissions on the home directory
+        file: path=/home/vagrant owner=vagrant group=vagrant recurse=true state=directory
 
 - hosts: tomcat-8-boxes
   sudo: yes
@@ -372,5 +376,19 @@
         unarchive: src=/root/tomcat-8.tar.gz dest=/home/vagrant/Software copy=no owner=vagrant group=vagrant creates=/home/vagrant/Software/apache-tomcat-8.0.15/NOTICE
       - name: Soft-link Tomcat 8 
         file: src=/home/vagrant/Software/apache-tomcat-8.0.15 path=/home/vagrant/Software/tomcat-8 state=link
+      - name: Set permissions on the home directory
+        file: path=/home/vagrant owner=vagrant group=vagrant recurse=true state=directory
 
+- hosts: logfaces-boxes
+  sudo: yes
+  gather_facts: yes
+  tasks:
+      - name: Create Software directory 
+        file: path=/home/vagrant/Software owner=vagrant group=vagrant state=directory mode=755
+      - name: Download logFACES 
+        get_url: url=http://www.moonlit-software.com/logfaces/downloads/lfc.4.1.2.linux.gtk.x86_64.tar.gz dest=/root/logfaces.tar.gz mode=444 
+      - name: Unpack logFACES 
+        unarchive: src=/root/logfaces.tar.gz dest=/home/vagrant/Software copy=no owner=vagrant group=vagrant creates=/home/vagrant/Software/logFacesClient/about.html
+      - name: Set permissions on the home directory
+        file: path=/home/vagrant owner=vagrant group=vagrant recurse=true state=directory
 
