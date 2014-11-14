@@ -235,6 +235,13 @@
       - name: Install MySQL Workbench
         apt: name=mysql-workbench state=latest
 
+- hosts: mysql-client-boxes 
+  sudo: yes
+  gather_facts: yes
+  tasks:
+      - name: Install MySQL client 
+        apt: name=mysql-client state=latest
+
 - hosts: rabbitmq-boxes 
   sudo: yes
   gather_facts: yes
