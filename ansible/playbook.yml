@@ -301,3 +301,20 @@
         command: /bin/sed --in-place --expression '/bind 127.0.0.1/s/^/# /' /etc/redis/redis.conf 
       - name: Restart Redis 
         service: name=redis-server state=restarted 
+
+- hosts: elasticsearch-boxes 
+  sudo: yes
+  gather_facts: yes
+  tasks:
+      - name: Install Elasticsearch key 
+        apt_key: url='http://packages.elasticsearch.org/GPG-KEY-elasticsearch' state=present
+      - name: Install Elasticsearch repository
+        apt_repository: repo='deb http://packages.elasticsearch.org/elasticsearch/1.3/debian stable main' state=present
+      - name: Install Elasticsearch 
+        apt: name=elasticsearch state=latest
+      - name: Set clustername
+        lineinfile: "dest=/etc/elasticsearch/elasticsearch.yml regexp='^#cluster.name: elasticsearch' line='cluster.name: logstash'"
+      - name: Set node
+        lineinfile: "dest=/etc/elasticsearch/elasticsearch.yml regexp='^#node.name: Franz Kafka' line='node.name: logstash'"
+      - name: Restart Elastisearch 
+        service: name=elasticsearch state=restarted 
