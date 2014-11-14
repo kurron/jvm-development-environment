@@ -266,3 +266,14 @@
   tasks:
       - name: Install PostgreSQL 
         apt: name=postgresql state=latest
+
+- hosts: nginx-boxes 
+  sudo: yes
+  gather_facts: yes
+  tasks:
+      - name: Install nginx keys
+        apt_key: url='http://nginx.org/keys/nginx_signing.key' state=present
+      - name: Install nginx repository
+        apt_repository: repo='deb http://nginx.org/packages/ubuntu/ trusty nginx' state=present
+      - name: Install nginx 
+        apt: name=nginx state=latest
