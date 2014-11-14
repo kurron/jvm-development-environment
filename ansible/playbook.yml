@@ -259,3 +259,10 @@
         command: /bin/sed --in-place --expression '/bind_ip = 127.0.0.1/s/^/# /' /etc/mongod.conf 
       - name: Restart MongoDB 
         service: name=mongod state=restarted 
+
+- hosts: postgresql-boxes 
+  sudo: yes
+  gather_facts: yes
+  tasks:
+      - name: Install PostgreSQL 
+        apt: name=postgresql state=latest
