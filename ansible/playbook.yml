@@ -167,7 +167,7 @@
         file: path=/home/vagrant/Software owner=vagrant group=vagrant state=directory mode=755
       - name: Download DbVisualizer 
         get_url: url=http://www.dbvis.com/product_download/dbvis-9.1.11/media/dbvis_unix_9_1_11.tar.gz dest=/root/dbvis.tar.gz mode=444 
-      - name: Unpack Charles 
+      - name: Unpack DbVisualizer 
         unarchive: src=/root/dbvis.tar.gz dest=/home/vagrant/Software copy=no owner=vagrant group=vagrant creates=/home/vagrant/Software/DbVisualizer
       - name: Create Desktop directory 
         file: path=/home/vagrant/Desktop owner=vagrant group=vagrant state=directory mode=755
@@ -333,5 +333,18 @@
         copy: src=files/central.conf dest=/etc/logstash/conf.d owner=root group=root mode=644 backup=yes
       - name: Start Logstash 
         service: name=logstash state=restarted 
+
+- hosts: ant-boxes
+  sudo: yes
+  gather_facts: yes
+  tasks:
+      - name: Create Software directory 
+        file: path=/home/vagrant/Software owner=vagrant group=vagrant state=directory mode=755
+      - name: Download Ant 
+        get_url: url=http://apache.mirrors.pair.com/ant/binaries/apache-ant-1.9.4-bin.tar.gz dest=/root/ant.tar.gz mode=444 
+      - name: Unpack Ant 
+        unarchive: src=/root/ant.tar.gz dest=/home/vagrant/Software copy=no owner=vagrant group=vagrant creates=/home/vagrant/Software/apache-ant-1.9.4/README
+      - name: Soft-link Ant 
+        file: src=/home/vagrant/Software/apache-ant-1.9.4 path=/home/vagrant/Software/ant state=link
 
 
