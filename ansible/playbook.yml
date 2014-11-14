@@ -218,7 +218,7 @@
         file: path=/home/vagrant/Stash owner=vagrant group=vagrant state=directory mode=755
       - name: Set permissions on the home directory
         file: path=/home/vagrant owner=vagrant group=vagrant recurse=true state=directory
-		
+
 - hosts: mysql-boxes 
   sudo: yes
   gather_facts: yes
@@ -227,7 +227,7 @@
         apt: name=mysql-server state=latest update_cache=true cache_valid_time=600
       - name: Install MyTop 
         apt: name=mytop state=latest update_cache=true cache_valid_time=600
-		
+
 - hosts: rabbitmq-boxes 
   sudo: yes
   gather_facts: yes
