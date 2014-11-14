@@ -392,3 +392,18 @@
       - name: Set permissions on the home directory
         file: path=/home/vagrant owner=vagrant group=vagrant recurse=true state=directory
 
+- hosts: maven-boxes
+  sudo: yes
+  gather_facts: yes
+  tasks:
+      - name: Create Software directory 
+        file: path=/home/vagrant/Software owner=vagrant group=vagrant state=directory mode=755
+      - name: Download Maven 
+        get_url: url=http://mirror.nexcess.net/apache/maven/maven-3/3.2.3/binaries/apache-maven-3.2.3-bin.tar.gz dest=/root/maven.tar.gz mode=444 
+      - name: Unpack Maven 
+        unarchive: src=/root/maven.tar.gz dest=/home/vagrant/Software copy=no owner=vagrant group=vagrant creates=/home/vagrant/Software/apache-maven-3.2.3/NOTICE
+      - name: Soft-link Maven 
+        file: src=/home/vagrant/Software/apache-maven-3.2.3 path=/home/vagrant/Software/maven state=link
+      - name: Set permissions on the home directory
+        file: path=/home/vagrant owner=vagrant group=vagrant recurse=true state=directory
+
