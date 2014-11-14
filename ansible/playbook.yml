@@ -228,6 +228,13 @@
       - name: Install MyTop 
         apt: name=mytop state=latest
 
+- hosts: mysql-workbench-boxes 
+  sudo: yes
+  gather_facts: yes
+  tasks:
+      - name: Install MySQL Workbench
+        apt: name=mysql-workbench state=latest
+
 - hosts: rabbitmq-boxes 
   sudo: yes
   gather_facts: yes
