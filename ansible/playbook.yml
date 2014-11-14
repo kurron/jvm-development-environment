@@ -437,3 +437,15 @@
       - name: Set permissions on the home directory
         file: path=/home/vagrant owner=vagrant group=vagrant recurse=true state=directory
 
+- hosts: ffmpeg-boxes
+  sudo: yes
+  gather_facts: yes
+  tasks:
+      - name: Download FFmpeg 
+        get_url: url=http://johnvansickle.com/ffmpeg/releases/ffmpeg-2.4.3-64bit-static.tar.xz dest=/root/ffmpeg.tar.xz mode=444 
+      - name: Unpack FFmpeg 
+        unarchive: src=/root/ffmpeg.tar.xz dest=/opt copy=no owner=root group=root creates=/opt/ffmpeg-2.4.3-64bit-static/ffprobe
+      - name: Soft-link FFmpeg 
+        file: src=/opt/ffmpeg-2.4.3-64bit-static path=/opt/ffmpeg state=link
+      - name: Set permissions on the opt directory
+        file: path=/opt owner=root group=root recurse=true state=directory
