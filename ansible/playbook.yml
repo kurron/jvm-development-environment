@@ -277,3 +277,16 @@
         apt_repository: repo='deb http://nginx.org/packages/ubuntu/ trusty nginx' state=present
       - name: Install nginx 
         apt: name=nginx state=latest
+
+- hosts: haproxy-boxes 
+  sudo: yes
+  gather_facts: yes
+  tasks:
+      - name: Install HAProxy 
+        apt: name=haproxy state=latest
+      - name: Install HATop 
+        apt: name=hatop state=latest
+      - name: Vim HAProxy support 
+        apt: name=vim-haproxy state=latest
+      - name: Vim HAProxy documentation 
+        apt: name=haproxy-doc state=latest
