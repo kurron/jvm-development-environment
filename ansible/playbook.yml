@@ -224,9 +224,9 @@
   gather_facts: yes
   tasks:
       - name: Install MySQL 
-        apt: name=mysql-server state=latest update_cache=true cache_valid_time=600
+        apt: name=mysql-server state=latest
       - name: Install MyTop 
-        apt: name=mytop state=latest update_cache=true cache_valid_time=600
+        apt: name=mytop state=latest
 
 - hosts: rabbitmq-boxes 
   sudo: yes
@@ -237,7 +237,7 @@
       - name: Install RabbitMQ repository
         apt_repository: repo='deb http://www.rabbitmq.com/debian/ testing main' state=present update_cache=yes
       - name: Install RabbitMQ 
-        apt: name=rabbitmq-server state=latest update_cache=true
+        apt: name=rabbitmq-server state=latest
       - name: Copy RabbitMQ configuration file
         copy: src=files/rabbitmq.config dest=/etc/rabbitmq owner=root group=root mode=644 backup=yes
       - name: Activate RabbitMQ administration plug-in 
