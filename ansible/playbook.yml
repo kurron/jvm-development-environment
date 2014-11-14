@@ -244,3 +244,18 @@
         command: rabbitmq-plugins enable rabbitmq_management 
       - name: Restart RabbitMQ
         service: name=rabbitmq-server state=restarted
+
+- hosts: mongodb-boxes 
+  sudo: yes
+  gather_facts: yes
+  tasks:
+      - name: Install MongoDB keys
+        apt_key: state=present keyserver=keyserver.ubuntu.com id=7F0CEB10
+      - name: Install MongoDB repository
+        apt_repository: repo='deb http://downloads-distro.mongodb.org/repo/ubuntu-upstart dist 10gen' state=present
+      - name: Install MongoDB 
+        apt: name=mongodb-org state=latest
+      - name: Allow MongoDB to listen on all network interfaces
+        command: /bin/sed --in-place --expression '/bind_ip = 127.0.0.1/s/^/# /' /etc/mongod.conf 
+      - name: Restart MongoDB 
+        service: name=mongod state=restarted 
