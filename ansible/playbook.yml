@@ -347,4 +347,17 @@
       - name: Soft-link Ant 
         file: src=/home/vagrant/Software/apache-ant-1.9.4 path=/home/vagrant/Software/ant state=link
 
+- hosts: tomcat-7-boxes
+  sudo: yes
+  gather_facts: yes
+  tasks:
+      - name: Create Software directory 
+        file: path=/home/vagrant/Software owner=vagrant group=vagrant state=directory mode=755
+      - name: Download Tomcat 7 
+        get_url: url=http://mirrors.sonic.net/apache/tomcat/tomcat-7/v7.0.57/bin/apache-tomcat-7.0.57.tar.gz dest=/root/tomcat-7.tar.gz mode=444 
+      - name: Unpack Tomcat 7 
+        unarchive: src=/root/tomcat-7.tar.gz dest=/home/vagrant/Software copy=no owner=vagrant group=vagrant creates=/home/vagrant/Software/apache-tomcat-7.0.57/NOTICE
+      - name: Soft-link Tomcat 7 
+        file: src=/home/vagrant/Software/apache-tomcat-7.0.57 path=/home/vagrant/Software/tomcat-7 state=link
+
 
