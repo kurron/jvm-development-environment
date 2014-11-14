@@ -290,3 +290,14 @@
         apt: name=vim-haproxy state=latest
       - name: Vim HAProxy documentation 
         apt: name=haproxy-doc state=latest
+
+- hosts: redis-boxes 
+  sudo: yes
+  gather_facts: yes
+  tasks:
+      - name: Install Redis 
+        apt: name=redis-server state=latest
+      - name: Allow Redis to listen on all network interfaces
+        command: /bin/sed --in-place --expression '/bind 127.0.0.1/s/^/# /' /etc/redis/redis.conf 
+      - name: Restart Redis 
+        service: name=redis-server state=restarted 
