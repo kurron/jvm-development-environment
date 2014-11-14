@@ -456,3 +456,12 @@
         file: src=/opt/ffmpeg-2.4.3-64bit-static path=/opt/ffmpeg state=link
       - name: Set permissions on the opt directory
         file: path=/opt owner=root group=root recurse=true state=directory
+
+- hosts: pip-boxes
+  sudo: yes
+  gather_facts: yes
+  tasks:
+      - name: Download PIP 
+        get_url: url=https://raw.github.com/pypa/pip/master/contrib/get-pip.py dest=/root/get-pip.py mode=444 
+      - name: Install PIP 
+        command: /usr/bin/python /root/get-pip.py
