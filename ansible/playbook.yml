@@ -360,4 +360,17 @@
       - name: Soft-link Tomcat 7 
         file: src=/home/vagrant/Software/apache-tomcat-7.0.57 path=/home/vagrant/Software/tomcat-7 state=link
 
+- hosts: tomcat-8-boxes
+  sudo: yes
+  gather_facts: yes
+  tasks:
+      - name: Create Software directory 
+        file: path=/home/vagrant/Software owner=vagrant group=vagrant state=directory mode=755
+      - name: Download Tomcat 8 
+        get_url: url=http://supergsego.com/apache/tomcat/tomcat-8/v8.0.15/bin/apache-tomcat-8.0.15.tar.gz dest=/root/tomcat-8.tar.gz mode=444 
+      - name: Unpack Tomcat 8 
+        unarchive: src=/root/tomcat-8.tar.gz dest=/home/vagrant/Software copy=no owner=vagrant group=vagrant creates=/home/vagrant/Software/apache-tomcat-8.0.15/NOTICE
+      - name: Soft-link Tomcat 8 
+        file: src=/home/vagrant/Software/apache-tomcat-8.0.15 path=/home/vagrant/Software/tomcat-8 state=link
+
 
