@@ -45,9 +45,13 @@
       - name: soft-link the JDK to a normalized location
         file: src=/usr/lib/jvm/jdk1.8.0_25 dest=/usr/lib/jvm/oracle-jdk-8 owner=root group=root state=link
       - name: Copy export script to a safe place
-        copy: src=scripts/export-java-home.sh dest=/tmp/export-java-home.sh owner=root group=root mode=755 backup=no
-      - name: Execute JDK export script 
-        command: /tmp/export-java-home.sh
+        copy: src=scripts/set-etc-environment.sh dest=/tmp/set-etc-environment.sh owner=root group=root mode=755 backup=no
+      - name: Execute JAVA_HOME 
+        command: /tmp/set-etc-environment.sh JAVA_HOME /usr/lib/jvm/oracle-jdk-8 
+      - name: Execute JDK_HOME
+        command: /tmp/set-etc-environment.sh JDK_HOME /usr/lib/jvm/oracle-jdk-8 
+      - name: Execute JAVA8_HOME 
+        command: /tmp/set-etc-environment.sh JAVA8_HOME /usr/lib/jvm/oracle-jdk-8 
 
 - hosts: java-7-box
   sudo: yes
@@ -63,6 +67,10 @@
         unarchive: src=/root/jdk-7.tar.gz dest=/usr/lib/jvm copy=no owner=root group=root mode=755 creates=/usr/lib/jvm/jdk1.7.0_71/COPYRIGHT
       - name: soft-link the JDK to a normalized location
         file: src=/usr/lib/jvm/jdk1.7.0_71 dest=/usr/lib/jvm/oracle-jdk-7 owner=root group=root state=link
+      - name: Copy export script to a safe place
+        copy: src=scripts/set-etc-environment.sh dest=/tmp/set-etc-environment.sh owner=root group=root mode=755 backup=no
+      - name: Export JAVA7_HOME 
+        command: /tmp/set-etc-environment.sh JAVA7_HOME /usr/lib/jvm/oracle-jdk-7 
 
 - hosts: groovy-developer
   sudo: yes
@@ -94,9 +102,9 @@
       - name: Copy desktop IntelliJ file  
         copy: src=files/InjelliJ.desktop dest=/home/vagrant/Desktop/InjelliJ.desktop owner=vagrant group=vagrant backup=no mode=755
       - name: Copy export script to a safe place
-        copy: src=scripts/export-idea-jdk.sh dest=/tmp/export-idea-jdk.sh owner=root group=root mode=755 backup=no
-      - name: Execute IDEA export script 
-        command: /tmp/export-idea-jdk.sh
+        copy: src=scripts/set-etc-environment.sh dest=/tmp/set-etc-environment.sh owner=root group=root mode=755 backup=no
+      - name: Export IDEA_JDK 
+        command: /tmp/set-etc-environment.sh IDEA_JDK /usr/lib/jvm/oracle-jdk-8 
       - name: Set permissions on the home directory
         file: path=/home/vagrant owner=vagrant group=vagrant recurse=true state=directory
 
@@ -362,6 +370,10 @@
         file: src=/home/vagrant/Software/apache-ant-1.9.4 path=/home/vagrant/Software/ant state=link
       - name: Set permissions on the home directory
         file: path=/home/vagrant owner=vagrant group=vagrant recurse=true state=directory
+      - name: Copy export script to a safe place
+        copy: src=scripts/set-etc-environment.sh dest=/tmp/set-etc-environment.sh owner=root group=root mode=755 backup=no
+      - name: Export ANT_HOME 
+        command: /tmp/set-etc-environment.sh ANT_HOME /home/vagrant/Software/ant 
 
 - hosts: tomcat-7-boxes
   sudo: yes
@@ -420,6 +432,10 @@
         file: src=/home/vagrant/Software/apache-maven-3.2.3 path=/home/vagrant/Software/maven state=link
       - name: Set permissions on the home directory
         file: path=/home/vagrant owner=vagrant group=vagrant recurse=true state=directory
+      - name: Copy export script to a safe place
+        copy: src=scripts/set-etc-environment.sh dest=/tmp/set-etc-environment.sh owner=root group=root mode=755 backup=no
+      - name: Export M2_HOME 
+        command: /tmp/set-etc-environment.sh M2_HOME /home/vagrant/Software/maven 
 
 - hosts: pycharm-user
   sudo: yes
@@ -443,6 +459,10 @@
 #        command: /tmp/export-idea-jdk.sh
       - name: Set permissions on the home directory
         file: path=/home/vagrant owner=vagrant group=vagrant recurse=true state=directory
+      - name: Copy export script to a safe place
+        copy: src=scripts/set-etc-environment.sh dest=/tmp/set-etc-environment.sh owner=root group=root mode=755 backup=no
+      - name: Export PYCHARM_JDK 
+        command: /tmp/set-etc-environment.sh PYCHARM_JDK  /usr/lib/jvm/oracle-jdk-8
 
 - hosts: ffmpeg-boxes
   sudo: yes
