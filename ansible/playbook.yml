@@ -1,6 +1,7 @@
-- hosts: all
+- name: Common Bits 
+  hosts: all
   sudo: yes
-  gather_facts: yes
+  gather_facts: no
   tasks:
       - name: Copy the sudoers file
         copy: src=files/passwordless-sudo dest=/etc/sudoers.d/passwordless-sudo owner=root group=root mode=0440 backup=no
@@ -25,8 +26,9 @@
            - telnet
            - apt-transport-https
 
-- hosts: remote-managed
-  sudo: yes
+- name: Remote management for headless boxes 
+  hosts: remote-managed
+  sudo: no
   gather_facts: yes
   tasks:
       - name: Install Webmin keys
@@ -38,9 +40,10 @@
       - name: Install Webmin software
         apt: name=webmin state=latest
 
-- hosts: java-8-box
+- name: Oracle JDK 8 bits 
+  hosts: java-8-box
   sudo: yes
-  gather_facts: yes
+  gather_facts: no
   tasks:
       - name: Create destination directory 
         file: path=/usr/lib/jvm owner=root group=root state=directory mode=755
@@ -61,9 +64,10 @@
       - name: Execute JAVA8_HOME 
         command: /tmp/set-etc-environment.sh JAVA8_HOME /usr/lib/jvm/oracle-jdk-8 
 
-- hosts: java-7-box
+- name: Oracle JDK 7 bits 
+  hosts: java-7-box
   sudo: yes
-  gather_facts: yes
+  gather_facts: no
   tasks:
       - name: Create destination directory 
         file: path=/usr/lib/jvm owner=root group=root state=directory mode=755
@@ -80,9 +84,10 @@
       - name: Export JAVA7_HOME 
         command: /tmp/set-etc-environment.sh JAVA7_HOME /usr/lib/jvm/oracle-jdk-7 
 
-- hosts: groovy-developer
+- name: Groovy Environment Manager 
+  hosts: groovy-developer
   sudo: yes
-  gather_facts: yes
+  gather_facts: no
   tasks:
       - name: Copy GVM installation script to a safe place
         copy: src=scripts/install-gvm.sh dest=/tmp/install-gvm.sh owner=vagrant group=vagrant mode=755 backup=no
@@ -93,9 +98,10 @@
       - name: Set permissions on the home directory
         file: path=/home/vagrant owner=vagrant group=vagrant recurse=true state=directory
 
-- hosts: intellij-user
+- name: Jetbrains IntelliJ IDEA 
+  hosts: intellij-user
   sudo: yes
-  gather_facts: yes
+  gather_facts: no
   tasks:
       - name: Create Software directory 
         file: path=/home/vagrant/Software owner=vagrant group=vagrant state=directory mode=755
@@ -116,9 +122,10 @@
       - name: Set permissions on the home directory
         file: path=/home/vagrant owner=vagrant group=vagrant recurse=true state=directory
 
-- hosts: sts-user
+- name: Spring Tool Suite 
+  hosts: sts-user
   sudo: yes
-  gather_facts: yes
+  gather_facts: no
   tasks:
       - name: Create Software directory 
         file: path=/home/vagrant/Software owner=vagrant group=vagrant state=directory mode=755
@@ -137,9 +144,10 @@
       - name: Set permissions on the home directory
         file: path=/home/vagrant owner=vagrant group=vagrant recurse=true state=directory
 
-- hosts: ggts-user
+- name: Groovy/Grails Tool Suite 
+  hosts: ggts-user
   sudo: yes
-  gather_facts: yes
+  gather_facts: no
   tasks:
       - name: Create Software directory 
         file: path=/home/vagrant/Software owner=vagrant group=vagrant state=directory mode=755
@@ -158,9 +166,10 @@
       - name: Set permissions on the home directory
         file: path=/home/vagrant owner=vagrant group=vagrant recurse=true state=directory
 
-- hosts: charles-user
+- name: Charles proxy bits 
+  hosts: charles-user
   sudo: yes
-  gather_facts: yes
+  gather_facts: no
   tasks:
       - name: Create Software directory 
         file: path=/home/vagrant/Software owner=vagrant group=vagrant state=directory mode=755
@@ -175,9 +184,10 @@
       - name: Set permissions on the home directory
         file: path=/home/vagrant owner=vagrant group=vagrant recurse=true state=directory
 
-- hosts: dbvisualizer-user
+- name: DbVisualizer Database Browser 
+  hosts: dbvisualizer-user
   sudo: yes
-  gather_facts: yes
+  gather_facts: no
   tasks:
       - name: Create Software directory 
         file: path=/home/vagrant/Software owner=vagrant group=vagrant state=directory mode=755
@@ -192,9 +202,10 @@
       - name: Set permissions on the home directory
         file: path=/home/vagrant owner=vagrant group=vagrant recurse=true state=directory
 
-- hosts: docker-box
+- name: Docker container support 
+  hosts: docker-box
   sudo: yes
-  gather_facts: yes
+  gather_facts: no
   tasks:
       - name: Install Docker keys
         apt_key: state=present keyserver=keyserver.ubuntu.com id=36A1D7869245C8950F966E92D8576A8BA88D21E9
@@ -211,9 +222,10 @@
       - name: Restart Docker 
         service: name=docker state=restarted 
 
-- hosts: desktops
+- name: Desktop bits and tweaks 
+  hosts: desktops
   sudo: yes
-  gather_facts: yes
+  gather_facts: no
   tasks:
       - name: Install desktop packages
         apt: "name={{ item }} state=present update_cache=true cache_valid_time=600"
@@ -241,32 +253,36 @@
       - name: Set permissions on the home directory
         file: path=/home/vagrant owner=vagrant group=vagrant recurse=true state=directory
 
-- hosts: mysql-boxes 
+- name: MySQL server 
+  hosts: mysql-boxes 
   sudo: yes
-  gather_facts: yes
+  gather_facts: no
   tasks:
       - name: Install MySQL 
         apt: name=mysql-server state=latest
       - name: Install MyTop 
         apt: name=mytop state=latest
 
-- hosts: mysql-workbench-boxes 
+- name: MySQL Workbench 
+  hosts: mysql-workbench-boxes 
   sudo: yes
-  gather_facts: yes
+  gather_facts: no
   tasks:
       - name: Install MySQL Workbench
         apt: name=mysql-workbench state=latest
 
-- hosts: mysql-client-boxes 
+- name: MySQL CLI 
+  hosts: mysql-client-boxes 
   sudo: yes
-  gather_facts: yes
+  gather_facts: no
   tasks:
       - name: Install MySQL client 
         apt: name=mysql-client state=latest
 
-- hosts: rabbitmq-boxes 
+- name: RabbitMQ server 
+  hosts: rabbitmq-boxes 
   sudo: yes
-  gather_facts: yes
+  gather_facts: no
   tasks:
       - name: Install RabbitMQ key 
         apt_key: url='http://www.rabbitmq.com/rabbitmq-signing-key-public.asc' state=present
@@ -281,9 +297,10 @@
       - name: Restart RabbitMQ
         service: name=rabbitmq-server state=restarted
 
-- hosts: mongodb-boxes 
+- name: MongoDB server 
+  hosts: mongodb-boxes 
   sudo: yes
-  gather_facts: yes
+  gather_facts: no
   tasks:
       - name: Install MongoDB keys
         apt_key: state=present keyserver=keyserver.ubuntu.com id=7F0CEB10
@@ -296,16 +313,18 @@
       - name: Restart MongoDB 
         service: name=mongod state=restarted 
 
-- hosts: postgresql-boxes 
+- name: PostgreSQL server 
+  hosts: postgresql-boxes 
   sudo: yes
-  gather_facts: yes
+  gather_facts: no
   tasks:
       - name: Install PostgreSQL 
         apt: name=postgresql state=latest
 
-- hosts: nginx-boxes 
+- name: Nginx server 
+  hosts: nginx-boxes 
   sudo: yes
-  gather_facts: yes
+  gather_facts: no
   tasks:
       - name: Install nginx keys
         apt_key: url='http://nginx.org/keys/nginx_signing.key' state=present
@@ -314,9 +333,10 @@
       - name: Install nginx 
         apt: name=nginx state=latest
 
-- hosts: haproxy-boxes 
+- name: HAProxy server 
+  hosts: haproxy-boxes 
   sudo: yes
-  gather_facts: yes
+  gather_facts: no
   tasks:
       - name: Install HAProxy 
         apt: name=haproxy state=latest
@@ -327,9 +347,10 @@
       - name: Vim HAProxy documentation 
         apt: name=haproxy-doc state=latest
 
-- hosts: redis-boxes 
+- name: Redis server 
+  hosts: redis-boxes 
   sudo: yes
-  gather_facts: yes
+  gather_facts: no
   tasks:
       - name: Install Redis 
         apt: name=redis-server state=latest
@@ -338,9 +359,10 @@
       - name: Restart Redis 
         service: name=redis-server state=restarted 
 
-- hosts: elasticsearch-boxes 
+- name: Elasticsearch server 
+  hosts: elasticsearch-boxes 
   sudo: yes
-  gather_facts: yes
+  gather_facts: no
   tasks:
       - name: Install Elasticsearch key 
         apt_key: url='http://packages.elasticsearch.org/GPG-KEY-elasticsearch' state=present
@@ -355,9 +377,10 @@
       - name: Restart Elastisearch 
         service: name=elasticsearch state=restarted 
 
-- hosts: logstash-boxes 
+- name: Logstash server 
+  hosts: logstash-boxes 
   sudo: yes
-  gather_facts: yes
+  gather_facts: no
   tasks:
       - name: Install Logstash key 
         apt_key: url='http://packages.elasticsearch.org/GPG-KEY-elasticsearch' state=present
@@ -370,9 +393,10 @@
       - name: Start Logstash 
         service: name=logstash state=restarted 
 
-- hosts: ant-boxes
+- name: Apache Ant bits 
+  hosts: ant-boxes
   sudo: yes
-  gather_facts: yes
+  gather_facts: no
   tasks:
       - name: Create Software directory 
         file: path=/home/vagrant/Software owner=vagrant group=vagrant state=directory mode=755
@@ -389,9 +413,10 @@
       - name: Export ANT_HOME 
         command: /tmp/set-etc-environment.sh ANT_HOME /home/vagrant/Software/ant 
 
-- hosts: tomcat-7-boxes
+- name: Apache Tomcat 7 
+  hosts: tomcat-7-boxes
   sudo: yes
-  gather_facts: yes
+  gather_facts: no
   tasks:
       - name: Create Software directory 
         file: path=/home/vagrant/Software owner=vagrant group=vagrant state=directory mode=755
@@ -404,9 +429,10 @@
       - name: Set permissions on the home directory
         file: path=/home/vagrant owner=vagrant group=vagrant recurse=true state=directory
 
-- hosts: tomcat-8-boxes
+- name: Apache Tomcat 8 
+  hosts: tomcat-8-boxes
   sudo: yes
-  gather_facts: yes
+  gather_facts: no
   tasks:
       - name: Create Software directory 
         file: path=/home/vagrant/Software owner=vagrant group=vagrant state=directory mode=755
@@ -419,9 +445,10 @@
       - name: Set permissions on the home directory
         file: path=/home/vagrant owner=vagrant group=vagrant recurse=true state=directory
 
-- hosts: logfaces-boxes
+- name: logFACES Client 
+  hosts: logfaces-boxes
   sudo: yes
-  gather_facts: yes
+  gather_facts: no
   tasks:
       - name: Create Software directory 
         file: path=/home/vagrant/Software owner=vagrant group=vagrant state=directory mode=755
@@ -438,9 +465,10 @@
       - name: Copy desktop logFACES file  
         copy: src=files/logFACES.desktop dest=/home/vagrant/Desktop/logFACES.desktop owner=vagrant group=vagrant backup=no mode=755
 
-- hosts: maven-boxes
+- name: Apache Maven bits 
+  hosts: maven-boxes
   sudo: yes
-  gather_facts: yes
+  gather_facts: no
   tasks:
       - name: Create Software directory 
         file: path=/home/vagrant/Software owner=vagrant group=vagrant state=directory mode=755
@@ -457,9 +485,10 @@
       - name: Export M2_HOME 
         command: /tmp/set-etc-environment.sh M2_HOME /home/vagrant/Software/maven 
 
-- hosts: pycharm-user
+- name: Jetbrain's PyCharm IDE 
+  hosts: pycharm-user
   sudo: yes
-  gather_facts: yes
+  gather_facts: no
   tasks:
       - name: Create Software directory 
         file: path=/home/vagrant/Software owner=vagrant group=vagrant state=directory mode=755
@@ -480,9 +509,10 @@
       - name: Export PYCHARM_JDK 
         command: /tmp/set-etc-environment.sh PYCHARM_JDK  /usr/lib/jvm/oracle-jdk-8
 
-- hosts: ffmpeg-boxes
+- name: FFmpeg binary 
+  hosts: ffmpeg-boxes
   sudo: yes
-  gather_facts: yes
+  gather_facts: no
   tasks:
       - name: Download FFmpeg 
         get_url: url=http://johnvansickle.com/ffmpeg/releases/ffmpeg-2.4.3-64bit-static.tar.xz dest=/root/ffmpeg.tar.xz mode=444 
@@ -493,9 +523,10 @@
       - name: Set permissions on the opt directory
         file: path=/opt owner=root group=root recurse=true state=directory
 
-- hosts: pip-boxes
+- name: Python PIP 
+  hosts: pip-boxes
   sudo: yes
-  gather_facts: yes
+  gather_facts: no
   tasks:
       - name: Download PIP 
         get_url: url=https://raw.github.com/pypa/pip/master/contrib/get-pip.py dest=/root/get-pip.py mode=444 
