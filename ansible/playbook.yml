@@ -218,6 +218,12 @@
         file: path=/home/vagrant/bin owner=vagrant group=vagrant state=directory mode=755
       - name: Copy Git intialization script  
         copy: src=scripts/intialize-git.sh dest=/home/vagrant/bin/intialize-git.sh owner=vagrant group=vagrant backup=no mode=744
+      - name: Copy POM file  
+        copy: src=files/pom.xml dest=/home/vagrant/bin/pom.xml owner=vagrant group=vagrant backup=no mode=644
+      - name: Copy settings file  
+        copy: src=files/settings.xml dest=/home/vagrant/bin/settings.xml owner=vagrant group=vagrant backup=no mode=644
+      - name: Copy Artifactory population script  
+        copy: src=scripts/populate-artifactory.sh dest=/home/vagrant/bin/populate-artifactory.sh owner=vagrant group=vagrant backup=no mode=744
       - name: Create GitHub directory 
         file: path=/home/vagrant/GitHub owner=vagrant group=vagrant state=directory mode=755
       - name: Create Bitbucket directory 
