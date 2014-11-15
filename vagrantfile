@@ -20,7 +20,7 @@ Vagrant.configure("2") do |config|
     config.vm.graceful_halt_timeout = 60
 #   config.vm.guest = :linux
 #   config.vm.network = foo
-    config.vm.post_up_message = "Sush-E Development Is Now Ready"
+    config.vm.post_up_message = "Login credentials are vagrant/vagrant"
 #   config.vm.synced_folder = /foo
     config.vm.usable_port_range = 2200..2250
 

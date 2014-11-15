@@ -6,6 +6,14 @@
         copy: src=files/passwordless-sudo dest=/etc/sudoers.d/passwordless-sudo owner=root group=root mode=0440 backup=no
       - name: Upgrade currently installed packages
         apt: "upgrade=dist state=present update_cache=true cache_valid_time=600"
+      - name: Copy hostname script to a safe place
+        copy: src=scripts/add-host-name.sh dest=/tmp/add-host-name.sh owner=root group=root mode=755 backup=no
+      - name: Add rabbitmq to hostfile 
+        command: /tmp/add-host-name.sh rabbitmq 192.168.44.10
+      - name: Add mysql to hostfile 
+        command: /tmp/add-host-name.sh mysql 192.168.44.20
+      - name: Add desktop to hostfile 
+        command: /tmp/add-host-name.sh desktop 192.168.44.30
       - name: Install common packages
         apt: "name={{ item }} state=present"
         with_items:

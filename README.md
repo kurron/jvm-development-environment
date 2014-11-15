@@ -17,6 +17,7 @@ certain previsions to fail.  On occassion, networks timeout or files get corrupt
 
 Currently, the following software is installed into the desktop box:
 
+* Docker 
 * Oracle JDK 8
 * Oracle JDK 7
 * GVM 
