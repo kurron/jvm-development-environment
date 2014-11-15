@@ -1,0 +1,10 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=logFACES
+Comment=Distributed Logger
+Exec=/home/vagrant/Software/logFacesClient/logfaces
+Icon=/home/vagrant/Software/logFacesClient/icon.xpm
+Path=
+Terminal=false
+StartupNotify=true

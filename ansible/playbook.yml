@@ -2,9 +2,18 @@
   sudo: yes
   gather_facts: yes
   tasks:
+      - name: Copy the sudoers file
+        copy: src=files/passwordless-sudo dest=/etc/sudoers.d/passwordless-sudo owner=root group=root mode=0440 backup=no
       - name: Upgrade currently installed packages
         apt: "upgrade=dist state=present update_cache=true cache_valid_time=600"
-
+      - name: Copy hostname script to a safe place
+        copy: src=scripts/add-host-name.sh dest=/tmp/add-host-name.sh owner=root group=root mode=755 backup=no
+      - name: Add rabbitmq to hostfile 
+        command: /tmp/add-host-name.sh rabbitmq 192.168.44.10
+      - name: Add mysql to hostfile 
+        command: /tmp/add-host-name.sh mysql 192.168.44.20
+      - name: Add desktop to hostfile 
+        command: /tmp/add-host-name.sh desktop 192.168.44.30
       - name: Install common packages
         apt: "name={{ item }} state=present"
         with_items:
@@ -15,13 +24,6 @@
            - curl
            - telnet
            - apt-transport-https
-
-- hosts: passwordless-sudo-box
-  sudo: yes
-  gather_facts: yes
-  tasks:
-      - name: Copy the sudoers file
-        copy: src=files/passwordless-sudo dest=/etc/sudoers.d/passwordless-sudo owner=root group=root mode=0440 backup=no
 
 - hosts: remote-managed
   sudo: yes
@@ -34,7 +36,7 @@
       - name: Install secondary Webmin repository
         apt_repository: repo='deb http://webmin.mirror.somersettechsolutions.co.uk/repository sarge contrib' state=present 
       - name: Install Webmin software
-        apt: name=webmin state=latest update_cache=true cache_valid_time=600
+        apt: name=webmin state=latest
 
 - hosts: java-8-box
   sudo: yes
@@ -51,9 +53,13 @@
       - name: soft-link the JDK to a normalized location
         file: src=/usr/lib/jvm/jdk1.8.0_25 dest=/usr/lib/jvm/oracle-jdk-8 owner=root group=root state=link
       - name: Copy export script to a safe place
-        copy: src=scripts/export-java-home.sh dest=/tmp/export-java-home.sh owner=root group=root mode=755 backup=no
-      - name: Execute JDK export script 
-        command: /tmp/export-java-home.sh
+        copy: src=scripts/set-etc-environment.sh dest=/tmp/set-etc-environment.sh owner=root group=root mode=755 backup=no
+      - name: Execute JAVA_HOME 
+        command: /tmp/set-etc-environment.sh JAVA_HOME /usr/lib/jvm/oracle-jdk-8 
+      - name: Execute JDK_HOME
+        command: /tmp/set-etc-environment.sh JDK_HOME /usr/lib/jvm/oracle-jdk-8 
+      - name: Execute JAVA8_HOME 
+        command: /tmp/set-etc-environment.sh JAVA8_HOME /usr/lib/jvm/oracle-jdk-8 
 
 - hosts: java-7-box
   sudo: yes
@@ -69,6 +75,10 @@
         unarchive: src=/root/jdk-7.tar.gz dest=/usr/lib/jvm copy=no owner=root group=root mode=755 creates=/usr/lib/jvm/jdk1.7.0_71/COPYRIGHT
       - name: soft-link the JDK to a normalized location
         file: src=/usr/lib/jvm/jdk1.7.0_71 dest=/usr/lib/jvm/oracle-jdk-7 owner=root group=root state=link
+      - name: Copy export script to a safe place
+        copy: src=scripts/set-etc-environment.sh dest=/tmp/set-etc-environment.sh owner=root group=root mode=755 backup=no
+      - name: Export JAVA7_HOME 
+        command: /tmp/set-etc-environment.sh JAVA7_HOME /usr/lib/jvm/oracle-jdk-7 
 
 - hosts: groovy-developer
   sudo: yes
@@ -100,9 +110,9 @@
       - name: Copy desktop IntelliJ file  
         copy: src=files/InjelliJ.desktop dest=/home/vagrant/Desktop/InjelliJ.desktop owner=vagrant group=vagrant backup=no mode=755
       - name: Copy export script to a safe place
-        copy: src=scripts/export-idea-jdk.sh dest=/tmp/export-idea-jdk.sh owner=root group=root mode=755 backup=no
-      - name: Execute IDEA export script 
-        command: /tmp/export-idea-jdk.sh
+        copy: src=scripts/set-etc-environment.sh dest=/tmp/set-etc-environment.sh owner=root group=root mode=755 backup=no
+      - name: Export IDEA_JDK 
+        command: /tmp/set-etc-environment.sh IDEA_JDK /usr/lib/jvm/oracle-jdk-8 
       - name: Set permissions on the home directory
         file: path=/home/vagrant owner=vagrant group=vagrant recurse=true state=directory
 
@@ -173,7 +183,7 @@
         file: path=/home/vagrant/Software owner=vagrant group=vagrant state=directory mode=755
       - name: Download DbVisualizer 
         get_url: url=http://www.dbvis.com/product_download/dbvis-9.1.11/media/dbvis_unix_9_1_11.tar.gz dest=/root/dbvis.tar.gz mode=444 
-      - name: Unpack Charles 
+      - name: Unpack DbVisualizer 
         unarchive: src=/root/dbvis.tar.gz dest=/home/vagrant/Software copy=no owner=vagrant group=vagrant creates=/home/vagrant/Software/DbVisualizer
       - name: Create Desktop directory 
         file: path=/home/vagrant/Desktop owner=vagrant group=vagrant state=directory mode=755
@@ -216,6 +226,12 @@
         file: path=/home/vagrant/bin owner=vagrant group=vagrant state=directory mode=755
       - name: Copy Git intialization script  
         copy: src=scripts/intialize-git.sh dest=/home/vagrant/bin/intialize-git.sh owner=vagrant group=vagrant backup=no mode=744
+      - name: Copy POM file  
+        copy: src=files/pom.xml dest=/home/vagrant/bin/pom.xml owner=vagrant group=vagrant backup=no mode=644
+      - name: Copy settings file  
+        copy: src=files/settings.xml dest=/home/vagrant/bin/settings.xml owner=vagrant group=vagrant backup=no mode=644
+      - name: Copy Artifactory population script  
+        copy: src=scripts/populate-artifactory.sh dest=/home/vagrant/bin/populate-artifactory.sh owner=vagrant group=vagrant backup=no mode=744
       - name: Create GitHub directory 
         file: path=/home/vagrant/GitHub owner=vagrant group=vagrant state=directory mode=755
       - name: Create Bitbucket directory 
@@ -225,3 +241,263 @@
       - name: Set permissions on the home directory
         file: path=/home/vagrant owner=vagrant group=vagrant recurse=true state=directory
 
+- hosts: mysql-boxes 
+  sudo: yes
+  gather_facts: yes
+  tasks:
+      - name: Install MySQL 
+        apt: name=mysql-server state=latest
+      - name: Install MyTop 
+        apt: name=mytop state=latest
+
+- hosts: mysql-workbench-boxes 
+  sudo: yes
+  gather_facts: yes
+  tasks:
+      - name: Install MySQL Workbench
+        apt: name=mysql-workbench state=latest
+
+- hosts: mysql-client-boxes 
+  sudo: yes
+  gather_facts: yes
+  tasks:
+      - name: Install MySQL client 
+        apt: name=mysql-client state=latest
+
+- hosts: rabbitmq-boxes 
+  sudo: yes
+  gather_facts: yes
+  tasks:
+      - name: Install RabbitMQ key 
+        apt_key: url='http://www.rabbitmq.com/rabbitmq-signing-key-public.asc' state=present
+      - name: Install RabbitMQ repository
+        apt_repository: repo='deb http://www.rabbitmq.com/debian/ testing main' state=present update_cache=yes
+      - name: Install RabbitMQ 
+        apt: name=rabbitmq-server state=latest
+      - name: Copy RabbitMQ configuration file
+        copy: src=files/rabbitmq.config dest=/etc/rabbitmq owner=root group=root mode=644 backup=yes
+      - name: Activate RabbitMQ administration plug-in 
+        command: rabbitmq-plugins enable rabbitmq_management 
+      - name: Restart RabbitMQ
+        service: name=rabbitmq-server state=restarted
+
+- hosts: mongodb-boxes 
+  sudo: yes
+  gather_facts: yes
+  tasks:
+      - name: Install MongoDB keys
+        apt_key: state=present keyserver=keyserver.ubuntu.com id=7F0CEB10
+      - name: Install MongoDB repository
+        apt_repository: repo='deb http://downloads-distro.mongodb.org/repo/ubuntu-upstart dist 10gen' state=present
+      - name: Install MongoDB 
+        apt: name=mongodb-org state=latest
+      - name: Allow MongoDB to listen on all network interfaces
+        command: /bin/sed --in-place --expression '/bind_ip = 127.0.0.1/s/^/# /' /etc/mongod.conf 
+      - name: Restart MongoDB 
+        service: name=mongod state=restarted 
+
+- hosts: postgresql-boxes 
+  sudo: yes
+  gather_facts: yes
+  tasks:
+      - name: Install PostgreSQL 
+        apt: name=postgresql state=latest
+
+- hosts: nginx-boxes 
+  sudo: yes
+  gather_facts: yes
+  tasks:
+      - name: Install nginx keys
+        apt_key: url='http://nginx.org/keys/nginx_signing.key' state=present
+      - name: Install nginx repository
+        apt_repository: repo='deb http://nginx.org/packages/ubuntu/ trusty nginx' state=present
+      - name: Install nginx 
+        apt: name=nginx state=latest
+
+- hosts: haproxy-boxes 
+  sudo: yes
+  gather_facts: yes
+  tasks:
+      - name: Install HAProxy 
+        apt: name=haproxy state=latest
+      - name: Install HATop 
+        apt: name=hatop state=latest
+      - name: Vim HAProxy support 
+        apt: name=vim-haproxy state=latest
+      - name: Vim HAProxy documentation 
+        apt: name=haproxy-doc state=latest
+
+- hosts: redis-boxes 
+  sudo: yes
+  gather_facts: yes
+  tasks:
+      - name: Install Redis 
+        apt: name=redis-server state=latest
+      - name: Allow Redis to listen on all network interfaces
+        command: /bin/sed --in-place --expression '/bind 127.0.0.1/s/^/# /' /etc/redis/redis.conf 
+      - name: Restart Redis 
+        service: name=redis-server state=restarted 
+
+- hosts: elasticsearch-boxes 
+  sudo: yes
+  gather_facts: yes
+  tasks:
+      - name: Install Elasticsearch key 
+        apt_key: url='http://packages.elasticsearch.org/GPG-KEY-elasticsearch' state=present
+      - name: Install Elasticsearch repository
+        apt_repository: repo='deb http://packages.elasticsearch.org/elasticsearch/1.3/debian stable main' state=present
+      - name: Install Elasticsearch 
+        apt: name=elasticsearch state=latest
+      - name: Set clustername
+        lineinfile: "dest=/etc/elasticsearch/elasticsearch.yml regexp='^#cluster.name: elasticsearch' line='cluster.name: logstash'"
+      - name: Set node
+        lineinfile: "dest=/etc/elasticsearch/elasticsearch.yml regexp='^#node.name: Franz Kafka' line='node.name: logstash'"
+      - name: Restart Elastisearch 
+        service: name=elasticsearch state=restarted 
+
+- hosts: logstash-boxes 
+  sudo: yes
+  gather_facts: yes
+  tasks:
+      - name: Install Logstash key 
+        apt_key: url='http://packages.elasticsearch.org/GPG-KEY-elasticsearch' state=present
+      - name: Install Logstash repository
+        apt_repository: repo='deb http://packages.elasticsearch.org/logstash/1.4/debian stable main' state=present
+      - name: Install Logstash 
+        apt: name=logstash state=latest
+      - name: Copy Logstash configuration file
+        copy: src=files/central.conf dest=/etc/logstash/conf.d owner=root group=root mode=644 backup=yes
+      - name: Start Logstash 
+        service: name=logstash state=restarted 
+
+- hosts: ant-boxes
+  sudo: yes
+  gather_facts: yes
+  tasks:
+      - name: Create Software directory 
+        file: path=/home/vagrant/Software owner=vagrant group=vagrant state=directory mode=755
+      - name: Download Ant 
+        get_url: url=http://apache.mirrors.pair.com/ant/binaries/apache-ant-1.9.4-bin.tar.gz dest=/root/ant.tar.gz mode=444 
+      - name: Unpack Ant 
+        unarchive: src=/root/ant.tar.gz dest=/home/vagrant/Software copy=no owner=vagrant group=vagrant creates=/home/vagrant/Software/apache-ant-1.9.4/README
+      - name: Soft-link Ant 
+        file: src=/home/vagrant/Software/apache-ant-1.9.4 path=/home/vagrant/Software/ant state=link
+      - name: Set permissions on the home directory
+        file: path=/home/vagrant owner=vagrant group=vagrant recurse=true state=directory
+      - name: Copy export script to a safe place
+        copy: src=scripts/set-etc-environment.sh dest=/tmp/set-etc-environment.sh owner=root group=root mode=755 backup=no
+      - name: Export ANT_HOME 
+        command: /tmp/set-etc-environment.sh ANT_HOME /home/vagrant/Software/ant 
+
+- hosts: tomcat-7-boxes
+  sudo: yes
+  gather_facts: yes
+  tasks:
+      - name: Create Software directory 
+        file: path=/home/vagrant/Software owner=vagrant group=vagrant state=directory mode=755
+      - name: Download Tomcat 7 
+        get_url: url=http://mirrors.sonic.net/apache/tomcat/tomcat-7/v7.0.57/bin/apache-tomcat-7.0.57.tar.gz dest=/root/tomcat-7.tar.gz mode=444 
+      - name: Unpack Tomcat 7 
+        unarchive: src=/root/tomcat-7.tar.gz dest=/home/vagrant/Software copy=no owner=vagrant group=vagrant creates=/home/vagrant/Software/apache-tomcat-7.0.57/NOTICE
+      - name: Soft-link Tomcat 7 
+        file: src=/home/vagrant/Software/apache-tomcat-7.0.57 path=/home/vagrant/Software/tomcat-7 state=link
+      - name: Set permissions on the home directory
+        file: path=/home/vagrant owner=vagrant group=vagrant recurse=true state=directory
+
+- hosts: tomcat-8-boxes
+  sudo: yes
+  gather_facts: yes
+  tasks:
+      - name: Create Software directory 
+        file: path=/home/vagrant/Software owner=vagrant group=vagrant state=directory mode=755
+      - name: Download Tomcat 8 
+        get_url: url=http://supergsego.com/apache/tomcat/tomcat-8/v8.0.15/bin/apache-tomcat-8.0.15.tar.gz dest=/root/tomcat-8.tar.gz mode=444 
+      - name: Unpack Tomcat 8 
+        unarchive: src=/root/tomcat-8.tar.gz dest=/home/vagrant/Software copy=no owner=vagrant group=vagrant creates=/home/vagrant/Software/apache-tomcat-8.0.15/NOTICE
+      - name: Soft-link Tomcat 8 
+        file: src=/home/vagrant/Software/apache-tomcat-8.0.15 path=/home/vagrant/Software/tomcat-8 state=link
+      - name: Set permissions on the home directory
+        file: path=/home/vagrant owner=vagrant group=vagrant recurse=true state=directory
+
+- hosts: logfaces-boxes
+  sudo: yes
+  gather_facts: yes
+  tasks:
+      - name: Create Software directory 
+        file: path=/home/vagrant/Software owner=vagrant group=vagrant state=directory mode=755
+      - name: Download logFACES 
+        get_url: url=http://www.moonlit-software.com/logfaces/downloads/lfc.4.1.2.linux.gtk.x86_64.tar.gz dest=/root/logfaces.tar.gz mode=444 
+      - name: Unpack logFACES 
+        unarchive: src=/root/logfaces.tar.gz dest=/home/vagrant/Software copy=no owner=vagrant group=vagrant creates=/home/vagrant/Software/logFacesClient/about.html
+      - name: soft-link the JDK to a normalized location
+        file: src=/usr/lib/jvm/oracle-jdk-8/jre dest=/home/vagrant/Software/logFacesClient/jre owner=root group=root state=link
+      - name: Set permissions on the home directory
+        file: path=/home/vagrant owner=vagrant group=vagrant recurse=true state=directory
+      - name: Create Desktop directory 
+        file: path=/home/vagrant/Desktop owner=vagrant group=vagrant state=directory mode=755
+      - name: Copy desktop logFACES file  
+        copy: src=files/logFACES.desktop dest=/home/vagrant/Desktop/logFACES.desktop owner=vagrant group=vagrant backup=no mode=755
+
+- hosts: maven-boxes
+  sudo: yes
+  gather_facts: yes
+  tasks:
+      - name: Create Software directory 
+        file: path=/home/vagrant/Software owner=vagrant group=vagrant state=directory mode=755
+      - name: Download Maven 
+        get_url: url=http://mirror.nexcess.net/apache/maven/maven-3/3.2.3/binaries/apache-maven-3.2.3-bin.tar.gz dest=/root/maven.tar.gz mode=444 
+      - name: Unpack Maven 
+        unarchive: src=/root/maven.tar.gz dest=/home/vagrant/Software copy=no owner=vagrant group=vagrant creates=/home/vagrant/Software/apache-maven-3.2.3/NOTICE
+      - name: Soft-link Maven 
+        file: src=/home/vagrant/Software/apache-maven-3.2.3 path=/home/vagrant/Software/maven state=link
+      - name: Set permissions on the home directory
+        file: path=/home/vagrant owner=vagrant group=vagrant recurse=true state=directory
+      - name: Copy export script to a safe place
+        copy: src=scripts/set-etc-environment.sh dest=/tmp/set-etc-environment.sh owner=root group=root mode=755 backup=no
+      - name: Export M2_HOME 
+        command: /tmp/set-etc-environment.sh M2_HOME /home/vagrant/Software/maven 
+
+- hosts: pycharm-user
+  sudo: yes
+  gather_facts: yes
+  tasks:
+      - name: Create Software directory 
+        file: path=/home/vagrant/Software owner=vagrant group=vagrant state=directory mode=755
+      - name: Download PyCharm 
+        get_url: url=http://download.jetbrains.com/python/pycharm-professional-3.4.1.tar.gz dest=/root/pycharm.tar.gz mode=444 
+      - name: Unpack PyCharm 
+        unarchive: src=/root/pycharm.tar.gz dest=/home/vagrant/Software copy=no owner=vagrant group=vagrant creates=/home/vagrant/Software/pycharm-3.4.1/build.txt
+      - name: Soft-link PyCharm 
+        file: src=/home/vagrant/Software/pycharm-3.4.1 path=/home/vagrant/Software/pycharm state=link
+      - name: Create Desktop directory 
+        file: path=/home/vagrant/Desktop owner=vagrant group=vagrant state=directory mode=755
+      - name: Copy desktop PyCharm file  
+        copy: src=files/PyCharm.desktop dest=/home/vagrant/Desktop/PyCharm.desktop owner=vagrant group=vagrant backup=no mode=755
+      - name: Set permissions on the home directory
+        file: path=/home/vagrant owner=vagrant group=vagrant recurse=true state=directory
+      - name: Copy export script to a safe place
+        copy: src=scripts/set-etc-environment.sh dest=/tmp/set-etc-environment.sh owner=root group=root mode=755 backup=no
+      - name: Export PYCHARM_JDK 
+        command: /tmp/set-etc-environment.sh PYCHARM_JDK  /usr/lib/jvm/oracle-jdk-8
+
+- hosts: ffmpeg-boxes
+  sudo: yes
+  gather_facts: yes
+  tasks:
+      - name: Download FFmpeg 
+        get_url: url=http://johnvansickle.com/ffmpeg/releases/ffmpeg-2.4.3-64bit-static.tar.xz dest=/root/ffmpeg.tar.xz mode=444 
+      - name: Unpack FFmpeg 
+        unarchive: src=/root/ffmpeg.tar.xz dest=/opt copy=no owner=root group=root creates=/opt/ffmpeg-2.4.3-64bit-static/ffprobe
+      - name: Soft-link FFmpeg 
+        file: src=/opt/ffmpeg-2.4.3-64bit-static path=/opt/ffmpeg state=link
+      - name: Set permissions on the opt directory
+        file: path=/opt owner=root group=root recurse=true state=directory
+
+- hosts: pip-boxes
+  sudo: yes
+  gather_facts: yes
+  tasks:
+      - name: Download PIP 
+        get_url: url=https://raw.github.com/pypa/pip/master/contrib/get-pip.py dest=/root/get-pip.py mode=444 
+      - name: Install PIP 
+        command: /usr/bin/python /root/get-pip.py
