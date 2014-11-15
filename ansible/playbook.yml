@@ -415,8 +415,14 @@
         get_url: url=http://www.moonlit-software.com/logfaces/downloads/lfc.4.1.2.linux.gtk.x86_64.tar.gz dest=/root/logfaces.tar.gz mode=444 
       - name: Unpack logFACES 
         unarchive: src=/root/logfaces.tar.gz dest=/home/vagrant/Software copy=no owner=vagrant group=vagrant creates=/home/vagrant/Software/logFacesClient/about.html
+      - name: soft-link the JDK to a normalized location
+        file: src=/usr/lib/jvm/oracle-jdk-8/jre dest=/home/vagrant/Software/logFacesClient/jre owner=root group=root state=link
       - name: Set permissions on the home directory
         file: path=/home/vagrant owner=vagrant group=vagrant recurse=true state=directory
+      - name: Create Desktop directory 
+        file: path=/home/vagrant/Desktop owner=vagrant group=vagrant state=directory mode=755
+      - name: Copy desktop logFACES file  
+        copy: src=files/logFACES.desktop dest=/home/vagrant/Desktop/logFACES.desktop owner=vagrant group=vagrant backup=no mode=755
 
 - hosts: maven-boxes
   sudo: yes
