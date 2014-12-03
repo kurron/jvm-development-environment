@@ -130,13 +130,13 @@
       - name: Create Software directory 
         file: path=/home/vagrant/Software owner=vagrant group=vagrant state=directory mode=755
       - name: Download STS 
-        get_url: url=http://download.springsource.com/release/STS/3.6.2/dist/e4.4/spring-tool-suite-3.6.2.RELEASE-e4.4.1-linux-gtk-x86_64.tar.gz dest=/root/sts.tar.gz mode=444 
+        get_url: url=http://download.springsource.com/release/STS/3.6.3/dist/e4.4/spring-tool-suite-3.6.3.RELEASE-e4.4.1-linux-gtk-x86_64.tar.gz dest=/root/sts.tar.gz mode=444 
       - name: Unpack STS 
-        unarchive: src=/root/sts.tar.gz dest=/home/vagrant/Software copy=no owner=vagrant group=vagrant creates=/home/vagrant/Software/sts-bundle/sts-3.6.2.RELEASE/readme
+        unarchive: src=/root/sts.tar.gz dest=/home/vagrant/Software copy=no owner=vagrant group=vagrant creates=/home/vagrant/Software/sts-bundle/sts-3.6.3.RELEASE/readme
       - name: Soft-link STS 
-        file: src=/home/vagrant/Software/sts-bundle/sts-3.6.2.RELEASE path=/home/vagrant/Software/sts state=link
+        file: src=/home/vagrant/Software/sts-bundle/sts-3.6.3.RELEASE path=/home/vagrant/Software/sts state=link
       - name: Soft-link JRE 
-        file: src=/usr/lib/jvm/oracle-jdk-8/jre path=/home/vagrant/Software/sts-bundle/sts-3.6.2.RELEASE/jre state=link
+        file: src=/usr/lib/jvm/oracle-jdk-8/jre path=/home/vagrant/Software/sts-bundle/sts-3.6.3.RELEASE/jre state=link
       - name: Create Desktop directory 
         file: path=/home/vagrant/Desktop owner=vagrant group=vagrant state=directory mode=755
       - name: Copy desktop STS file  
@@ -152,13 +152,13 @@
       - name: Create Software directory 
         file: path=/home/vagrant/Software owner=vagrant group=vagrant state=directory mode=755
       - name: Download GGTS 
-        get_url: url=http://download.springsource.com/release/STS/3.6.2/dist/e4.4/groovy-grails-tool-suite-3.6.2.RELEASE-e4.4.1-linux-gtk-x86_64.tar.gz dest=/root/ggts.tar.gz mode=444 
+        get_url: url=http://download.springsource.com/release/STS/3.6.3/dist/e4.4/groovy-grails-tool-suite-3.6.3.RELEASE-e4.4.1-linux-gtk-x86_64.tar.gz mode=444 
       - name: Unpack GGTS 
-        unarchive: src=/root/ggts.tar.gz dest=/home/vagrant/Software copy=no owner=vagrant group=vagrant creates=/home/vagrant/Software/ggts-bundle/ggts-3.6.2.RELEASE/readme
+        unarchive: src=/root/ggts.tar.gz dest=/home/vagrant/Software copy=no owner=vagrant group=vagrant creates=/home/vagrant/Software/ggts-bundle/ggts-3.6.3.RELEASE/readme
       - name: Soft-link GGTS 
-        file: src=/home/vagrant/Software/ggts-bundle/ggts-3.6.2.RELEASE path=/home/vagrant/Software/ggts state=link
+        file: src=/home/vagrant/Software/ggts-bundle/ggts-3.6.3.RELEASE path=/home/vagrant/Software/ggts state=link
       - name: Soft-link JRE 
-        file: src=/usr/lib/jvm/oracle-jdk-8/jre path=/home/vagrant/Software/ggts-bundle/ggts-3.6.2.RELEASE/jre state=link
+        file: src=/usr/lib/jvm/oracle-jdk-8/jre path=/home/vagrant/Software/ggts-bundle/ggts-3.6.3.RELEASE/jre state=link
       - name: Create Desktop directory 
         file: path=/home/vagrant/Desktop owner=vagrant group=vagrant state=directory mode=755
       - name: Copy desktop GGTS file  
