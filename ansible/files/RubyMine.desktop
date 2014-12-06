@@ -1,0 +1,10 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=RubyMine
+Comment=Ruby IDE
+Exec=/home/vagrant/Software/rubymine/bin/rubymine.sh
+Icon=/home/vagrant/Software/rubymine/bin/rubymine.png
+Path=
+Terminal=false
+StartupNotify=true

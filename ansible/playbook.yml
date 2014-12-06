@@ -509,6 +509,30 @@
       - name: Export PYCHARM_JDK 
         command: /tmp/set-etc-environment.sh PYCHARM_JDK  /usr/lib/jvm/oracle-jdk-8
 
+- name: Jetbrain's RubyMine IDE
+  hosts: rubymine-user
+  sudo: yes
+  gather_facts: no
+  tasks:
+      - name: Create Software directory
+        file: path=/home/vagrant/Software owner=vagrant group=vagrant state=directory mode=755
+      - name: Download RubyMine
+        get_url: url=http://download.jetbrains.com/ruby/RubyMine-7.0.1.tar.gz dest=/root/rubymine.tar.gz mode=444
+      - name: Unpack RubyMine
+        unarchive: src=/root/rubymine.tar.gz dest=/home/vagrant/Software copy=no owner=vagrant group=vagrant creates=/home/vagrant/Software/RubyMine-7.0.1/build.txt
+      - name: Soft-link RubyMine
+        file: src=/home/vagrant/Software/RubyMine-7.0.1 path=/home/vagrant/Software/rubymine state=link
+      - name: Create Desktop directory
+        file: path=/home/vagrant/Desktop owner=vagrant group=vagrant state=directory mode=755
+      - name: Copy desktop RubyMine file
+        copy: src=files/RubyMine.desktop dest=/home/vagrant/Desktop/RubyMine.desktop owner=vagrant group=vagrant backup=no mode=755
+      - name: Set permissions on the home directory
+        file: path=/home/vagrant owner=vagrant group=vagrant recurse=true state=directory
+      - name: Copy export script to a safe place
+        copy: src=scripts/set-etc-environment.sh dest=/tmp/set-etc-environment.sh owner=root group=root mode=755 backup=no
+      - name: Export RUBYMINE_JDK 
+        command: /tmp/set-etc-environment.sh RUBYMINE_JDK /usr/lib/jvm/oracle-jdk-8
+
 - name: FFmpeg binary 
   hosts: ffmpeg-boxes
   sudo: yes
