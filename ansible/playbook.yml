@@ -493,11 +493,11 @@
       - name: Create Software directory 
         file: path=/home/vagrant/Software owner=vagrant group=vagrant state=directory mode=755
       - name: Download PyCharm 
-        get_url: url=http://download.jetbrains.com/python/pycharm-professional-3.4.1.tar.gz dest=/root/pycharm.tar.gz mode=444 
+        get_url: url=http://download.jetbrains.com/python/pycharm-professional-4.0.1.tar.gz dest=/root/pycharm.tar.gz mode=444 
       - name: Unpack PyCharm 
-        unarchive: src=/root/pycharm.tar.gz dest=/home/vagrant/Software copy=no owner=vagrant group=vagrant creates=/home/vagrant/Software/pycharm-3.4.1/build.txt
+        unarchive: src=/root/pycharm.tar.gz dest=/home/vagrant/Software copy=no owner=vagrant group=vagrant creates=/home/vagrant/Software/pycharm-.4.0.1/build.txt
       - name: Soft-link PyCharm 
-        file: src=/home/vagrant/Software/pycharm-3.4.1 path=/home/vagrant/Software/pycharm state=link
+        file: src=/home/vagrant/Software/pycharm-4.0.1 path=/home/vagrant/Software/pycharm state=link
       - name: Create Desktop directory 
         file: path=/home/vagrant/Desktop owner=vagrant group=vagrant state=directory mode=755
       - name: Copy desktop PyCharm file  
