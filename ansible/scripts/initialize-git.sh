@@ -2,12 +2,12 @@
 
 if [ "$1" = "" ]
 then
- echo "Usage: $0 <username> <e-mail>"
+ echo "Usage: $0 'James Kirk' kirk@starfleetcommand.com"
  exit
 fi
 if [ "$2" = "" ]
 then
- echo "Usage: $0 <username> <e-mail>"
+ echo "Usage: $0 'James Kirk' kirk@starfleetcommand.com"
  exit
 fi
 NAME=$1
@@ -19,3 +19,5 @@ git config --global color.ui true
 git config --global core.autocrlf input
 git config --global core.editor vi
 git config --global push.default simple
+
+git config --list
