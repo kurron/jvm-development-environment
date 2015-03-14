@@ -225,6 +225,8 @@
         command: update-grub
       - name: Restart Docker 
         service: name=docker state=restarted 
+      - name: Install Fig 
+        command: pip install -U fig 
 
 - name: Desktop bits and tweaks 
   hosts: desktops
