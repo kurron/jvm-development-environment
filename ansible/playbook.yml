@@ -56,9 +56,9 @@
       - name: Execute download script 
         command: /tmp/download-jdk-8.sh
       - name: unpack the archive
-        unarchive: src=/root/jdk-8.tar.gz dest=/usr/lib/jvm copy=no owner=root group=root mode=755 creates=/usr/lib/jvm/jdk1.8.0_25/COPYRIGHT
+        unarchive: src=/root/jdk-8.tar.gz dest=/usr/lib/jvm copy=no owner=root group=root mode=755 creates=/usr/lib/jvm/jdk1.8.0_40/COPYRIGHT
       - name: soft-link the JDK to a normalized location
-        file: src=/usr/lib/jvm/jdk1.8.0_25 dest=/usr/lib/jvm/oracle-jdk-8 owner=root group=root state=link
+        file: src=/usr/lib/jvm/jdk1.8.0_40 dest=/usr/lib/jvm/oracle-jdk-8 owner=root group=root state=link
       - name: Copy export script to a safe place
         copy: src=scripts/set-etc-environment.sh dest=/tmp/set-etc-environment.sh owner=root group=root mode=755 backup=no
       - name: Execute JAVA_HOME 
@@ -80,9 +80,9 @@
       - name: Execute download script 
         command: /tmp/download-jdk-7.sh
       - name: unpack the archive
-        unarchive: src=/root/jdk-7.tar.gz dest=/usr/lib/jvm copy=no owner=root group=root mode=755 creates=/usr/lib/jvm/jdk1.7.0_71/COPYRIGHT
+        unarchive: src=/root/jdk-7.tar.gz dest=/usr/lib/jvm copy=no owner=root group=root mode=755 creates=/usr/lib/jvm/jdk1.7.0_75/COPYRIGHT
       - name: soft-link the JDK to a normalized location
-        file: src=/usr/lib/jvm/jdk1.7.0_71 dest=/usr/lib/jvm/oracle-jdk-7 owner=root group=root state=link
+        file: src=/usr/lib/jvm/jdk1.7.0_75 dest=/usr/lib/jvm/oracle-jdk-7 owner=root group=root state=link
       - name: Copy export script to a safe place
         copy: src=scripts/set-etc-environment.sh dest=/tmp/set-etc-environment.sh owner=root group=root mode=755 backup=no
       - name: Export JAVA7_HOME 
@@ -110,11 +110,11 @@
       - name: Create Software directory 
         file: path=/home/vagrant/Software owner=vagrant group=vagrant state=directory mode=755
       - name: Download IntelliJ IDEA 
-        get_url: url=http://download.jetbrains.com/idea/ideaIU-14.0.2.tar.gz dest=/root/idea.tar.gz mode=444 
+        get_url: url=http://download.jetbrains.com/idea/ideaIU-14.0.3.tar.gz dest=/root/idea.tar.gz mode=444 
       - name: Unpack IntelliJ IDEA 
-        unarchive: src=/root/idea.tar.gz dest=/home/vagrant/Software copy=no owner=vagrant group=vagrant creates=/home/vagrant/Software/idea-IU-139.659.2/build.txt
+        unarchive: src=/root/idea.tar.gz dest=/home/vagrant/Software copy=no owner=vagrant group=vagrant creates=/home/vagrant/Software/idea-IU-139.1117.1/build.txt
       - name: Soft-link IntelliJ 
-        file: src=/home/vagrant/Software/idea-IU-139.659.2 path=/home/vagrant/Software/idea state=link
+        file: src=/home/vagrant/Software/idea-IU-139.1117.1 path=/home/vagrant/Software/idea state=link
       - name: Create Desktop directory 
         file: path=/home/vagrant/Desktop owner=vagrant group=vagrant state=directory mode=755
       - name: Copy desktop IntelliJ file  
@@ -196,7 +196,7 @@
       - name: Create Software directory 
         file: path=/home/vagrant/Software owner=vagrant group=vagrant state=directory mode=755
       - name: Download DbVisualizer 
-        get_url: url=http://www.dbvis.com/product_download/dbvis-9.1.11/media/dbvis_unix_9_1_11.tar.gz dest=/root/dbvis.tar.gz mode=444 
+        get_url: url=http://www.dbvis.com/product_download/dbvis-9.2.4/media/dbvis_unix_9_2_4.tar.gz dest=/root/dbvis.tar.gz mode=444 
       - name: Unpack DbVisualizer 
         unarchive: src=/root/dbvis.tar.gz dest=/home/vagrant/Software copy=no owner=vagrant group=vagrant creates=/home/vagrant/Software/DbVisualizer
       - name: Create Desktop directory 
@@ -309,7 +309,7 @@
       - name: Install MongoDB keys
         apt_key: state=present keyserver=keyserver.ubuntu.com id=7F0CEB10
       - name: Install MongoDB repository
-        apt_repository: repo='deb http://downloads-distro.mongodb.org/repo/ubuntu-upstart dist 10gen' state=present
+        apt_repository: repo='deb http://repo.mongodb.org/apt/ubuntu trusty/mongodb-org/3.0 multiverse' state=present
       - name: Install MongoDB 
         apt: name=mongodb-org state=latest
       - name: Allow MongoDB to listen on all network interfaces
@@ -425,11 +425,11 @@
       - name: Create Software directory 
         file: path=/home/vagrant/Software owner=vagrant group=vagrant state=directory mode=755
       - name: Download Tomcat 7 
-        get_url: url=http://mirrors.sonic.net/apache/tomcat/tomcat-7/v7.0.57/bin/apache-tomcat-7.0.57.tar.gz dest=/root/tomcat-7.tar.gz mode=444 
+        get_url: url=http://mirrors.ibiblio.org/apache/tomcat/tomcat-7/v7.0.59/bin/apache-tomcat-7.0.59.tar.gz dest=/root/tomcat-7.tar.gz mode=444 
       - name: Unpack Tomcat 7 
-        unarchive: src=/root/tomcat-7.tar.gz dest=/home/vagrant/Software copy=no owner=vagrant group=vagrant creates=/home/vagrant/Software/apache-tomcat-7.0.57/NOTICE
+        unarchive: src=/root/tomcat-7.tar.gz dest=/home/vagrant/Software copy=no owner=vagrant group=vagrant creates=/home/vagrant/Software/apache-tomcat-7.0.59/NOTICE
       - name: Soft-link Tomcat 7 
-        file: src=/home/vagrant/Software/apache-tomcat-7.0.57 path=/home/vagrant/Software/tomcat-7 state=link
+        file: src=/home/vagrant/Software/apache-tomcat-7.0.59 path=/home/vagrant/Software/tomcat-7 state=link
       - name: Set permissions on the home directory
         file: path=/home/vagrant owner=vagrant group=vagrant recurse=true state=directory
 
@@ -441,11 +441,11 @@
       - name: Create Software directory 
         file: path=/home/vagrant/Software owner=vagrant group=vagrant state=directory mode=755
       - name: Download Tomcat 8 
-        get_url: url=http://mirrors.ibiblio.org/apache/tomcat/tomcat-8/v8.0.15/bin/apache-tomcat-8.0.15.tar.gz dest=/root/tomcat-8.tar.gz mode=444 
+        get_url: url=http://mirrors.ibiblio.org/apache/tomcat/tomcat-8/v8.0.18/bin/apache-tomcat-8.0.18.tar.gz dest=/root/tomcat-8.tar.gz mode=444 
       - name: Unpack Tomcat 8 
-        unarchive: src=/root/tomcat-8.tar.gz dest=/home/vagrant/Software copy=no owner=vagrant group=vagrant creates=/home/vagrant/Software/apache-tomcat-8.0.15/NOTICE
+        unarchive: src=/root/tomcat-8.tar.gz dest=/home/vagrant/Software copy=no owner=vagrant group=vagrant creates=/home/vagrant/Software/apache-tomcat-8.0.18/NOTICE
       - name: Soft-link Tomcat 8 
-        file: src=/home/vagrant/Software/apache-tomcat-8.0.15 path=/home/vagrant/Software/tomcat-8 state=link
+        file: src=/home/vagrant/Software/apache-tomcat-8.0.18 path=/home/vagrant/Software/tomcat-8 state=link
       - name: Set permissions on the home directory
         file: path=/home/vagrant owner=vagrant group=vagrant recurse=true state=directory
 
@@ -497,11 +497,11 @@
       - name: Create Software directory 
         file: path=/home/vagrant/Software owner=vagrant group=vagrant state=directory mode=755
       - name: Download PyCharm 
-        get_url: url=http://download.jetbrains.com/python/pycharm-professional-4.0.1.tar.gz dest=/root/pycharm.tar.gz mode=444 
+        get_url: url=http://download.jetbrains.com/python/pycharm-professional-4.0.4.tar.gz dest=/root/pycharm.tar.gz mode=444 
       - name: Unpack PyCharm 
-        unarchive: src=/root/pycharm.tar.gz dest=/home/vagrant/Software copy=no owner=vagrant group=vagrant creates=/home/vagrant/Software/pycharm-.4.0.1/build.txt
+        unarchive: src=/root/pycharm.tar.gz dest=/home/vagrant/Software copy=no owner=vagrant group=vagrant creates=/home/vagrant/Software/pycharm-4.0.4/build.txt
       - name: Soft-link PyCharm 
-        file: src=/home/vagrant/Software/pycharm-4.0.1 path=/home/vagrant/Software/pycharm state=link
+        file: src=/home/vagrant/Software/pycharm-4.0.4 path=/home/vagrant/Software/pycharm state=link
       - name: Create Desktop directory 
         file: path=/home/vagrant/Desktop owner=vagrant group=vagrant state=directory mode=755
       - name: Copy desktop PyCharm file  

@@ -4,7 +4,7 @@ using `vagrant\vagrant` as credentials.
 
 
 Initial box creation can take some time so _do not log into the desktop vm until the Vagrant command completes_.  Logging in prior to completion may cause
-certain previsions to fail.  On occassion, networks timeout or files get corrupted and there are a few simple techniques you can use to correct errors.
+certain provisions to fail.  On occassion, networks timeout or files get corrupted and there are a few simple techniques you can use to correct errors.
 
 1. retry the process.  Determine the name of the box that failed and attempt to retry build.  For example, if the `mysql` box failed you can
    try issuing the command `vagrant provision mysql`.
@@ -24,7 +24,6 @@ Currently, the following software is installed into the desktop box:
 * Jetbrains IntelliJ IDEA 
 * Tomcat 8 
 * Tomcat 7 
-* logFACES client 
 * DbVisualizer database browser 
 * Charles proxy 
 
