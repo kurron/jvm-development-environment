@@ -254,6 +254,8 @@
         file: path=/home/vagrant/Bitbucket owner=vagrant group=vagrant state=directory mode=755
       - name: Create Stash directory 
         file: path=/home/vagrant/Stash owner=vagrant group=vagrant state=directory mode=755
+      - name: Copy bash alias file  
+        copy: src=files/.bash_aliases dest=/home/vagrant/.bash_aliases owner=vagrant group=vagrant backup=no mode=744
       - name: Set permissions on the home directory
         file: path=/home/vagrant owner=vagrant group=vagrant recurse=true state=directory
 
