@@ -256,6 +256,10 @@
         file: path=/home/vagrant/Stash owner=vagrant group=vagrant state=directory mode=755
       - name: Copy bash alias file  
         copy: src=files/.bash_aliases dest=/home/vagrant/.bash_aliases owner=vagrant group=vagrant backup=no mode=744
+      - name: Create .lazybones directory 
+        file: path=/home/vagrant/.lazybones owner=vagrant group=vagrant state=directory mode=755
+      - name: Copy lazybones configurations file  
+        copy: src=files/config.groovy dest=/home/vagrant/.lazybones/config.groovy owner=vagrant group=vagrant backup=no mode=744
       - name: Set permissions on the home directory
         file: path=/home/vagrant owner=vagrant group=vagrant recurse=true state=directory
 
