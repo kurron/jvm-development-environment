@@ -593,7 +593,7 @@
       - name: Unpack FFmpeg
         unarchive: src=/root/node.tar.gz dest=/opt copy=no owner=root group=root creates=/opt/node-v0.12.0-linux-x64/LICENSE
       - name: Soft-link Node
-        file: src=/opt/node-v0.12.0-linux-x64 path=/opt/node state=link
+        file: src=/opt/node-v0.12.0-linux-x64/bin/* path=/usr/local/bin state=link
       - name: Set permissions on the opt directory
         file: path=/opt owner=root group=root recurse=true state=directory
       - name: Update npm 
