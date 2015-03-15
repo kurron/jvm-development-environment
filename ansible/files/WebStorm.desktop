@@ -1,0 +1,10 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=WebStorm
+Comment=Javascript IDE
+Exec=/home/vagrant/Software/webstorm/bin/webstorm.sh
+Icon=/home/vagrant/Software/webstorm/bin/webide.png
+Path=
+Terminal=false
+StartupNotify=true
