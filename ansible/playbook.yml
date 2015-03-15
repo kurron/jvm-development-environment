@@ -583,6 +583,22 @@
       - name: Set permissions on the opt directory
         file: path=/opt owner=root group=root recurse=true state=directory
 
+- name: Node 
+  hosts: node-boxes
+  sudo: yes
+  gather_facts: no
+  tasks:
+      - name: Download Node
+        get_url: url=http://nodejs.org/dist/v0.12.0/node-v0.12.0-linux-x64.tar.gz dest=/root/node.tar.gz mode=444
+      - name: Unpack FFmpeg
+        unarchive: src=/root/node.tar.gz dest=/opt copy=no owner=root group=root creates=/opt/node-v0.12.0-linux-x64/LICENSE
+      - name: Soft-link Node
+        file: src=/opt/node-v0.12.0-linux-x64 path=/opt/node state=link
+      - name: Set permissions on the opt directory
+        file: path=/opt owner=root group=root recurse=true state=directory
+      - name: Update npm 
+        command: /opt/node/bin/npm -g npm@"2.7.1"
+
 - name: Python PIP 
   hosts: pip-boxes
   sudo: yes
