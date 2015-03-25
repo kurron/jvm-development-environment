@@ -110,11 +110,11 @@
       - name: Create Software directory 
         file: path=/home/vagrant/Software owner=vagrant group=vagrant state=directory mode=755
       - name: Download IntelliJ IDEA 
-        get_url: url=http://download.jetbrains.com/idea/ideaIU-14.0.3.tar.gz dest=/root/idea.tar.gz mode=444 
+        get_url: url=http://download.jetbrains.com/idea/ideaIU-14.1.tar.gz dest=/root/idea.tar.gz mode=444 
       - name: Unpack IntelliJ IDEA 
-        unarchive: src=/root/idea.tar.gz dest=/home/vagrant/Software copy=no owner=vagrant group=vagrant creates=/home/vagrant/Software/idea-IU-139.1117.1/build.txt
+        unarchive: src=/root/idea.tar.gz dest=/home/vagrant/Software copy=no owner=vagrant group=vagrant creates=/home/vagrant/Software/idea-IU-141.177.4/build.txt
       - name: Soft-link IntelliJ 
-        file: src=/home/vagrant/Software/idea-IU-139.1117.1 path=/home/vagrant/Software/idea state=link
+        file: src=/home/vagrant/Software/idea-IU-141.177.4 path=/home/vagrant/Software/idea state=link
       - name: Create Desktop directory 
         file: path=/home/vagrant/Desktop owner=vagrant group=vagrant state=directory mode=755
       - name: Copy desktop IntelliJ file  
