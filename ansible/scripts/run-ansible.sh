@@ -4,4 +4,9 @@
 cp -r /vagrant/ansible /tmp
 chmod -x /tmp/ansible/inventory.ini
 
-ansible-playbook --verbose --connection=local --limit=${HOSTNAME} --inventory-file=/tmp/ansible/inventory.ini /tmp/ansible/playbook.yml
+
+mkdir -p /opt/git
+# we have to checkout the repo by hand just to deal with Windows permissions!
+#git clone https://github.com/kurron/ansible-pull.git /opt/ansible-pull
+
+ansible-pull --checkout master --directory /opt/ansible-pull --inventory-file=/opt/ansible-pull/inventory.ini  --module-name=git  --only-if-changed --url=https://github.com/kurron/ansible-pull.git --verbose playbook.yml
