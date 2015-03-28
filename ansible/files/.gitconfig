@@ -1,0 +1,11 @@
+[user]
+	name = Ron Kurr
+	email = kurr@kurron.org
+[color]
+	ui = true
+[core]
+	autocrlf = input
+	editor = vi
+[push]
+	default = simple
+
