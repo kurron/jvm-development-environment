@@ -15,5 +15,7 @@
         command: /tmp/set-etc-environment.sh RON_WAS_HERE true 
       - name: Copy Git configuration file
         copy: src=files/.gitconfig dest=/home/vagrant/.gitconfig owner=vagrant group=vagrant mode=644 backup=no
+      - name: Set command-line editor to VI 
+        shell: echo set -o vi | tee --append /home/vagrant/.bashrc 
       - name: Set permissions on the home directory
         file: path=/home/vagrant owner=vagrant group=vagrant recurse=true state=directory
