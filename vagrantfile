@@ -47,9 +47,7 @@ Vagrant.configure("2") do |config|
         v.customize ["modifyvm", :id, "--groups", "/JVM Guy"]
     end
 
-#   config.vm.provision "shell", path: "ansible/scripts/run-ansible.sh"
-#   config.vm.provision "shell", path: "ansible/scripts/run-ansible-one-big-box.sh"
-    config.vm.provision "shell", path: "ansible/scripts/run-ansible-one-medium-box.sh"
+    config.vm.provision "shell", path: "ansible/scripts/run-remote-playbook.sh one-medium-box.ini"
 
     config.vm.define "desktop" do |desktop|
         desktop.vm.box = "trusty-x64-desktop/4.3.24"
