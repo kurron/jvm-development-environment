@@ -43,6 +43,7 @@ Vagrant.configure("2") do |config|
         v.customize ["modifyvm", :id, "--vtxvpid", "on"]
         v.customize ["modifyvm", :id, "--largepages", "on"]
         v.customize ["modifyvm", :id, "--acpi", "on"]
+        v.customize ["modifyvm", :id, "--nictype1", "virtio"]
         v.customize ["modifyvm", :id, "--groups", "/JVM Guy"]
     end
 
