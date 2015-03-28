@@ -5,4 +5,7 @@
         apt: "name={{ item }} state=present"
         with_items:
            - cvs 
-
+      - name: Copy hostname script to a safe place
+        copy: src=scripts/add-host-name.sh dest=/tmp/add-host-name.sh owner=root group=root mode=755 backup=no
+      - name: Add docker to hostfile 
+        command: /tmp/add-host-name.sh docker 192.168.44.60
