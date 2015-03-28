@@ -4,4 +4,4 @@
 cp -r /vagrant/ansible /tmp
 
 mkdir -p /opt/git
-ansible-pull --checkout master --directory /opt/ansible-pull --inventory-file=/tmp/one-fat-box.ini  --module-name=git  --only-if-changed --url=https://github.com/kurron/ansible-pull.git --verbose playbook.yml
+ansible-pull --checkout master --directory /opt/ansible-pull --inventory-file=/tmp/ansible/one-fat-box.ini  --module-name=git  --only-if-changed --url=https://github.com/kurron/ansible-pull.git --verbose playbook.yml
