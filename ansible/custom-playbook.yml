@@ -17,8 +17,11 @@
         copy: src=files/.gitconfig dest=/home/vagrant/.gitconfig owner=vagrant group=vagrant mode=644 backup=no
       - name: Copy bashrc change script to a safe place
         copy: src=scripts/append-line-to-bashrc.sh dest=/tmp/append-line-to-bashrc.sh owner=root group=root mode=755 backup=no
-
       - name: set editor to VI 
         command: /tmp/append-line-to-bashrc.sh editor 'set -o vi' 
+      - name: Copy alias change script to a safe place
+        copy: src=scripts/add-alias.sh dest=/tmp/add-alias.sh owner=root group=root mode=755 backup=no
+      - name: add a silly alias 
+        command: /tmp/add-alias.sh bob 'ls -alh' 
       - name: Set permissions on the home directory
         file: path=/home/vagrant owner=vagrant group=vagrant recurse=true state=directory
