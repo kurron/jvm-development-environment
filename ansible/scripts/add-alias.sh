@@ -12,7 +12,7 @@ if [ -f "${DONEFILE}" ]; then
     exit 0
 fi
 
-echo "alias ${ALIAS_NAME} = '${ALIAS_COMMAND}'" | tee --append  /home/vagrant/.bash_aliases 
+echo "alias ${ALIAS_NAME}='${ALIAS_COMMAND}'" | tee --append  /home/vagrant/.bash_aliases 
 
 # signal a successful provision
 touch ${DONEFILE}
