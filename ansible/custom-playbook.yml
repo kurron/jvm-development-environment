@@ -23,5 +23,15 @@
         copy: src=scripts/add-alias.sh dest=/tmp/add-alias.sh owner=root group=root mode=755 backup=no
       - name: add a silly alias 
         command: /tmp/add-alias.sh bob 'ls -alh' 
+      - name: Create Asgard project directory
+        file: path=/home/vagrant/Stash/Asgard state=directory
+      - name: Create Gradle project directory
+        file: path=/home/vagrant/Stash/Gradle state=directory
+      - name: Create Khujand project directory
+        file: path=/home/vagrant/Stash/Khujand state=directory
+      - name: Create Mold-E project directory
+        file: path=/home/vagrant/Stash/Mold-E state=directory
+      - name: Create Sush-E project directory
+        file: path=/home/vagrant/Stash/Sush-E state=directory
       - name: Set permissions on the home directory
         file: path=/home/vagrant owner=vagrant group=vagrant recurse=true state=directory
