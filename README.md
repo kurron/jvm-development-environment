@@ -17,7 +17,7 @@ certain provisions to fail.  On occassion, networks timeout or files get corrupt
 
 The current version of this project generates a single virtual machine.  It is an Ubuntu desktop running Docker.  Mutlipe Docker containers are running to provide various services, including RabbitMQ, MongoDB, Nginx and MySQL.  Upon entering the box, type `docker ps` to ses the currently running containers.
 
-The provisioning of this box uses multi-pass Ansible steps.  The first pass is based on [a project](https://github.com/kurron/ansible-pull) that provides generalized Ansible plays suitable for a variety of envirionments.  The plays are shared but the inventory is controlled by this project.  Using customized innventory fieles allows you to pick and chose which plays get applied to which boxes.  As the plays are updated, you get the changes for free.
+The provisioning of this box uses multi-pass Ansible steps.  The first pass is based on [a project](https://github.com/kurron/ansible-pull) that provides generalized Ansible plays suitable for a variety of envirionments.  The plays are shared but the inventory is controlled by this project.  Using customized inventory files allows you to pick and choose which plays get applied to which boxes.  As the plays are updated, you get the changes for free.
 
 The second pass is based on a local Playbook and is completely customizable.  May any changes as you see fit.  You might decide that one big VM isn't right for you and want to split things up into to boxes.  Easily done.
 
