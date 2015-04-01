@@ -47,10 +47,12 @@
         command: /tmp/add-host-name.sh registry.transparent.com 192.168.254.90
 
 - name: Make per-project tweaks to RabbitMQ 
-  hosts: nobody 
+  hosts: custom-desktop-box
   tasks:
-    - name: Sush-E virtualhost 
-      rabbitmq_vhost: node=rabbitmq name=/sush-e state=present
+    - name: Copy hostname script to a safe place
+      copy: src=scripts/add-virtualhost.sh dest=/tmp/add-virtualhost.sh owner=root group=root mode=755 backup=no
+    - name: Add Sush-E virtual host 
+      command: /tmp/add-virtualhost.sh /sush-e rabbitmq guest guest
 
 - name: Create custom databases 
   hosts: custom-desktop-box
