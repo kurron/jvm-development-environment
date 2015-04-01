@@ -7,14 +7,24 @@
            - cvs 
       - name: Copy hostname script to a safe place
         copy: src=scripts/add-host-name.sh dest=/tmp/add-host-name.sh owner=root group=root mode=755 backup=no
-      - name: Add docker to hostfile 
+      - name: Add docker to hostfile
         command: /tmp/add-host-name.sh docker 192.168.44.60
-      - name: Add rabbitmq to hostfile 
+      - name: Add rabbitmq to hostfile
         command: /tmp/add-host-name.sh rabbitmq 192.168.44.30
-      - name: Add mongodb to hostfile 
+      - name: Add mongodb to hostfile
         command: /tmp/add-host-name.sh mongodb 192.168.44.30
-      - name: Add mysql to hostfile 
+      - name: Add mysql to hostfile
         command: /tmp/add-host-name.sh mysql 192.168.44.30
+      - name: Add redis to hostfile
+        command: /tmp/add-host-name.sh redis 192.168.44.30
+      - name: Add memcached to hostfile
+        command: /tmp/add-host-name.sh memcached 192.168.44.30
+      - name: Add elasticsearch to hostfile
+        command: /tmp/add-host-name.sh elasticsearch 192.168.44.30
+      - name: Add nginx to hostfile
+        command: /tmp/add-host-name.sh nginx 192.168.44.30
+      - name: Add postgresql to hostfile
+        command: /tmp/add-host-name.sh postgresql 192.168.44.30
       - name: Copy etc change script to a safe place
         copy: src=scripts/set-etc-environment.sh dest=/tmp/set-etc-environment.sh owner=root group=root mode=755 backup=no
       - name: Add silly environment variable 
