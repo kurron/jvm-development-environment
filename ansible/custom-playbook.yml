@@ -53,6 +53,12 @@
       copy: src=scripts/add-virtualhost.sh dest=/tmp/add-virtualhost.sh owner=root group=root mode=755 backup=no
     - name: Add Sush-E virtual host 
       command: /tmp/add-virtualhost.sh sush-e rabbitmq guest guest
+    - name: Add Mold-E virtual host 
+      command: /tmp/add-virtualhost.sh mold-e rabbitmq guest guest
+    - name: Add Asgard virtual host 
+      command: /tmp/add-virtualhost.sh asgard rabbitmq guest guest
+    - name: Add Khujand virtual host 
+      command: /tmp/add-virtualhost.sh khujand rabbitmq guest guest
 
 - name: Create custom databases 
   hosts: custom-desktop-box
