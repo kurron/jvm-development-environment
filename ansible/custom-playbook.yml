@@ -1,10 +1,13 @@
 - name: Create custom databases 
-  hosts: nobody 
+  hosts: custom-desktop-box
   tasks:
-      - name: Install Python  MySQL module
-        command: pip install --upgrade MySQL-python 
-      - name: Sush-E Database 
-        mysql_db: name=sushe state=present encoding=utf8 collation=utf8_general_ci login_user=root login_password=mysql
+    - name: Installing required dependencies so we can use Ansible MySQL modules
+      apt: name={{ item }} state=present
+      with_items:
+        - mysql-client
+        - python-mysqldb
+    - name: Sush-E Database 
+      mysql_db: name=sushe state=present encoding=utf8 collation=utf8_general_ci login_user=root login_password=mysql
 
 - name: Custom Desktop tweeks 
   hosts: custom-desktop-box
