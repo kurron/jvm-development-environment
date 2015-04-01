@@ -21,9 +21,33 @@
         command: /tmp/add-host-name.sh nginx 192.168.44.30
       - name: Add postgresql to hostfile
         command: /tmp/add-host-name.sh postgresql 192.168.44.30
+      - name: Add logfaces to hostfile 
+        command: /tmp/add-host-name.sh logfaces 192.168.254.123 
+      - name: Add logfaces-boston to hostfile 
+        command: /tmp/add-host-name.sh logfaces-boston 192.168.100.124 
+      - name: Add mongo1test to hostfile 
+        command: /tmp/add-host-name.sh mongo1test 192.168.254.57 
+      - name: Add mongo2test to hostfile 
+        command: /tmp/add-host-name.sh mongo1test 192.168.254.58 
+      - name: Add mongo3test to hostfile 
+        command: /tmp/add-host-name.sh mongo1test 192.168.254.59 
+      - name: Add stagetwo to hostfile 
+        command: /tmp/add-host-name.sh stagetwo 192.168.255.29 
+      - name: Add cd0 to hostfile 
+        command: /tmp/add-host-name.sh cd0 192.168.254.85 
+      - name: Add cd1 to hostfile 
+        command: /tmp/add-host-name.sh cd1 192.168.254.81 
+      - name: Add cd5 to hostfile 
+        command: /tmp/add-host-name.sh cd5 192.168.254.114 
+      - name: Add cd6 to hostfile 
+        command: /tmp/add-host-name.sh cd6 192.168.254.59 
+      - name: Add rabbit-test to hostfile 
+        command: /tmp/add-host-name.sh rabbit-test 192.168.254.28 
+      - name: Add registry.transparent.com to hostfile
+        command: /tmp/add-host-name.sh registry.transparent.com 192.168.254.90
 
 - name: Make per-project tweaks to RabbitMQ 
-  hosts: custom-desktop-box
+  hosts: nobody 
   tasks:
     - name: Sush-E virtualhost 
       rabbitmq_vhost: node=rabbitmq name=/sush-e state=present
