@@ -1,21 +1,6 @@
-- name: Create custom databases 
+- name: Add host entiries for the Docker containers 
   hosts: custom-desktop-box
   tasks:
-    - name: Installing required dependencies so we can use Ansible MySQL modules
-      apt: name={{ item }} state=present
-      with_items:
-        - mysql-client
-        - python-mysqldb
-    - name: Sush-E Database 
-      mysql_db: name=sushe state=present encoding=utf8 collation=utf8_general_ci login_host=mysql login_user=root login_password=mysql
-
-- name: Custom Desktop tweeks 
-  hosts: custom-desktop-box
-  tasks:
-      - name: Install custom desktop packages
-        apt: "name={{ item }} state=present"
-        with_items:
-           - cvs 
       - name: Copy hostname script to a safe place
         copy: src=scripts/add-host-name.sh dest=/tmp/add-host-name.sh owner=root group=root mode=755 backup=no
       - name: Add docker to hostfile
@@ -36,6 +21,31 @@
         command: /tmp/add-host-name.sh nginx 192.168.44.30
       - name: Add postgresql to hostfile
         command: /tmp/add-host-name.sh postgresql 192.168.44.30
+
+- name: Make per-project tweaks to RabbitMQ 
+  hosts: custom-desktop-box
+  tasks:
+    - name: Sush-E virtualhost 
+      rabbitmq_vhost: node=rabbitmq name=/sush-e state=present
+
+- name: Create custom databases 
+  hosts: custom-desktop-box
+  tasks:
+    - name: Installing required dependencies so we can use Ansible MySQL modules
+      apt: name={{ item }} state=present
+      with_items:
+        - mysql-client
+        - python-mysqldb
+    - name: Sush-E Database 
+      mysql_db: name=sushe state=present encoding=utf8 collation=utf8_general_ci login_host=mysql login_user=root login_password=mysql
+
+- name: Custom Desktop tweeks 
+  hosts: custom-desktop-box
+  tasks:
+      - name: Install custom desktop packages
+        apt: "name={{ item }} state=present"
+        with_items:
+           - cvs 
       - name: Copy etc change script to a safe place
         copy: src=scripts/set-etc-environment.sh dest=/tmp/set-etc-environment.sh owner=root group=root mode=755 backup=no
       - name: Add silly environment variable 
