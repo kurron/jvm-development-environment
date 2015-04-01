@@ -15,7 +15,7 @@ if [ -f "${DONEFILE}" ]; then
 fi
 
 curl --include --user $USERNAME:$PASSWORD --header "content-type:application/json" -XPUT http://$RABBIT_HOST:15672/api/vhosts/%2F$VHOST
-curl --include --user $USERNAME:$PASSWORD --header "content-type:application/json" -XPUT --data '{"configure":".*","write":".*","read":".*"}' http://$RABBIT_HOST:15672/api/vhosts/%2F$VHOST/$USERNAME
+curl --include --user $USERNAME:$PASSWORD --header "content-type:application/json" -XPUT http://$RABBIT_HOST:15672/api/permissions/%2F$VHOST/$USERNAME --data '{"configure":".*","write":".*","read":".*"}'
 
 # signal a successful provision
 touch ${DONEFILE}
