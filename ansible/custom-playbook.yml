@@ -1,3 +1,9 @@
+- name: Create custom databases 
+  hosts: custom-desktop-box
+  tasks:
+      - name: Sush-E Database 
+        mysql_db: name=sushe state=present encoding=utf8 collation=utf8_general_ci login_user=root login_password=mysql
+
 - name: Custom Desktop tweeks 
   hosts: custom-desktop-box
   tasks:
