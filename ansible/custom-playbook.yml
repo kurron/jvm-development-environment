@@ -1,5 +1,5 @@
 - name: Create custom databases 
-  hosts: custom-desktop-box
+  hosts: nobody 
   tasks:
       - name: Install Python  MySQL module
         command: pip install --upgrade MySQL-python 
