@@ -90,10 +90,6 @@
         copy: src=scripts/append-line-to-bashrc.sh dest=/tmp/append-line-to-bashrc.sh owner=root group=root mode=755 backup=no
       - name: set editor to VI 
         command: /tmp/append-line-to-bashrc.sh editor 'set -o vi' 
-      - name: Copy alias change script to a safe place
-        copy: src=scripts/add-alias.sh dest=/tmp/add-alias.sh owner=root group=root mode=755 backup=no
-      - name: add a silly alias 
-        command: /tmp/add-alias.sh bob 'ls -alh' 
       - name: Create Asgard project directory
         file: path=/home/vagrant/Stash/Asgard state=directory
       - name: Create Gradle project directory
@@ -106,3 +102,11 @@
         file: path=/home/vagrant/Stash/Sush-E state=directory
       - name: Set permissions on the home directory
         file: path=/home/vagrant owner=vagrant group=vagrant recurse=true state=directory
+      - name: Copy alias change script to a safe place
+        copy: src=scripts/add-alias.sh dest=/tmp/add-alias.sh owner=root group=root mode=755 backup=no
+      - name: add an alias to quickly change to the Asgard directory
+        command: /tmp/add-alias.sh asgard 'cd /home/vagrant/Stash/Asgard'
+      - name: add an alias to quickly change to the Mold-E directory
+        command: /tmp/add-alias.sh molde 'cd /home/vagrant/Stash/Mold-E'
+      - name: add an alias to quickly change to the Sush-E directory
+        command: /tmp/add-alias.sh sushe 'cd /home/vagrant/Stash/Sush-E'
