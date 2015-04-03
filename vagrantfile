@@ -7,13 +7,13 @@ Vagrant.configure("2") do |config|
     config.vagrant.host = :detect
 
     config.vm.boot_timeout = 300
-    config.vm.box = "trusty-x64-server/4.3.24"
+    config.vm.box = "trusty-x64-server/4.3.26"
     config.vm.box_check_update = true
 #   config.vm.box_download_checksum = "19ab876677040a892dad48af40fea449"
 #   config.vm.box_download_checksum_type = "md5"
 #   config.vm.box_download_client_cert = /foo.cert
 #   config.vm.box_download_insecure = false 
-    config.vm.box_url = "http://cd1:81/artifactory/vm-artifacts/vagrant/ubuntu/trusty-x64/4.3.24/trusty-x64-server.box"
+    config.vm.box_url = "http://cd1:81/artifactory/vm-artifacts/vagrant/ubuntu/trusty-x64/4.3.26/trusty-x64-server.box"
 #   config.vm.box_version = "1.0.0"
     config.vm.hostname = "blackbox"
     config.vm.graceful_halt_timeout = 60
@@ -65,8 +65,8 @@ Vagrant.configure("2") do |config|
     end
 
     config.vm.define "desktop" do |desktop|
-        desktop.vm.box = "trusty-x64-desktop/4.3.24"
-        desktop.vm.box_url = "http://cd1:81/artifactory/vm-artifacts/vagrant/ubuntu/trusty-x64/4.3.24/trusty-x64-desktop.box"
+        desktop.vm.box = "trusty-x64-desktop/4.3.26"
+        desktop.vm.box_url = "http://cd1:81/artifactory/vm-artifacts/vagrant/ubuntu/trusty-x64/4.3.26/trusty-x64-desktop.box"
         desktop.vm.hostname = "desktop"
         desktop.vm.network :private_network, ip: "192.168.44.30"
         desktop.vm.provider "virtualbox" do |v|
