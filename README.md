@@ -13,7 +13,7 @@ certain provisions to fail.  On occassion, networks timeout or files get corrupt
    that has problems.  Since the directory is owned by root, you will have to use `sudo` to remove any files.  Once the file is removed,
    exit the shell and try the provision again.
 3. if you cannot figure out which file is failing you could nuke the box from orbit and try again -- `vagrant destroy desktop` followed by
-   `vagrant up mysql`.
+   `vagrant up desktop`.
 
 The current version of this project generates a single virtual machine.  It is an Xubuntu desktop running Docker.  Multiple Docker containers are running to provide various services, including RabbitMQ, MongoDB, Nginx and MySQL.  Upon entering the box, type `docker ps` to see the currently running containers.
 
