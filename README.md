@@ -19,6 +19,8 @@ The current version of this project generates a single virtual machine.  It is a
 
 The provisioning of this box uses multi-pass Ansible steps.  The first pass is based on [a project](https://github.com/kurron/ansible-pull) that provides generalized Ansible plays suitable for a variety of envirionments.  The plays are shared but the inventory is controlled by this project.  Using customized inventory files allows you to pick and choose which plays get applied to which boxes.  As the plays are updated, you get the changes for free.
 
-The second pass is based on a local Playbook and is completely customizable.  May any changes as you see fit.  You might decide that one big VM isn't right for you and want to split things up into to boxes.  Easily done.
+The second pass is based on a local Playbook and is expected to be project specific.  For example, the project may expect certain databases to exist in MySQL and will provision them.
+
+The last pass is based on a remote Ansible playbook specific to the user running Vagrant.  This is an optional phase that is controlled by an environment variable: `USER_PLAYS`.  If the shell running Vagrant specifies the variable such that it points to an Ansible project on GitHub, the plays will be run and the changes applied.  For example `USER_PLAYS = kurron/ansible-pull-desktop-tweaks.git` will result in [this playbook](https://github.com/kurron/ansible-pull-desktop-tweaks) getting run.  If the environment variable does not exist, the last provisioning step is not run.
 
 Since we are using Docker for services, we also need to use Docker for CLI access.  To that end, I've created numerous aliases to help with that process.  For each service, there should be 2 aliases.  Once to run the cli tool and one to provide shell access to the service container itself.  Running the `alias` will show the current list of aliases.
