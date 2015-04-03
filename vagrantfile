@@ -47,11 +47,6 @@ Vagrant.configure("2") do |config|
         v.customize ["modifyvm", :id, "--groups", "/JVM Guy"]
     end
 
-    bob = ENV['USERNAME']
-    config.vm.provision "shell" do |echo|
-        echo.path = "ansible/scripts/echo.sh"
-        echo.args = bob 
-    end
 
     config.vm.provision "shell" do |remote|
         remote.path = "ansible/scripts/run-remote-playbook.sh"
@@ -61,6 +56,12 @@ Vagrant.configure("2") do |config|
     config.vm.provision "shell" do |local|
         local.path = "ansible/scripts/run-local-playbook.sh"
         local.args = "custom-inventory.ini"
+    end
+
+    project = ENV['USER_PLAYS']
+    config.vm.provision "shell" do |custom|
+        custom.path = "ansible/scripts/run-user-playbook.sh"
+        custom.args = project 
     end
 
     config.vm.define "desktop" do |desktop|
