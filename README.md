@@ -1,4 +1,4 @@
-This project creates a virtualized development environment tailored to JVM developers.  You must have both VirtualBox and Vagrant installed.  To use all you have
+This project creates a virtualized development environment tailored to JVM developers.  You must have both [VirtualBox](https://www.virtualbox.org/) and [Vagrant](https://www.vagrantup.com/) installed.  To use this environment all you have
  to do is issue the `vagrant up` command.  That will start the creation of the virtual machines.  Once the process is complete, you can log into the desktop
 using `vagrant\vagrant` as credentials. 
 
