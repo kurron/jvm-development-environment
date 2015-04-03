@@ -47,8 +47,11 @@ Vagrant.configure("2") do |config|
         v.customize ["modifyvm", :id, "--groups", "/JVM Guy"]
     end
 
-    bob= ENV['USERNAME']
-    config.vm.provision "shell", inline: "echo bob"
+    bob = ENV['USERNAME']
+    config.vm.provision "shell" do |echo|
+        echo.path = "ansible/scripts/echo.sh"
+        echo.args = bob 
+    end
 
     config.vm.provision "shell" do |remote|
         remote.path = "ansible/scripts/run-remote-playbook.sh"
