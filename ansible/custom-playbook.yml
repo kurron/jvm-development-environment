@@ -63,7 +63,7 @@
       command: /tmp/add-virtualhost.sh khujand rabbitmq guest guest
 
 - name: Create custom databases 
-  hosts: custom-desktop-box
+  hosts: nobody
   tasks:
     - name: Installing required dependencies so we can use Ansible MySQL modules
       apt: name={{ item }} state=present
