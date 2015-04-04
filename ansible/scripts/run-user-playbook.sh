@@ -14,4 +14,4 @@ PROJECT=$1
 cp -r /vagrant/ansible /tmp
 chmod -x /tmp/ansible/*.ini
 
-ansible-pull --checkout master --directory /opt/ansible-pull-custom --inventory-file=/opt/ansible-pull-custom/inventory.ini --module-name=git  --only-if-changed --url=https://github.com/${PROJECT} --verbose playbook.yml
+ansible-pull --checkout master --directory /opt/ansible-pull-custom --inventory-file=/opt/ansible-pull-custom/inventory.ini --module-name=git  --url=https://github.com/${PROJECT} --verbose playbook.yml
