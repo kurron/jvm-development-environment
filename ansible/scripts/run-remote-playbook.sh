@@ -5,4 +5,4 @@ INVENTORY=$1
 cp -r /vagrant/ansible /tmp
 chmod -x /tmp/ansible/*.ini
 
-ansible-pull --checkout master --directory /opt/ansible-pull --inventory-file=/tmp/ansible/$INVENTORY  --module-name=git  --only-if-changed --url=https://github.com/kurron/ansible-pull.git --verbose playbook.yml
+ansible-pull --checkout master --directory /opt/ansible-pull --inventory-file=/tmp/ansible/$INVENTORY  --module-name=git  --url=https://github.com/kurron/ansible-pull.git --verbose playbook.yml
