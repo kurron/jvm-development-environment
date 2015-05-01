@@ -47,6 +47,8 @@
         command: /tmp/add-host-name.sh rabbit-test 192.168.254.28 
       - name: Add registry.transparent.com to hostfile
         command: /tmp/add-host-name.sh registry.transparent.com 192.168.254.90
+      - name: Add docker1test to hostfile
+        command: /tmp/add-host-name.sh docker1test 192.168.254.58
 
 - name: Make per-project tweaks to RabbitMQ 
   hosts: custom-desktop-box
