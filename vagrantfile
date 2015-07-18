@@ -1,19 +1,19 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
 
-Vagrant.require_version ">= 1.7.2"
+Vagrant.require_version ">= 1.7.4"
 
 Vagrant.configure("2") do |config|
     config.vagrant.host = :detect
 
     config.vm.boot_timeout = 300
-    config.vm.box = "trusty-x64-server/4.3.28"
+    config.vm.box = "trusty-x64-server/5.0.0"
     config.vm.box_check_update = true
-#   config.vm.box_download_checksum = "19ab876677040a892dad48af40fea449"
-#   config.vm.box_download_checksum_type = "md5"
+    config.vm.box_download_checksum = "29e43e6f8056712fa0e96408515417a5"
+    config.vm.box_download_checksum_type = "md5"
 #   config.vm.box_download_client_cert = /foo.cert
 #   config.vm.box_download_insecure = false 
-    config.vm.box_url = "http://d2eko4jw6kz4m.cloudfront.net/trusty-x64-server.box"
+    config.vm.box_url = "https://s3.amazonaws.com/org-kurron-vagrant-boxes/5.0/trusty-x64-server.box"
 #   config.vm.box_version = "1.0.0"
     config.vm.hostname = "blackbox"
     config.vm.graceful_halt_timeout = 60
@@ -65,16 +65,18 @@ Vagrant.configure("2") do |config|
     end
 
     config.vm.define "desktop" do |desktop|
-        desktop.vm.box = "trusty-x64-desktop/4.3.28"
-        desktop.vm.box_url = "http://d2eko4jw6kz4m.cloudfront.net/trusty-x64-desktop.box"
+        desktop.vm.box = "trusty-x64-desktop/5.0.0"
+        desktop.vm.box_url = "https://s3.amazonaws.com/org-kurron-vagrant-boxes/5.0/trusty-x64-desktop.box"
+        desktop.vm.box_download_checksum = "6f8c8c9adad5ffb0ec5463daa7d6cc71"
+        desktop.vm.box_download_checksum_type = "md5"
         desktop.vm.hostname = "desktop"
         desktop.vm.network :private_network, ip: "192.168.44.30"
         desktop.vm.provider "virtualbox" do |v|
             v.gui = true
             v.name = "jvmguy.desktop"
-            v.customize ["modifyvm", :id, "--memory", "6144"]
+            v.customize ["modifyvm", :id, "--memory", "4096"]
             v.customize ["modifyvm", :id, "--vram", "24"]
-            v.customize ["modifyvm", :id, "--cpus", "4"]
+            v.customize ["modifyvm", :id, "--cpus", "2"]
         end
     end
 
