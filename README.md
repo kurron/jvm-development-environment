@@ -25,4 +25,8 @@ The last pass is based on a remote Ansible playbook specific to the user running
 
 Since we are using Docker for services, we also need to use Docker for CLI access.  To that end, I've created numerous aliases to help with that process.  For each service, there should be 2 aliases.  One to run the cli tool and one to provide shell access to the service container itself.  Running the `alias` will show the current list of aliases.
 
-**KNOWN ISSUE:** there is a MySQL provisionng step that fails complaining it cannot add the new database.  If you run `vagrant provision` and pick up where you left off, everything works.  Hopefully, we'll have a fix soon.
+**KNOWN ISSUE:** there is a MySQL provisiong step that fails complaining it cannot add the new database.  If you run `vagrant provision` and pick up where you left off, everything works.  Hopefully, we'll have a fix soon.
+
+**IMPORTANT:** there currently is an issue with Ansible' Docker module so we cannot automatically install the various Docker containers.  
+Until things are fixed, you are encouraged to [download scripts](https://github.com/kurron/scripts) from GitHub and install containers 
+using one of the scripts.
