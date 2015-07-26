@@ -102,3 +102,6 @@
         command: /tmp/add-alias.sh molde 'cd /home/vagrant/Stash/Mold-E'
       - name: add an alias to quickly change to the Sush-E directory
         command: /tmp/add-alias.sh sushe 'cd /home/vagrant/Stash/Sush-E'
+      - name: Install HTTP IE (cURL replacement)
+        pip: name=setuptools
+      - pip: name=httpie
