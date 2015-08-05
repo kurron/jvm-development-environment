@@ -1,54 +1,50 @@
 - name: Add host entiries for the Docker containers 
   hosts: custom-desktop-box
   tasks:
-      - name: Copy hostname script to a safe place
-        copy: src=scripts/add-host-name.sh dest=/tmp/add-host-name.sh owner=root group=root mode=755 backup=no
       - name: Add docker to hostfile
-        command: /tmp/add-host-name.sh docker 192.168.44.60
+        lineinfile: dest=/etc/hosts line="192.168.44.60 docker"
       - name: Add rabbitmq to hostfile
-        command: /tmp/add-host-name.sh rabbitmq 192.168.44.30
+        lineinfile: dest=/etc/hosts line="192.168.44.30 rabbitmq"
       - name: Add mongodb to hostfile
-        command: /tmp/add-host-name.sh mongodb 192.168.44.30
+        lineinfile: dest=/etc/hosts line="192.168.44.30 mongodb"
       - name: Add mongo to hostfile
-        command: /tmp/add-host-name.sh mongo 192.168.44.30
+        lineinfile: dest=/etc/hosts line="192.168.44.30 mongo"
       - name: Add mysql to hostfile
-        command: /tmp/add-host-name.sh mysql 192.168.44.30
+        lineinfile: dest=/etc/hosts line="192.168.44.30 mysql"
       - name: Add redis to hostfile
-        command: /tmp/add-host-name.sh redis 192.168.44.30
+        lineinfile: dest=/etc/hosts line="192.168.44.30 redis"
       - name: Add memcached to hostfile
-        command: /tmp/add-host-name.sh memcached 192.168.44.30
+        lineinfile: dest=/etc/hosts line="192.168.44.30 memcached"
       - name: Add elasticsearch to hostfile
-        command: /tmp/add-host-name.sh elasticsearch 192.168.44.30
+        lineinfile: dest=/etc/hosts line="192.168.44.30 elasticsearch"
       - name: Add nginx to hostfile
-        command: /tmp/add-host-name.sh nginx 192.168.44.30
+        lineinfile: dest=/etc/hosts line="192.168.44.30 nginx"
       - name: Add postgresql to hostfile
-        command: /tmp/add-host-name.sh postgresql 192.168.44.30
+        lineinfile: dest=/etc/hosts line="192.168.44.30 postgresql"
       - name: Add logfaces to hostfile 
-        command: /tmp/add-host-name.sh logfaces 192.168.254.123 
+        lineinfile: dest=/etc/hosts line="192.168.254.123 logfaces"
       - name: Add logfaces-boston to hostfile 
-        command: /tmp/add-host-name.sh logfaces-boston 192.168.100.124 
+        lineinfile: dest=/etc/hosts line="192.168.100.124 logfaces-boston"
       - name: Add mongo1test to hostfile
-        command: /tmp/add-host-name.sh mongo1test 192.168.254.57
+        lineinfile: dest=/etc/hosts line="192.168.254.57 mongo1test"
       - name: Add mongo2test to hostfile
-        command: /tmp/add-host-name.sh mongo2test 192.168.254.58
+        lineinfile: dest=/etc/hosts line="192.168.254.58 mongo2test"
       - name: Add mongo3test to hostfile
-        command: /tmp/add-host-name.sh mongo2test 192.168.254.59
+        lineinfile: dest=/etc/hosts line="192.168.254.59 mongo3test"
       - name: Add stagetwo to hostfile
-        command: /tmp/add-host-name.sh stagetwo 192.168.255.29 
+        lineinfile: dest=/etc/hosts line="192.168.255.29 stagetwo"
       - name: Add cd0 to hostfile 
-        command: /tmp/add-host-name.sh cd0 192.168.254.85 
+        lineinfile: dest=/etc/hosts line="192.168.254.85 cd0"
       - name: Add cd1 to hostfile 
-        command: /tmp/add-host-name.sh cd1 192.168.254.81 
+        lineinfile: dest=/etc/hosts line="192.168.254.81 cd1"
       - name: Add cd5 to hostfile 
-        command: /tmp/add-host-name.sh cd5 192.168.254.114 
+        lineinfile: dest=/etc/hosts line="192.168.254.114 cd5"
       - name: Add cd6 to hostfile 
-        command: /tmp/add-host-name.sh cd6 192.168.254.59 
+        lineinfile: dest=/etc/hosts line="192.168.254.59 cd6"
       - name: Add rabbit-test to hostfile 
-        command: /tmp/add-host-name.sh rabbit-test 192.168.254.28 
-      - name: Add registry.transparent.com to hostfile
-        command: /tmp/add-host-name.sh registry.transparent.com 192.168.254.90
+        lineinfile: dest=/etc/hosts line="192.168.254.28 rabbit-test"
       - name: Add docker1test to hostfile
-        command: /tmp/add-host-name.sh docker1test 192.168.254.58
+        lineinfile: dest=/etc/hosts line="192.168.254.58 docker1test"
 
 - name: Make per-project tweaks to RabbitMQ 
   hosts: custom-desktop-box
