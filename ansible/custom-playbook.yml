@@ -47,7 +47,7 @@
         lineinfile: dest=/etc/hosts line="192.168.254.58 docker1test"
 
 - name: Make per-project tweaks to RabbitMQ 
-  hosts: custom-desktop-box
+  hosts: custom-desktop-box-disabled
   tasks:
     - name: Copy hostname script to a safe place
       copy: src=scripts/add-virtualhost.sh dest=/tmp/add-virtualhost.sh owner=root group=root mode=755 backup=no
