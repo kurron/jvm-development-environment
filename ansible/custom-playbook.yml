@@ -122,8 +122,10 @@
       - name: Update certificates
         shell: update-ca-certificates
         when: certificate|changed
-      - name: Grab configuration file
+      - name: Place configuration file into the root account
         get_url: url=http://192.168.254.81:81/artifactory/static/ease/docker-registry/.dockercfg dest=/root/.dockercfg
+      - name: Place configuration file into the vagrant account
+        get_url: url=http://192.168.254.81:81/artifactory/static/ease/docker-registry/.dockercfg dest=/home/vagrant/.dockercfg
       - name: Restart Docker
         command: service docker restart
         when: certificate|changed
