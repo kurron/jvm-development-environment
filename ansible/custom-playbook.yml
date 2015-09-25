@@ -28,7 +28,7 @@
       - name: Add mongo1test to hostfile
         lineinfile: dest=/etc/hosts line="192.168.254.57 mongo1test"
       - name: Add mongo2test to hostfile
-        lineinfile: dest=/etc/hosts line="192.168.254.58 mongo2test"
+        lineinfile: dest=/etc/hosts line="192.168.254.63 mongo2test"
       - name: Add mongo3test to hostfile
         lineinfile: dest=/etc/hosts line="192.168.254.59 mongo3test"
       - name: Add stagetwo to hostfile
