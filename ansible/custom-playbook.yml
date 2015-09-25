@@ -104,3 +104,14 @@
       - name: Restart Docker
         command: service docker restart
         when: certificate|changed
+
+- name: Install Git Projects
+  hosts: all
+  sudo: False
+  tasks:
+    - name: Make GitHub Directory
+      file: path=/home/vagrant/GitHub state=directory mode=0755
+    - name: Install Git
+      apt: name=git state=present
+    - name: Pull Down Docker Containers
+      git: repo=https://github.com/kurron/docker-compose-tl.git dest=/home/vagrant/GitHub/docker-compose-tl
