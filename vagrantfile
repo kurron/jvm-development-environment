@@ -7,33 +7,17 @@ Vagrant.configure("2") do |config|
     config.vagrant.host = :detect
 
     config.vm.boot_timeout = 300
-    config.vm.box = "trusty-x64-desktop/5.0.2"
+    config.vm.box = "trusty-x64-desktop/5.0.3"
     config.vm.box_check_update = true
-    config.vm.box_download_checksum = "757ce7981c8123283f864041a7deade9"
+    config.vm.box_download_checksum = "31eac3f65b16ac5be847335d1c1f2ac7"
     config.vm.box_download_checksum_type = "md5"
-#   config.vm.box_download_client_cert = /foo.cert
-#   config.vm.box_download_insecure = false 
-    config.vm.box_url = "https://s3.amazonaws.com/org-kurron-vagrant-boxes/5.0.2/trusty-x64-desktop.box"
-#   config.vm.box_version = "1.0.0"
-#   config.vm.hostname = "blackbox"
+    config.vm.box_url = "https://s3.amazonaws.com/org-kurron-vagrant-boxes/5.0.3/trusty-x64-desktop.box"
     config.vm.graceful_halt_timeout = 60
-#   config.vm.guest = :linux
-#   config.vm.network = foo
     config.vm.post_up_message = "Login credentials are vagrant/vagrant"
-#   config.vm.synced_folder = /foo
     config.vm.usable_port_range = 2200..2250
 
-#   config.ssh.forward_agent = false
-#   config.ssh.forward_x11 = false
-#   config.ssh.guest_port = 22
-#   config.ssh.insert_key = true
-#   config.ssh.host = "127.0.0.1"
     config.ssh.password = "vagrant"
-#   config.ssh.port = 22
-#   config.ssh.private_key_path = "private-key.txt"
-#   config.ssh.proxy_command = "foo"
     config.ssh.username = "vagrant"
-#   config.ssh.shell = "bash -l"
 
     config.vm.provider "virtualbox" do |v|
         v.gui = false
@@ -51,26 +35,21 @@ Vagrant.configure("2") do |config|
         remote.path = "scripts/install-ansible.sh"
     end
 
-#   config.vm.provision "shell" do |remote|
-#       remote.path = "scripts/install-docker.sh"
-#   end
+    config.vm.provision "shell" do |remote|
+        remote.path = "scripts/install-docker.sh"
+    end
 
-#   config.vm.provision "shell" do |remote|
-#       remote.path = "scripts/install-development-tools.sh"
-#   end
+    config.vm.provision "shell" do |remote|
+        remote.path = "scripts/install-development-tools.sh"
+    end
 
-#   config.vm.provision "shell" do |remote|
-#       remote.path = "scripts/install-operations-tools.sh"
-#   end
+    config.vm.provision "shell" do |remote|
+        remote.path = "scripts/install-operations-tools.sh"
+    end
 
-#   config.vm.provision "shell" do |remote|
-#       remote.path = "scripts/install-transparent-tools.sh"
-#   end
-
-#    config.vm.provision "shell" do |local|
-#        local.path = "ansible/scripts/run-local-playbook.sh"
-#        local.args = "custom-inventory.ini"
-#    end
+    config.vm.provision "shell" do |remote|
+        remote.path = "scripts/install-transparent-tools.sh"
+    end
 
     project = ENV['USER_PLAYS']
      config.vm.provision "shell" do |custom|
@@ -79,9 +58,6 @@ Vagrant.configure("2") do |config|
      end
 
     config.vm.define "desktop" do |desktop|
-        desktop.vm.box_url = "https://s3.amazonaws.com/org-kurron-vagrant-boxes/5.0.2/trusty-x64-desktop.box"
-#       desktop.vm.hostname = "desktop"
-#       desktop.vm.network :private_network, ip: "192.168.44.30"
         desktop.vm.provider "virtualbox" do |v|
             v.gui = true
             v.name = "jvmguy.desktop"
