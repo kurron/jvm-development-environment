@@ -1,32 +1,58 @@
-This project creates a virtualized development environment tailored to JVM developers.  You must have both [VirtualBox](https://www.virtualbox.org/) and [Vagrant](https://www.vagrantup.com/) installed.  To use this environment all you have
- to do is issue the `vagrant up` command.  That will start the creation of the virtual machines.  Once the process is complete, you can log into the desktop
-using `vagrant\vagrant` as credentials. 
+#Overview
+This project is a Vagrant box that is provisioned for sofware development.  It is a Xubuntu-based system and 
+has many of the tools needed by a developer already installed.  The provisioning mechanism is based on Ansible 
+and allows for user-specific customizations to be applied.
 
+#Prerequisites
 
-Initial box creation can take some time so _do not log into the desktop vm until the Vagrant command completes_.  Logging in prior to completion may cause
-certain provisions to fail.  On occassion, networks timeout or files get corrupted and there are a few simple techniques you can use to correct errors.
+* [Vagrant](https://www.vagrantup.com/) installed and working
+* [VirtualBox](https://www.virtualbox.org/) installed and working
+* a working internet connection
+* Transparent Language VPN running (we need to copy some key files around) 
 
-1. retry the process.  Determine the name of the box that failed and attempt to retry build.  For example, if the `desktop` box failed you can
-   try issuing the command `vagrant provision desktop`.
-2. all downloaded files are stored in the `/root` directory and you might be able to correct a faulty download by removing the file.  Log
-   into the box via ssh using the command `vagrant ssh desktop`.  Once you are in, you will have to examine the `/root` and remove the file
-   that has problems.  Since the directory is owned by root, you will have to use `sudo` to remove any files.  Once the file is removed,
-   exit the shell and try the provision again.
-3. if you cannot figure out which file is failing you could nuke the box from orbit and try again -- `vagrant destroy desktop` followed by
-   `vagrant up desktop`.
+#Building
+All the components of the environment live in repositories on the internet so there is nothing to build.
 
-The current version of this project generates a single virtual machine.  It is an Xubuntu desktop running Docker.  Multiple Docker containers are running to provide various services, including RabbitMQ, MongoDB, Nginx and MySQL.  Upon entering the box, type `docker ps` to see the currently running containers.
+#Installation
+Type `vagrant up` and go get a cup of coffee.  The construction of the box greatly depends on your internet speeds.
+To start the environment, run `./start.sh`.  That will pull down the Docker image and start them in the background.
 
-The provisioning of this box uses multi-pass Ansible steps.  The first pass is based on [a project](https://github.com/kurron/ansible-pull) that provides generalized Ansible plays suitable for a variety of envirionments.  The plays are shared but the inventory is controlled by this project.  Using customized inventory files allows you to pick and choose which plays get applied to which boxes.  As the plays are updated, you get the changes for free.
+#Tips and Tricks
 
-The second pass is based on a local Playbook and is expected to be project specific.  For example, the project may expect certain databases to exist in MySQL and will provision them.
+##Verifying The Setup
+Log into the system with a username of `vagrant` and password of `vagrant`.
 
-The last pass is based on a remote Ansible playbook specific to the user running Vagrant.  This is an optional phase that is controlled by an environment variable: `USER_PLAYS`.  If the shell running Vagrant specifies the variable such that it points to an Ansible project on GitHub, the plays will be run and the changes applied.  For example `USER_PLAYS = kurron/ansible-pull-desktop-tweaks.git` will result in [this playbook](https://github.com/kurron/ansible-pull-desktop-tweaks) getting run.  If the environment variable does not exist, the last provisioning step is not run.
+##Installed Infrastructure
+Docker containers running common infrastructure are installed in `/home/vagrant/bin/servers`.  Look at the `docker-compose.yml` 
+file to see what services are currently available to use.  Run the `start.sh` script to install and run the servers.
 
-Since we are using Docker for services, we also need to use Docker for CLI access.  To that end, I've created numerous aliases to help with that process.  For each service, there should be 2 aliases.  One to run the cli tool and one to provide shell access to the service container itself.  Running the `alias` will show the current list of aliases.
+##Applying Your Own Customizations
+The system will look for an environment variable named `USER_PLAYS`.  If the shell running Vagrant specifies the variable 
+such that it points to an Ansible project on GitHub, the plays will be run and the changes applied.  For example 
+`USER_PLAYS = kurron/ansible-pull-desktop-tweaks.git` will result in 
+[this playbook](https://github.com/kurron/ansible-pull-desktop-tweaks) getting run.  If the environment variable does 
+not exist, the custom provisioning step is not run.
 
-**KNOWN ISSUE:** there is a MySQL provisiong step that fails complaining it cannot add the new database.  If you run `vagrant provision` and pick up where you left off, everything works.  Hopefully, we'll have a fix soon.
+##Installed Software
 
-**IMPORTANT:** there currently is an issue with Ansible' Docker module so we cannot automatically install the various Docker containers.  
-Until things are fixed, you are encouraged to [download scripts](https://github.com/kurron/scripts) from GitHub and install containers 
-using one of the scripts.
+* current JDK
+* SDKMAN! to manage various JVM tools
+* Clojure's leinengen tool
+* NodeJS and npm
+* Ant
+* Maven
+* a current version Docker
+* various JetBrains IDEs
+
+#Troubleshooting
+
+## Partial Failure
+Sometimes networks fail or mirror sites go down. If you experience a failure, you can attempt to resume the construction 
+by issuing `vagrant provision` at the command line.  Vagrant will attempt to start over, but will skip any provisions that
+have already taken place. 
+
+#License and Credits
+This project is licensed under the [Apache License Version 2.0, January 2004](http://www.apache.org/licenses/).
+
+#List of Changes
+
