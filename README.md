@@ -36,9 +36,12 @@ not exist, the custom provisioning step is not run.
 ##Installed Software
 
 * current JDK
-* SDKMAN! to manage various JVM tools
+* SDKMAN! to manage various JVM tools, including Groovy, Grails, Gradle and Spring Boot
 * Clojure's leinengen tool
 * NodeJS and npm
+* Packer
+* Terraform
+* AWS CLI
 * Ant
 * Maven
 * a current version Docker
