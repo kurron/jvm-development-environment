@@ -33,6 +33,10 @@ such that it points to an Ansible project on GitHub, the plays will be run and t
 [this playbook](https://github.com/kurron/ansible-pull-desktop-tweaks) getting run.  If the environment variable does 
 not exist, the custom provisioning step is not run.
 
+##Gather Docker Container Metrics
+`sudo csysdig -pc` will fire up the sysdig tool.  Use `F2` to switch to the container view and see how each container is using
+system resources.
+
 ##Installed Software
 
 * current JDK
