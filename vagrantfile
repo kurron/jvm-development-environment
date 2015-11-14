@@ -28,7 +28,7 @@ Vagrant.configure("2") do |config|
         v.customize ["modifyvm", :id, "--largepages", "on"]
         v.customize ["modifyvm", :id, "--acpi", "on"]
         v.customize ["modifyvm", :id, "--nictype1", "virtio"]
-        v.customize ["modifyvm", :id, "--groups", "/JVM Guy"]
+        v.customize ["modifyvm", :id, "--groups", "/JVM Development"]
     end
 
     config.vm.provision "file", source: "files/inventory", destination: "/tmp/inventory"
@@ -49,15 +49,17 @@ Vagrant.configure("2") do |config|
         remote.path = "scripts/install-operations-tools.sh"
     end
 
-    config.vm.provision "shell" do |remote|
-        remote.path = "scripts/install-transparent-tools.sh"
+    project = ENV['CORPORATE_PLAYS']
+    config.vm.provision "shell" do |corporate|
+        corporate.path = "scripts/install-corporate.sh"
+        corporate.args = project 
     end
 
     project = ENV['USER_PLAYS']
-     config.vm.provision "shell" do |custom|
-         custom.path = "scripts/install-custom.sh"
-         custom.args = project 
-     end
+    config.vm.provision "shell" do |custom|
+        custom.path = "scripts/install-custom.sh"
+        custom.args = project 
+    end
 
     config.vm.define "desktop" do |desktop|
         desktop.vm.provider "virtualbox" do |v|
