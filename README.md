@@ -55,7 +55,7 @@ system resources.
 * [Ant](http://ant.apache.org/)
 * [Maven](https://maven.apache.org/)
 * [Docker](https://www.docker.com/)
-* various [JetBrains IDEs](http://www.jetbrains.com/)
+* various [JetBrains IDEs](http://www.jetbrains.com/) running via Docker containers
 * [httpie](https://github.com/jkbrzt/httpie) - a more friendly alternative to cURL and wget
 
 #Troubleshooting
