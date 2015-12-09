@@ -14,7 +14,7 @@ and allows for user-specific customizations to be applied.
 All the components of the environment live in repositories on the internet so there is nothing to build.
 
 #Installation
-Type `vagrant up` and go get a cup of coffee.  The construction of the box greatly depends on your internet speeds.
+Type `vagrant up` and go get a cup of coffee.  The construction time of the box greatly depends on your internet speeds.
 
 #Tips and Tricks
 
@@ -24,6 +24,12 @@ Log into the system with a username of `vagrant` and password of `vagrant`.
 ##Installed Infrastructure
 Docker containers running common infrastructure are installed in `/home/vagrant/bin/servers`.  Look at the `docker-compose.yml` 
 file to see what services are currently available to use.  Run the `start.sh` script to install and run the servers.
+
+##Docker-based IDEs
+All of the IDEs are housed in Docker containers.  This allows for faster rebuilds of the environment and ensures that an
+IDE's bits are not downloaded until needed.  The initial launch of an IDE, however, can take several moments as the Docker image is
+downloaded from the repository.  You can pre-load the images by running `bin/prime-images.sh`, avoiding the delay.  Since this
+grabs all images, it might make sense to examine the script and pull down only the images you are certain you will be using.
 
 ##Applying Your Work Specific Customizations
 The system will look for an environment variable named `CORPORATE_PLAYS`.  If the shell running Vagrant specifies the variable 
