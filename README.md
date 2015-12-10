@@ -49,6 +49,17 @@ not exist, the custom provisioning step is not run.
 `sudo csysdig -pc` will fire up the sysdig tool.  Use `F2` to switch to the container view and see how each container is using
 system resources.
 
+##Sub-Projects
+The provisioning of the environment is done by several smaller projects.  You might be interested in examining
+exactly what they install and get a full inventory of the sofware and conveniences.
+
+* [ansible-pull-development](https://github.com/kurron/ansible-pull-development)
+* [ansible-pull-docker](https://github.com/kurron/ansible-pull-docker)
+* [ansible-pull-operations](https://github.com/kurron/ansible-pull-operations)
+* [ansible-pull-transparent](https://github.com/kurron/ansible-pull-transparent)
+
+The README files also give insight into what they install and how to use them.
+
 ##Installed Software
 
 * current [JDK](http://www.oracle.com/technetwork/java/index.html)
