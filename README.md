@@ -31,6 +31,10 @@ IDE's bits are not downloaded until needed.  The initial launch of an IDE, howev
 downloaded from the repository.  You can pre-load the images by running `bin/prime-images.sh`, avoiding the delay.  Since this
 grabs all images, it might make sense to examine the script and pull down only the images you are certain you will be using.
 
+The containers are constantly being updated and improved.  If there is something missing or there is an issue with the container, 
+please open a [ticket](https://github.com/kurron/jvm-development-environment/issues) or 
+[pull-request](https://github.com/kurron/jvm-development-environment/pulls).
+
 ##Applying Your Work Specific Customizations
 The system will look for an environment variable named `CORPORATE_PLAYS`.  If the shell running Vagrant specifies the variable 
 such that it points to an Ansible project on GitHub, the plays will be run and the changes applied.  For example 
