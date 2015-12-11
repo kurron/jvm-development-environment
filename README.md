@@ -20,6 +20,10 @@ Type `vagrant up` and go get a cup of coffee.  The construction time of the box 
 
 #Tips and Tricks
 
+##RAM and CPU Settings
+If you examine the `vagrantfile` file, you will see that the virtual machine is configured to use 4GB of RAM and
+2 CPUs.  Feel free to change these values to match your computer's hardware.
+
 ##Verifying The Setup
 Log into the system with a username of `vagrant` and password of `vagrant`.
 
@@ -32,6 +36,10 @@ All of the IDEs are housed in Docker containers.  This allows for faster rebuild
 IDE's bits are not downloaded until needed.  The initial launch of an IDE, however, can take several moments as the Docker image is
 downloaded from the repository.  You can pre-load the images by running `bin/prime-images.sh`, avoiding the delay.  Since this
 grabs all images, it might make sense to examine the script and pull down only the images you are certain you will be using.
+
+Some of the IDEs, when launched for the first time, will ask to create a convenience script or soft-link.  You should
+**NOT** check that option because it is unnecessary in a container environment and requires `sudo` access, which the container
+account does not have.
 
 The containers are constantly being updated and improved.  If there is something missing or there is an issue with the container, 
 please open a [ticket](https://github.com/kurron/jvm-development-environment/issues) or 
