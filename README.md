@@ -24,6 +24,15 @@ Type `vagrant up` and go get a cup of coffee.  The construction time of the box 
 If you examine the `vagrantfile` file, you will see that the virtual machine is configured to use 4GB of RAM and
 2 CPUs.  Feel free to change these values to match your computer's hardware.
 
+## Low Disk Space
+If an environment is used long enough, it is likely to run out of disk space.  The two main culprits are kernal updates 
+filling up the `/boot` partition and Docker images filling up the `/` partition.  You have at least 3 options:
+
+* throw away the environment and start fresh
+* clean up the old kernels via `sudo apt-get autoremove`
+* clean up Docker containers via `docker rm --volumes --force $(docker ps --all --quiet)`
+* clean up Docker images, after cleaning up the containers, via `docker rmi --force $(docker images --quiet)`
+ 
 ##Verifying The Setup
 Log into the system with a username of `vagrant` and password of `vagrant`.
 
@@ -33,7 +42,7 @@ file to see what services are currently available to use.  Run the `start.sh` sc
 
 ##Docker-based IDEs
 All of the IDEs are housed in Docker containers.  This allows for faster rebuilds of the environment and ensures that an
-IDE's bits are not downloaded until needed.  The initial launch of an IDE, however, can take several moments as the Docker image is
+IDE's bits are not downloaded until needed.  The **initial launch of an IDE, however, can take several moments** as the Docker image is
 downloaded from the repository.  You can pre-load the images by running `bin/prime-images.sh`, avoiding the delay.  Since this
 grabs all images, it might make sense to examine the script and pull down only the images you are certain you will be using.
 
