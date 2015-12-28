@@ -72,6 +72,9 @@ not exist, the custom provisioning step is not run.
 `sudo csysdig -pc` will fire up the sysdig tool.  Use `F2` to switch to the container view and see how each container is using
 system resources.
 
+##Docker-only Box
+If you don't need a full desktop but just the Docker engine, try using (vagrant-docker-server)[https://github.com/kurron/vagrant-docker-server]
+
 ##Sub-Projects
 The provisioning of the environment is done by several smaller projects.  You might be interested in examining
 exactly what they install and get a full inventory of the sofware and conveniences.
