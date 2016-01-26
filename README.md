@@ -14,7 +14,8 @@ and allows for user-specific customizations to be applied.
 All the components of the environment live in repositories on the internet so there is nothing to build.
 
 #Installation
-Type `vagrant up` and go get a cup of coffee.  The construction time of the box greatly depends on your internet speeds.
+Use Git to clone this project, go into the project folder and type `vagrant up` and go get a cup of coffee.  The construction time of the box 
+greatly depends on your internet speeds.
 
 ![screenshot](screenshot.png)
 
@@ -57,14 +58,14 @@ please open a [ticket](https://github.com/kurron/jvm-development-environment/iss
 ##Applying Your Work Specific Customizations
 The system will look for an environment variable named `CORPORATE_PLAYS`.  If the shell running Vagrant specifies the variable 
 such that it points to an Ansible project on GitHub, the plays will be run and the changes applied.  For example 
-`CORPORATE_PLAYS = kurron/ansible-pull-transparent.git` will result in 
+`CORPORATE_PLAYS=kurron/ansible-pull-transparent.git` will result in 
 [this playbook](https://github.com/kurron/ansible-pull-transparent.git) getting run.  If the environment variable does 
 not exist, the custom provisioning step is not run.
 
 ##Applying Your Own Customizations
 The system will look for an environment variable named `USER_PLAYS`.  If the shell running Vagrant specifies the variable 
 such that it points to an Ansible project on GitHub, the plays will be run and the changes applied.  For example 
-`USER_PLAYS = kurron/ansible-pull-desktop-tweaks.git` will result in 
+`USER_PLAYS=kurron/ansible-pull-desktop-tweaks.git` will result in 
 [this playbook](https://github.com/kurron/ansible-pull-desktop-tweaks) getting run.  If the environment variable does 
 not exist, the custom provisioning step is not run.
 
