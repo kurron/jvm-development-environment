@@ -7,6 +7,7 @@ and allows for user-specific customizations to be applied.
 
 * [Vagrant](https://www.vagrantup.com/) installed and working
 * [VirtualBox](https://www.virtualbox.org/) installed and working
+* [VirtualBox Extension Pack](https://www.virtualbox.org/wiki/Downloads) installed into VirtualBox 
 * a working internet connection
 * Your corporate VPN running (if you want to apply some work-specific plays) 
 
@@ -54,6 +55,9 @@ account does not have.
 The containers are constantly being updated and improved.  If there is something missing or there is an issue with the container, 
 please open a [ticket](https://github.com/kurron/jvm-development-environment/issues) or 
 [pull-request](https://github.com/kurron/jvm-development-environment/pulls).
+
+**UPDATE:** some memory issues have been ocurring so IntelliJ IDEA, PyCharm and WebStorm have reverted those IDEs back to 
+non-Docker installations.
 
 ##Applying Your Work Specific Customizations
 The system will look for an environment variable named `CORPORATE_PLAYS`.  If the shell running Vagrant specifies the variable 
