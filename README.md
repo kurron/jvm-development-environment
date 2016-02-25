@@ -108,6 +108,10 @@ The README files also give insight into what they install and how to use them.
 
 #Troubleshooting
 
+## Vagrant Box Does Not Come Up
+If you find that when you are building a new box and it does not come up, trying going into the `Settings->USB` section of your box in the VirtuabBox UI and disabling the USB controller. If you want USB support, make sure you have installed 
+[VM VirtualBox Extension Pack](http://download.virtualbox.org/virtualbox/5.0.14/Oracle_VM_VirtualBox_Extension_Pack-5.0.14-105127.vbox-extpack)
+
 ## Partial Failure
 Sometimes networks fail or mirror sites go down. If you experience a failure, you can attempt to resume the construction 
 by issuing `vagrant provision` at the command line.  Vagrant will attempt to start over, but will skip any provisions that
