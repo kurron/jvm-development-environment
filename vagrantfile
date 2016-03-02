@@ -65,7 +65,7 @@ Vagrant.configure("2") do |config|
         desktop.vm.provider "virtualbox" do |v|
             v.gui = true
             v.name = "jvmguy.desktop"
-            v.customize ["modifyvm", :id, "--memory", "4096"]
+            v.customize ["modifyvm", :id, "--memory", "6144"]
             v.customize ["modifyvm", :id, "--vram", "24"]
             v.customize ["modifyvm", :id, "--cpus", "2"]
         end
