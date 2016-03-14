@@ -23,7 +23,7 @@ greatly depends on your internet speeds.
 #Tips and Tricks
 
 ##RAM and CPU Settings
-If you examine the `vagrantfile` file, you will see that the virtual machine is configured to use 4GB of RAM and
+If you examine the `vagrantfile` file, you will see that the virtual machine is configured to use 6GB of RAM and
 2 CPUs.  Feel free to change these values to match your computer's hardware.
 
 ## Low Disk Space
