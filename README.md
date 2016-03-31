@@ -56,7 +56,7 @@ The containers are constantly being updated and improved.  If there is something
 please open a [ticket](https://github.com/kurron/jvm-development-environment/issues) or 
 [pull-request](https://github.com/kurron/jvm-development-environment/pulls).
 
-**UPDATE:** some memory issues have been ocurring so IntelliJ IDEA, PyCharm and WebStorm have reverted those IDEs back to 
+**UPDATE:** some memory issues have been ocurring so IntelliJ IDEA, PyCharm and WebStorm we have reverted those IDEs back to 
 non-Docker installations.
 
 ##Applying Your Work Specific Customizations
