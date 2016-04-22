@@ -8,6 +8,7 @@ and allows for user-specific customizations to be applied.
 * [Vagrant](https://www.vagrantup.com/) installed and working
 * [VirtualBox](https://www.virtualbox.org/) installed and working
 * [VirtualBox Extension Pack](https://www.virtualbox.org/wiki/Downloads) installed into VirtualBox 
+* **[Virtualization support](https://en.wikipedia.org/wiki/X86_virtualization) enabled in your BIOS**
 * a working internet connection
 * Your corporate VPN running (if you want to apply some work-specific plays) 
 
@@ -114,7 +115,9 @@ The README files also give insight into what they install and how to use them.
 
 ## Vagrant Box Does Not Come Up
 If you find that when you are building a new box that it does not come up, try going into the `Settings->USB` section of your box in the VirtuabBox UI and disabling the USB controller. If you want USB support, make sure you have installed 
-[VM VirtualBox Extension Pack](https://www.virtualbox.org/wiki/Downloads)
+[VM VirtualBox Extension Pack](https://www.virtualbox.org/wiki/Downloads).
+
+You should also double check that you have **enabled virtualization support** in your BIOS.
 
 ## Partial Failure
 Sometimes networks fail or mirror sites go down. If you experience a failure, you can attempt to resume the construction 
