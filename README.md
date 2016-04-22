@@ -40,7 +40,8 @@ Log into the system with a username of `vagrant` and password of `vagrant`.
 
 ## Installed Infrastructure
 Docker containers running common infrastructure are installed in `/home/vagrant/bin/servers`.  Look at the `docker-compose.yml` 
-file to see what services are currently available to use.  Run the `start.sh` script to install and run the servers.
+file to see what services are currently available to use.  Run the `start.sh` script to install and run the servers.  You can 
+also start up a single server, eg `docker-compose up -d mongodb`.
 
 ## Docker-based IDEs
 All of the IDEs are housed in Docker containers.  This allows for faster rebuilds of the environment and ensures that an
