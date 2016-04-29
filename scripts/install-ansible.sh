@@ -7,6 +7,7 @@ if [ -f "${DONEFILE}" ]; then
     exit 0
 fi
 
+sudo apt-get install -y libssl-dev libffi-dev
 sudo easy_install pip
 sudo pip install ansible
 
