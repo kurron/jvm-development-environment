@@ -74,7 +74,7 @@ The system will look for an environment variable named `USER_PLAYS`.  If the she
 such that it points to an Ansible project on GitHub, the plays will be run and the changes applied.  For example 
 `export USER_PLAYS=kurron/ansible-pull-desktop-tweaks.git` will result in 
 [this playbook](https://github.com/kurron/ansible-pull-desktop-tweaks) getting run.  If the environment variable does 
-not exist, the custom provisioning step is not run.
+not exist, the custom provisioning step is not run. **Important: use a copy of the project if you decide to apply customizations.**  If you reference this project, you will get somebody else's customizations, including Git configuration, which most certainly do not want.
 
 ## Gather Docker Container Metrics
 `sudo csysdig -pc` will fire up the sysdig tool.  Use `F2` to switch to the container view and see how each container is using
