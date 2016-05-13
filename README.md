@@ -65,14 +65,14 @@ non-Docker installations.
 ## Applying Your Work Specific Customizations
 The system will look for an environment variable named `CORPORATE_PLAYS`.  If the shell running Vagrant specifies the variable 
 such that it points to an Ansible project on GitHub, the plays will be run and the changes applied.  For example 
-`CORPORATE_PLAYS=kurron/ansible-pull-transparent.git` will result in 
+`export CORPORATE_PLAYS=kurron/ansible-pull-transparent.git` will result in 
 [this playbook](https://github.com/kurron/ansible-pull-transparent.git) getting run.  If the environment variable does 
 not exist, the custom provisioning step is not run.
 
 ## Applying Your Own Customizations
 The system will look for an environment variable named `USER_PLAYS`.  If the shell running Vagrant specifies the variable 
 such that it points to an Ansible project on GitHub, the plays will be run and the changes applied.  For example 
-`USER_PLAYS=kurron/ansible-pull-desktop-tweaks.git` will result in 
+`export USER_PLAYS=kurron/ansible-pull-desktop-tweaks.git` will result in 
 [this playbook](https://github.com/kurron/ansible-pull-desktop-tweaks) getting run.  If the environment variable does 
 not exist, the custom provisioning step is not run.
 
