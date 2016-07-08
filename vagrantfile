@@ -7,11 +7,11 @@ Vagrant.configure("2") do |config|
     config.vagrant.host = :detect
 
     config.vm.boot_timeout = 300
-    config.vm.box = "xenial-x64-desktop/5.0.22"
+    config.vm.box = "xenial-x64-desktop/5.0.24"
     config.vm.box_check_update = true
-    config.vm.box_download_checksum = "820f372828d844833995c5d661633517"
+    config.vm.box_download_checksum = "aaa6f04899f1932dc069d78482f28503"
     config.vm.box_download_checksum_type = "md5"
-    config.vm.box_url = "https://d2eko4jw6kz4m.cloudfront.net/5.0.22/xenial-x64-desktop.box"
+    config.vm.box_url = "https://d2eko4jw6kz4m.cloudfront.net/5.0.24/xenial-x64-desktop.box"
     config.vm.graceful_halt_timeout = 60
     config.vm.post_up_message = "Login credentials are vagrant/vagrant"
     config.vm.usable_port_range = 2200..2250
