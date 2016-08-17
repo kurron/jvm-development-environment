@@ -124,6 +124,18 @@ Sometimes networks fail or mirror sites go down. If you experience a failure, yo
 by issuing `vagrant provision` at the command line.  Vagrant will attempt to start over, but will skip any provisions that
 have already taken place. 
 
+## Cannot Acquire Repository Lock
+One of the first steps is to update the APT repositories via `apt-get update` which every once in a while can fail.
+What appears to happen in those cases is that the Ubuntu GUI has already acquired the lock and is running the update
+on its own.  The solution is to wait a bit and then reset the environment so that provisioning can continue.  This issue
+will manifest in "Ansible is not installed" errors.
+
+1. `vagrant ssh`
+1. `sudo apt-get update` -- repeat this step until you can successfully acquired the lock
+1. `sudo rm /var/ansible-install`
+1. `exit`
+1. `vagrant provision` should resume the provisioning of the box
+
 # License and Credits
 This project is licensed under the [Apache License Version 2.0, January 2004](http://www.apache.org/licenses/).
 
