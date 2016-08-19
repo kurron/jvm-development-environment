@@ -9,6 +9,8 @@ fi
 
 # I put this in because Carl's install got wedged once because it couldn't acquire the repository lock
 sudo apt-get update
+# see if waiting for the apt-get lock makes peo
+#until sudo apt-get update; do echo "Waiting for apt-get lock"; sleep 5; done
 
 #sudo apt-get install -y libssl-dev libffi-dev
 #sudo easy_install pip
