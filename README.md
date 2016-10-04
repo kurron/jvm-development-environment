@@ -74,7 +74,7 @@ The system will look for an environment variable named `USER_PLAYS`.  If the she
 such that it points to an Ansible project on GitHub, the plays will be run and the changes applied.  For example 
 `export USER_PLAYS=kurron/ansible-pull-desktop-tweaks.git` will result in 
 [this playbook](https://github.com/kurron/ansible-pull-desktop-tweaks) getting run.  If the environment variable does 
-not exist, the custom provisioning step is not run. **Important: use a copy of the project if you decide to apply customizations.**  If you reference this project, you will get somebody else's customizations, including Git configuration, which most certainly do not want.
+not exist, the custom provisioning step is not run. **Important: use a copy of the project if you decide to apply customizations.**  If you reference this project, you will get somebody else's customizations, including Git configuration, which most certainly you do not want.
 
 ## Gather Docker Container Metrics
 `sudo csysdig -pc` will fire up the sysdig tool.  Use `F2` to switch to the container view and see how each container is using
@@ -135,6 +135,10 @@ will manifest in "Ansible is not installed" errors.
 1. `sudo rm /var/ansible-install`
 1. `exit`
 1. `vagrant provision` should resume the provisioning of the box
+
+## My Git settings are all wrong!
+You need to specify a custom Git configuration file.  The best way to do that is to create and apply your own customizations.
+See the *Applying Your Own Customizations* section above on how to do that.  You can use [kurron/ansible-pull-desktop-tweaks.git](https://github.com/kurron/ansible-pull-desktop-tweaks) as inspiration. **Do not blindly copy the customizations as they are specific to a particular person.** 
 
 # License and Credits
 This project is licensed under the [Apache License Version 2.0, January 2004](http://www.apache.org/licenses/).
