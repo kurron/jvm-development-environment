@@ -123,6 +123,17 @@ The `desktop.vm.network "public_network"` in the `vagrantfile` is the key to thi
 multiple networks available on your machine, running a VPN for example, Vagrant needs to know which
 network you want to put your Vagrant box onto and will wait until you give it guidance.
 
+```
+==> desktop: Setting the name of the VM: jvmguy.desktop
+==> desktop: Clearing any previously set network interfaces...
+==> desktop: Available bridged network interfaces:
+1) Intel(R) 82579V Gigabit Network Connection
+2) Juniper Networks Virtual Adapter
+==> desktop: When choosing an interface, it is usually the one that is
+==> desktop: being used to connect to the internet.
+    desktop: Which interface should the network bridge to?
+```
+
 ## Vagrant Box Does Not Come Up
 If you find that when you are building a new box that it does not come up, try going into the `Settings->USB` section of your box in the VirtuabBox UI and 
 disabling the USB controller. If you want USB support, make sure you have installed 

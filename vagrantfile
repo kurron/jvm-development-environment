@@ -7,10 +7,10 @@ Vagrant.configure("2") do |config|
     config.vagrant.host = :detect
 
     config.vm.boot_timeout = 300
-    config.vm.box = "kurron/xenial-x64-xubuntu-desktop"
+    config.vm.box = "kurron/xenial-x64-xubuntu-desktop-baked"
     config.vm.box_check_update = true
-    config.vm.box_download_checksum = "6a500b1062d76742fdcfcd30991cd0e5"
-    config.vm.box_download_checksum_type = "md5"
+#   config.vm.box_download_checksum = "6a500b1062d76742fdcfcd30991cd0e5"
+#   config.vm.box_download_checksum_type = "md5"
 #   config.vm.box_url = "https://d2eko4jw6kz4m.cloudfront.net/5.1.4/xenial-x64-desktop.box"
     config.vm.graceful_halt_timeout = 60
     config.vm.post_up_message = "Login credentials are vagrant/vagrant"
@@ -32,22 +32,6 @@ Vagrant.configure("2") do |config|
     end
 
     config.vm.provision "file", source: "files/inventory", destination: "/tmp/inventory"
-
-    config.vm.provision "shell" do |remote|
-        remote.path = "scripts/install-ansible.sh"
-    end
-
-    config.vm.provision "shell" do |remote|
-        remote.path = "scripts/install-docker.sh"
-    end
-
-    config.vm.provision "shell" do |remote|
-        remote.path = "scripts/install-development-tools.sh"
-    end
-
-    config.vm.provision "shell" do |remote|
-        remote.path = "scripts/install-operations-tools.sh"
-    end
 
     project = ENV['USER_PLAYS']
     config.vm.provision "shell" do |custom|
