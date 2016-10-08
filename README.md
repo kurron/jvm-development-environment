@@ -14,6 +14,12 @@ and allows for user-specific customizations to be applied.
 
 # Building
 All the components of the environment live in repositories on the internet so there is nothing to build.
+**UPDATE:** some people have experienced issues when rebuilding a box due to flaky networks, online assets
+moving to different locations or installation processes changing.  When you need your box, you need your box 
+and you don't have the time to troubleshoot an installation issue.  To combat this problem, we've decided to 
+change the build model and bake in much of the software into the base image.  The trade-off we've made to 
+ensure quick and stable rebuilds is a larger initial download.  All boxes are currently housed in 
+[HashiCorp's Atlas](https://atlas.hashicorp.com) repository.
 
 # Installation
 Use Git to clone this project, go into the project folder and type `vagrant up` and go get a cup of coffee.  The construction time of the box 
@@ -45,36 +51,23 @@ file to see what services are currently available to use.  Run the `start.sh` sc
 also start up a single server, eg `docker-compose up -d mongodb`.
 
 ## Docker-based IDEs
-All of the IDEs are housed in Docker containers.  This allows for faster rebuilds of the environment and ensures that an
-IDE's bits are not downloaded until needed.  The **initial launch of an IDE, however, can take several moments** as the Docker image is
-downloaded from the repository.  You can pre-load the images by running `bin/prime-images.sh`, avoiding the delay.  Since this
-grabs all images, it might make sense to examine the script and pull down only the images you are certain you will be using.
-
-Some of the IDEs, when launched for the first time, will ask to create a convenience script or soft-link.  You should
-**NOT** check that option because it is unnecessary in a container environment and requires `sudo` access, which the container
-account does not have.
-
-The containers are constantly being updated and improved.  If there is something missing or there is an issue with the container, 
-please open a [ticket](https://github.com/kurron/jvm-development-environment/issues) or 
-[pull-request](https://github.com/kurron/jvm-development-environment/pulls).
-
-**UPDATE:** some memory issues have been ocurring so [IntelliJ IDEA](http://www.jetbrains.com/idea/), 
-[PyCharm](http://www.jetbrains.com/pycharm/) and [WebStorm](http://www.jetbrains.com/webstorm/) have been reverted to 
-non-Docker installations.
-
-## Applying Your Work Specific Customizations
+We've deprecated the use of Docker-based IDEs.  We've found that projects that produce and consume Docker images can be
+challeging when running from within a container.  If Docker in Docker ever becomes mainstream, we'll look into switching back.
+ 
+## Applying Your Company Specific Customizations
 The system will look for an environment variable named `CORPORATE_PLAYS`.  If the shell running Vagrant specifies the variable 
 such that it points to an Ansible project on GitHub, the plays will be run and the changes applied.  For example 
 `export CORPORATE_PLAYS=kurron/ansible-pull-transparent.git` will result in 
 [this playbook](https://github.com/kurron/ansible-pull-transparent.git) getting run.  If the environment variable does 
 not exist, the custom provisioning step is not run.
 
-## Applying Your Own Customizations
+## Applying Your Personal Customizations
 The system will look for an environment variable named `USER_PLAYS`.  If the shell running Vagrant specifies the variable 
 such that it points to an Ansible project on GitHub, the plays will be run and the changes applied.  For example 
 `export USER_PLAYS=kurron/ansible-pull-desktop-tweaks.git` will result in 
 [this playbook](https://github.com/kurron/ansible-pull-desktop-tweaks) getting run.  If the environment variable does 
-not exist, the custom provisioning step is not run. **Important: use a copy of the project if you decide to apply customizations.**  If you reference this project, you will get somebody else's customizations, including Git configuration, which most certainly you do not want.
+not exist, the custom provisioning step is not run. **Important: use a copy of the project if you decide to apply customizations.**  
+If you reference this project, you will get somebody else's customizations, including Git configuration, which most certainly you do not want.
 
 ## Gather Docker Container Metrics
 `sudo csysdig -pc` will fire up the sysdig tool.  Use `F2` to switch to the container view and see how each container is using
@@ -94,27 +87,45 @@ exactly what they install and get a full inventory of the sofware and convenienc
 
 The README files also give insight into what they install and how to use them.
 
-## Installed Software
+## Installed Software (partial list)
 
 * current [JDK](http://www.oracle.com/technetwork/java/index.html)
-* [SDKMAN!](http://sdkman.io/) to manage various JVM tools, including Groovy, Grails, Gradle and Spring Boot
+* [SDKMAN!](http://sdkman.io/) to manage various JVM tools, including Groovy, Scala, Clojure, Grails, Gradle, Maven, Ant and Spring Boot
 * Clojure's [leiningen](http://leiningen.org/) tool
 * [NodeJS](https://nodejs.org/en/) and [npm](https://www.npmjs.com/)
 * [Packer](https://packer.io/)
 * [Terraform](https://terraform.io/)
 * [AWS CLI](https://aws.amazon.com/cli/)
-* [Ant](http://ant.apache.org/)
-* [Maven](https://maven.apache.org/)
 * [Docker](https://www.docker.com/)
 * [Docker Compose](https://www.docker.com/products/docker-compose)
 * [Docker Machine](https://www.docker.com/products/docker-machine)
-* various [JetBrains IDEs](http://www.jetbrains.com/) running via Docker containers
+* various [JetBrains IDEs](http://www.jetbrains.com/)
 * [httpie](https://github.com/jkbrzt/httpie) - a more friendly alternative to cURL and wget
+
+## Different Windowing Systems
+*NOTE:* currently a work in progress.
+
+We have branches that use different window managers that may appeal to you.  Use Git to switch to approriate branch and run `vagrant up` to try it out.
+
+* Xubuntu
+* Lubuntu
+* Gnome
+* Kubuntu
+* Mate
+* Cinnamon
+* Unity
 
 # Troubleshooting
 
+## Vagrant Asks Me Which Network Interface To Bind To
+By default, the box is configured to join the local network as a fully accessable machine.
+The `desktop.vm.network "public_network"` in the `vagrantfile` is the key to this.  If you have
+multiple networks available on your machine, running a VPN for example, Vagrant needs to know which
+network you want to put your Vagrant box onto and will wait until you give it guidance.
+
 ## Vagrant Box Does Not Come Up
-If you find that when you are building a new box that it does not come up, try going into the `Settings->USB` section of your box in the VirtuabBox UI and disabling the USB controller. If you want USB support, make sure you have installed 
+If you find that when you are building a new box that it does not come up, try going into the `Settings->USB` section of your box in the VirtuabBox UI and 
+disabling the USB controller. If you want USB support, make sure you have installed 
 [VM VirtualBox Extension Pack](https://www.virtualbox.org/wiki/Downloads).
 
 You should also double check that you have **enabled virtualization support** in your BIOS.
@@ -125,6 +136,9 @@ by issuing `vagrant provision` at the command line.  Vagrant will attempt to sta
 have already taken place. 
 
 ## Cannot Acquire Repository Lock
+**UPDATE:** we've altered some of the installation logic to perform the retry logic described below automatically so
+you probably don't have to worry about this scenario any longer.
+
 One of the first steps is to update the APT repositories via `apt-get update` which every once in a while can fail.
 What appears to happen in those cases is that the Ubuntu GUI has already acquired the lock and is running the update
 on its own.  The solution is to wait a bit and then reset the environment so that provisioning can continue.  This issue
@@ -138,7 +152,8 @@ will manifest in "Ansible is not installed" errors.
 
 ## My Git settings are all wrong!
 You need to specify a custom Git configuration file.  The best way to do that is to create and apply your own customizations.
-See the *Applying Your Own Customizations* section above on how to do that.  You can use [kurron/ansible-pull-desktop-tweaks.git](https://github.com/kurron/ansible-pull-desktop-tweaks) as inspiration. **Do not blindly copy the customizations as they are specific to a particular person.** 
+See the *Applying Your Own Customizations* section above on how to do that.  You can use [kurron/ansible-pull-desktop-tweaks.git](https://github.com/kurron/ansible-pull-desktop-tweaks) 
+as inspiration. **Do not blindly copy the customizations as they are specific to a particular person.** 
 
 # License and Credits
 This project is licensed under the [Apache License Version 2.0, January 2004](http://www.apache.org/licenses/).
