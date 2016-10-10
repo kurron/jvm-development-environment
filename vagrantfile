@@ -45,10 +45,10 @@ Vagrant.configure("2") do |config|
         corporate.args = project 
     end
 
-    config.vm.define "desktop" do |desktop|
+    config.vm.define "xubuntu" do |xubuntu|
         # put the box on the network so we can participate in multi-host networking 
-        desktop.vm.network "public_network"
-        desktop.vm.provider "virtualbox" do |v|
+        xubuntu.vm.network "public_network"
+        xubuntu.vm.provider "virtualbox" do |v|
             v.gui = true
             v.name = "jvmguy.desktop"
             v.customize ["modifyvm", :id, "--memory", "6144"]
