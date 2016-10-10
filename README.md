@@ -1,5 +1,5 @@
 # Overview
-This project is a Vagrant box that is provisioned for sofware development.  It is a Xubuntu-based system and 
+This project is a Vagrant box that is provisioned for sofware development.  It is a CenOS-based system and 
 has many of the tools needed by a developer already installed.  The provisioning mechanism is based on Ansible 
 and allows for user-specific customizations to be applied.
 
@@ -151,7 +151,7 @@ have already taken place.
 you probably don't have to worry about this scenario any longer.
 
 One of the first steps is to update the APT repositories via `apt-get update` which every once in a while can fail.
-What appears to happen in those cases is that the Ubuntu GUI has already acquired the lock and is running the update
+What appears to happen in those cases is that the desktop has already acquired the lock and is running the update
 on its own.  The solution is to wait a bit and then reset the environment so that provisioning can continue.  This issue
 will manifest in "Ansible is not installed" errors.
 
