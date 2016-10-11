@@ -29,6 +29,14 @@ greatly depends on your internet speeds.
 
 # Tips and Tricks
 
+## Upgrading
+Sometimes the Vagrant file changes which can cause some subtle issues, such as creating an orphaned virutal machine.
+The safest upgrade procedure is the following:
+
+1. `vagrant destroy` to remove the existing box
+1. `git pull` to download the new files
+1. `vagrant up` to build the new box
+
 ## RAM and CPU Settings
 If you examine the `vagrantfile` file, you will see that the virtual machine is configured to use 6GB of RAM and
 2 CPUs.  Feel free to change these values to match your computer's hardware.
