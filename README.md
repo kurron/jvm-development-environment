@@ -164,7 +164,8 @@ on its own.  The solution is to wait a bit and then reset the environment so tha
 will manifest in "Ansible is not installed" errors.
 
 1. `vagrant ssh`
-1. `sudo apt-get update` -- repeat this step until you can successfully acquired the lock
+1. `sudo rm /var/lib/dpkg/lock` to remove the lock file
+1. `sudo apt-get update` -- repeat this step until you can successfully acquired the lock and update
 1. `sudo rm /var/ansible-install`
 1. `exit`
 1. `vagrant provision` should resume the provisioning of the box
