@@ -1,5 +1,5 @@
 # Overview
-This project is a Vagrant box that is provisioned for sofware development.  It is a Xubuntu-based system and 
+This project is a Vagrant box that is provisioned for sofware development.  It is a Linux-based system and 
 has many of the tools needed by a developer already installed.  The provisioning mechanism is based on Ansible 
 and allows for user-specific customizations to be applied.
 
@@ -28,6 +28,21 @@ greatly depends on your internet speeds.
 ![screenshot](screenshot.png)
 
 # Tips and Tricks
+
+## Choice Of Disributions
+We now support multiple Linux distributions.  If you run `vagrant status` you should see something like this:
+
+```
+vagrant status
+Current machine states:
+
+xubuntu                   not created (virtualbox)
+xedora                    not created (virtualbox)
+centos                    not created (virtualbox)
+```
+
+By default, `xubuntu` is the default but you can also run `vagrant xedora` or `vagrant centos` to run 
+another distribution.  You can run concurrent instances if you have the hardware and the need.
 
 ## Upgrading
 Sometimes the Vagrant file changes which can cause some subtle issues, such as creating an orphaned virutal machine.
@@ -85,21 +100,15 @@ system resources.
 If you don't need a full desktop but just the Docker engine, try using [vagrant-docker-server](https://github.com/kurron/vagrant-docker-server)
 
 ## Sub-Projects
-The provisioning of the environment is done by several smaller projects.  You might be interested in examining
-exactly what they install and get a full inventory of the sofware and conveniences.
-
-* [ansible-pull-development](https://github.com/kurron/ansible-pull-development)
-* [ansible-pull-docker](https://github.com/kurron/ansible-pull-docker)
-* [ansible-pull-operations](https://github.com/kurron/ansible-pull-operations)
-* [ansible-pull-transparent](https://github.com/kurron/ansible-pull-transparent)
-
-The README files also give insight into what they install and how to use them.
+**Update:** we've moved away from using `ansible-pull` and to using Ansible Roles, which give us a better
+mechansim for reusing provisioning logic.  You can find a
+[list of available roles](https://galaxy.ansible.com/kurron/) in our Ansible Galaxy account.  More are sure 
+to be included over time.
 
 ## Installed Software (partial list)
 
 * current [JDK](http://www.oracle.com/technetwork/java/index.html)
-* [SDKMAN!](http://sdkman.io/) to manage various JVM tools, including Groovy, Scala, Clojure, Grails, Gradle, Maven, Ant and Spring Boot
-* Clojure's [leiningen](http://leiningen.org/) tool
+* [SDKMAN!](http://sdkman.io/) to manage various JVM tools, including Groovy, Scala, Clojure, Grails, Gradle, Maven, Ant and Leiningen 
 * [NodeJS](https://nodejs.org/en/) and [npm](https://www.npmjs.com/)
 * [Packer](https://packer.io/)
 * [Terraform](https://terraform.io/)
