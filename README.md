@@ -41,7 +41,7 @@ xedora                    not created (virtualbox)
 centos                    not created (virtualbox)
 ```
 
-By default, `xubuntu` is the default but you can also run `vagrant xedora` or `vagrant centos` to run 
+By default, `xubuntu` is the default but you can also run `vagrant up xedora` or `vagrant up centos` to run 
 another distribution.  You can run concurrent instances if you have the hardware and the need.
 
 ## Upgrading
@@ -50,8 +50,8 @@ The safest upgrade procedure is the following:
 
 1. `vagrant destroy` to remove the existing box
 1. `git pull` to download the new files
-1. **`vagrant box outdated` to see if newer version of the box is available**
-1. `vagrant box update` to pull down the current version of the box
+1. **`vagrant box outdated`** to see if newer version of the box is available
+1. `vagrant box update --box <boxname>` to pull down the current version of the box
 1. `vagrant up` to build the new box
 
 ## RAM and CPU Settings
@@ -60,7 +60,7 @@ If you examine the `vagrantfile` file, you will see that the virtual machine is 
 
 ## Low Disk Space
 If an environment is used long enough, it is likely to run out of disk space.  The two main culprits are kernal updates 
-filling up the `/boot` partition and Docker images filling up the `/opt/docker` partition.  You have at least 3 options:
+filling up the `/boot` partition and Docker images filling up the `/var/lib/docker` partition.  You have at least 3 options:
 
 * throw away the environment and start fresh
 * clean up the old kernels via `sudo apt-get autoremove`
@@ -102,9 +102,9 @@ system resources.
 If you don't need a full desktop but just the Docker engine, try using [vagrant-docker-server](https://github.com/kurron/vagrant-docker-server)
 
 ## Sub-Projects
-**Update:** we've moved away from using `ansible-pull` and to using Ansible Roles, which give us a better
+**Update:** we've moved away from using `ansible-pull` and to using [Ansible Roles](http://docs.ansible.com/ansible/playbooks_roles.html), which give us a better
 mechansim for reusing provisioning logic.  You can find a
-[list of available roles](https://galaxy.ansible.com/kurron/) in our Ansible Galaxy account.  More are sure 
+[list of available roles](https://galaxy.ansible.com/kurron/) in my Ansible Galaxy account.  More are sure 
 to be included over time.
 
 ## Installed Software (partial list)
