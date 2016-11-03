@@ -50,6 +50,8 @@ The safest upgrade procedure is the following:
 
 1. `vagrant destroy` to remove the existing box
 1. `git pull` to download the new files
+1. **`vagrant box outdated` to see if newer version of the box is available**
+1. `vagrant box update` to pull down the current version of the box
 1. `vagrant up` to build the new box
 
 ## RAM and CPU Settings
@@ -120,7 +122,7 @@ to be included over time.
 * [httpie](https://github.com/jkbrzt/httpie) - a more friendly alternative to cURL and wget
 
 ## Different Windowing Systems
-*NOTE:* currently a work in progress.
+*NOTE:* currently a work in incubation.
 
 We have branches that use different window managers that may appeal to you.  Use Git to switch to approriate branch and run `vagrant up` to try it out.
 
