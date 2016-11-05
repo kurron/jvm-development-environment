@@ -9,5 +9,13 @@ fi
 # the GitHub location of the custom Ansible plays to run eg, kurron/ansible-pull-desktop-tweaks.git
 PROJECT=$1
 
-ansible-pull --checkout master --directory /opt/ansible-pull-custom --inventory-file=/tmp/inventory --module-name=git  --url=https://github.com/${PROJECT} --verbose playbook.yml
+ansible-pull --checkout master \
+             --directory /opt/ansible-pull-custom \
+             --inventory-file=/tmp/inventory \
+             --module-name=git \
+             --url=https://github.com/${PROJECT} \
+             --verbose \
+             --only-if-changed \
+             --user vagrant \
+             playbook.yml
 
