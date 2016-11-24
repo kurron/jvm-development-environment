@@ -209,5 +209,9 @@ You need to specify a custom Git configuration file.  The best way to do that is
 See the *Applying Your Own Customizations* section above on how to do that.  You can use [kurron/ansible-pull-desktop-tweaks.git](https://github.com/kurron/ansible-pull-desktop-tweaks)
 as inspiration. **Do not blindly copy the customizations as they are specific to a particular person.**
 
+# Change History
+1. Smaller download, replaced ext4 with xfs, updates to Docker, IntelliJ, PyCharm, WebStorm, Node JS, Atom, Packer and VirtualBox 5.1.10 support
+1. VirtualBox 5.1.8 support
+
 # License and Credits
 This project is licensed under the [Apache License Version 2.0, January 2004](http://www.apache.org/licenses/).
