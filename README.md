@@ -25,7 +25,9 @@ ensure quick and stable rebuilds is a larger initial download.  All boxes are cu
 Use Git to clone this project, go into the project folder and type `vagrant up` and go get a cup of coffee.  The construction time of the box
 greatly depends on your internet speeds.
 
-![screenshot](screenshot.png)
+![xubuntu](xubuntu.png)
+
+![xedora](xedora.png)
 
 # Tips and Tricks
 
