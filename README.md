@@ -41,7 +41,7 @@ xedhat                    not created (virtualbox)
 ```
 
 `xubuntu` is the default but you can also run `vagrant up xedhat` to run
-another distribution.  You can run concurrent instances if you have the hardware and the need.
+the Red Hat distribution.  You can run concurrent instances if you have the hardware and the need.
 
 ## Upgrading
 Sometimes the Vagrant file changes which can cause some subtle issues, such as creating an orphaned virutal machine.
