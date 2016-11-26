@@ -40,7 +40,7 @@ xubuntu                   not created (virtualbox)
 xedhat                    not created (virtualbox)
 ```
 
-By default, `xubuntu` is the default but you can also run `vagrant up xedhat` to run
+`xubuntu` is the default but you can also run `vagrant up xedhat` to run
 another distribution.  You can run concurrent instances if you have the hardware and the need.
 
 ## Upgrading
