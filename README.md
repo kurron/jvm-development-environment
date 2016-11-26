@@ -37,11 +37,10 @@ vagrant status
 Current machine states:
 
 xubuntu                   not created (virtualbox)
-xedora                    not created (virtualbox)
-centos                    not created (virtualbox)
+xedhat                    not created (virtualbox)
 ```
 
-By default, `xubuntu` is the default but you can also run `vagrant up xedora` or `vagrant up centos` to run
+By default, `xubuntu` is the default but you can also run `vagrant up xedhat` to run
 another distribution.  You can run concurrent instances if you have the hardware and the need.
 
 ## Upgrading
