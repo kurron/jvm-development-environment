@@ -211,6 +211,7 @@ See the *Applying Your Own Customizations* section above on how to do that.  You
 as inspiration. **Do not blindly copy the customizations as they are specific to a particular person.**
 
 # Change History
+1. VirtualBox 5.1.12 support, RedHat now has a current version of Git installed.  Firefox, Chromium and Evince now installed by default. Numerous version upgrades.
 1. Smaller download, replaced ext4 with xfs, updates to Docker, IntelliJ, PyCharm, WebStorm, Node JS, Atom, Packer and VirtualBox 5.1.10 support
 1. VirtualBox 5.1.8 support
 
