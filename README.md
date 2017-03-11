@@ -160,6 +160,11 @@ We have branches that use different window managers that may appeal to you.  Use
 
 # Troubleshooting
 
+## Where did /vagrant go?
+There is [an issue with Windows 10 and VirtualBox 5.1.16](http://stackoverflow.com/questions/42074246/vagrant-error-unable-to-mount-virtualbox-shared-folders-guest-additions-vboxs)
+that prevents Vagrant from starting properly.  As a workaround, we've disabled sharing of folders.  Non-Windows users can
+edit the `vagrantfile` and re-enable the mount if desired.
+
 ## Vagrant Asks Me Which Network Interface To Bind To
 By default, the box is configured to join the local network as a fully accessable machine.
 The `desktop.vm.network "public_network"` in the `vagrantfile` is the key to this.  If you have
@@ -211,6 +216,23 @@ See the *Applying Your Own Customizations* section above on how to do that.  You
 as inspiration. **Do not blindly copy the customizations as they are specific to a particular person.**
 
 # Change History
+1. Release 5.1.16
+  * VirtualBox 5.1.16 support
+  * Vagrant 1.9.2 support
+  * Docker 17.03.0-ce
+  * Docker Compose 1.11.2
+  * Ansible 2.2.1.0
+  * AWS CLI 1.11.59
+  * NodeJS v6.10.0
+  * NPM 3.10.10
+  * Consul v0.7.5
+  * Nomad v0.5.4
+  * Packer 0.12.3
+  * WebStorm 2016.3.4
+  * IntelliJ 2016.3.5
+  * DataGrip 2016.3.4
+  * Atom 1.14.4
+  * Sysdig 0.15.0
 1. Release 5.1.14
   * Azul JDK is now the default, Oracle is still available if needed
   * Oracle JDK updated to 1.8.0_121
