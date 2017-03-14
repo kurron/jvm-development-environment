@@ -31,7 +31,7 @@ greatly depends on your internet speeds.
 
 # Tips and Tricks
 
-## Choice Of Disributions
+## Choice Of Distributions
 We now support multiple Linux distributions.  If you run `vagrant status` you should see something like this:
 
 ```
@@ -157,6 +157,34 @@ We have branches that use different window managers that may appeal to you.  Use
 * Mate
 * Cinnamon
 * Unity
+
+## SSH Jump Servers
+Some personal and corporate plays install a custom SSH configuration
+which simplifies access to private machines.  Look in `~/.ssh/config`
+to see what your configuration looks likes.  When I want to access
+an Amazon EC2 instance in a private subnet, I have to proxy through
+a Bastion, aka Jump Server, box.  To do that I need to edit the
+configuration file to make sure I have the proper public address
+of the Bastion box.
+
+```
+Host bastion
+    User ec2-user
+    HostName ec2-54-218-52-2.us-west-2.compute.amazonaws.com
+    IdentityFile ~/Bitbucket/Operations/aws-ssh-keys/us-west-2/asgard-lite-test.pem
+    ForwardAgent yes
+
+Host 10.0.*.*
+    User ec2-user
+    IdentityFile ~/Bitbucket/Operations/aws-ssh-keys/us-west-2/asgard-lite-test.pem
+    ProxyCommand ssh bastion -W %h:%p
+    ExitOnForwardFailure yes
+```
+
+To test out the configuration, try `ssh bastion`.  Once that is
+working, try connecting to an internal box `ssh 10.20.30.40` and
+see if that works.  The same setup works for accessing your home
+network.
 
 # Troubleshooting
 
