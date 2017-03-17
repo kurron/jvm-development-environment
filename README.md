@@ -248,66 +248,61 @@ as inspiration. **Do not blindly copy the customizations as they are specific to
 # Change History
 
 1. Release 5.1.18
-  * VirtualBox 5.1.18 support
-  * Nomad 0.5.5
-  * Terraform 0.9.0
-  * Atom 1.15.0
-  * AWS CLI 1.11.63
-
+    * VirtualBox 5.1.18 support
+    * Nomad 0.5.5
+    * Terraform 0.9.0
+    * Atom 1.15.0
+    * AWS CLI 1.11.63
 1. Release 5.1.16
-  * VirtualBox 5.1.16 support
-  * Vagrant 1.9.2 support
-  * Docker 17.03.0-ce
-  * Docker Compose 1.11.2
-  * Ansible 2.2.1.0
-  * AWS CLI 1.11.59
-  * NodeJS v6.10.0
-  * NPM 3.10.10
-  * Consul v0.7.5
-  * Nomad v0.5.4
-  * Packer 0.12.3
-  * WebStorm 2016.3.4
-  * IntelliJ 2016.3.5
-  * DataGrip 2016.3.4
-  * Atom 1.14.4
-  * Sysdig 0.15.0
-
+    * VirtualBox 5.1.16 support
+    * Vagrant 1.9.2 support
+    * Docker 17.03.0-ce
+    * Docker Compose 1.11.2
+    * Ansible 2.2.1.0
+    * AWS CLI 1.11.59
+    * NodeJS v6.10.0
+    * NPM 3.10.10
+    * Consul v0.7.5
+    * Nomad v0.5.4
+    * Packer 0.12.3
+    * WebStorm 2016.3.4
+    * IntelliJ 2016.3.5
+    * DataGrip 2016.3.4
+    * Atom 1.14.4
+    * Sysdig 0.15.0
 1. Release 5.1.14
-  * Azul JDK is now the default, Oracle is still available if needed
-  * Oracle JDK updated to 1.8.0_121
-  * AWS CLI updated to 1.11.41
-  * ECS CLI updated to 0.4.6
-  * Sysdig updated to 0.13.0
-  * NodeJS updated to 6.9.4
-  * logFACES updated to 4.3.1
-  * DataGrip updated to 2016.3.2
-  * PyCharm updated to 2016.3.2
-  * IntelliJ IDEA updated to 2016.3.3
-  * Atom updated to 1.13.0
-  * Docker Engine updated to 1.13.0
-  * Docker Compose updated to 1.10.0
-  * Consul Replicate updated to 0.3.0
-  * Consul Template updated to 0.18.0
-  * Consul Env updated to 0.6.2
-  * Nomad updated to 0.5.2
-  * Packer updated to 0.12.2
-  * Terraform update to 0.8.4
-  * Added missing Atlassian repository keys
-
+    * Azul JDK is now the default, Oracle is still available if needed
+    * Oracle JDK updated to 1.8.0_121
+    * AWS CLI updated to 1.11.41
+    * ECS CLI updated to 0.4.6
+    * Sysdig updated to 0.13.0
+    * NodeJS updated to 6.9.4
+    * logFACES updated to 4.3.1
+    * DataGrip updated to 2016.3.2
+    * PyCharm updated to 2016.3.2
+    * IntelliJ IDEA updated to 2016.3.3
+    * Atom updated to 1.13.0
+    * Docker Engine updated to 1.13.0
+    * Docker Compose updated to 1.10.0
+    * Consul Replicate updated to 0.3.0
+    * Consul Template updated to 0.18.0
+    * Consul Env updated to 0.6.2
+    * Nomad updated to 0.5.2
+    * Packer updated to 0.12.2
+    * Terraform update to 0.8.4
+    * Added missing Atlassian repository keys
 1. Release 5.1.12
-  * VirtualBox 5.1.12 support,
-  * RedHat now has a current version of Git installed.
-  * Firefox, Chromium and Evince now installed by default.
-  * Numerous version upgrades.
-
+    * VirtualBox 5.1.12 support,
+    * RedHat now has a current version of Git installed.
+    * Firefox, Chromium and Evince now installed by default.
+    * Numerous version upgrades.
 1. Release 5.1.10
-  * Smaller download,
-  * replaced ext4 with xfs,
-  * updates to Docker, IntelliJ, PyCharm, WebStorm, Node JS, Atom, Packer
-  * VirtualBox 5.1.10 support
-
+    * Smaller download,
+    * replaced ext4 with xfs,
+    * updates to Docker, IntelliJ, PyCharm, WebStorm, Node JS, Atom, Packer
+    * VirtualBox 5.1.10 support
 1. Release 5.1.8
-  * VirtualBox 5.1.8 support
+    * VirtualBox 5.1.8 support
 
 # License and Credits
 This project is licensed under the [Apache License Version 2.0, January 2004](http://www.apache.org/licenses/).
