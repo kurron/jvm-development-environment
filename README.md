@@ -246,6 +246,12 @@ See the *Applying Your Own Customizations* section above on how to do that.  You
 as inspiration. **Do not blindly copy the customizations as they are specific to a particular person.**
 
 # Change History
+1. Release 5.1.18
+  * VirtualBox 5.1.18 support
+  * Nomad 0.5.5
+  * Terraform 0.9.0
+  * Atom 1.15.0
+  * AWS CLI 1.11.63
 1. Release 5.1.16
   * VirtualBox 5.1.16 support
   * Vagrant 1.9.2 support
