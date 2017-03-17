@@ -21,7 +21,8 @@ Vagrant.configure("2") do |config|
     # there is a bug with Windows 10 + VirtualBox 5.1.16 that causes Vagrant not to be able to mount the current directory
     # http://stackoverflow.com/questions/42074246/vagrant-error-unable-to-mount-virtualbox-shared-folders-guest-additions-vboxs
     # we are disabling it for now but can be safely turned on for non-Windows 10 users
-    config.vm.synced_folder ".", "/vagrant", disabled: true
+    # UPDATE: fixed in VirtualBox 5.1.18
+#   config.vm.synced_folder ".", "/vagrant", disabled: true
 
     config.vm.provider "virtualbox" do |v|
         v.gui = false

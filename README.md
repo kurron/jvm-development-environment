@@ -188,10 +188,12 @@ network.
 
 # Troubleshooting
 
-## Where did /vagrant go?
+## Where did `/vagrant` go?
 There is [an issue with Windows 10 and VirtualBox 5.1.16](http://stackoverflow.com/questions/42074246/vagrant-error-unable-to-mount-virtualbox-shared-folders-guest-additions-vboxs)
 that prevents Vagrant from starting properly.  As a workaround, we've disabled sharing of folders.  Non-Windows users can
 edit the `vagrantfile` and re-enable the mount if desired.
+
+**UPDATE:** the issue has been resolved in VirtualBox 5.1.18.  The `/vagrant` folder is now mounted as usual.
 
 ## Vagrant Asks Me Which Network Interface To Bind To
 By default, the box is configured to join the local network as a fully accessable machine.
