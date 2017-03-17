@@ -253,6 +253,7 @@ as inspiration. **Do not blindly copy the customizations as they are specific to
   * Terraform 0.9.0
   * Atom 1.15.0
   * AWS CLI 1.11.63
+
 1. Release 5.1.16
   * VirtualBox 5.1.16 support
   * Vagrant 1.9.2 support
@@ -270,6 +271,7 @@ as inspiration. **Do not blindly copy the customizations as they are specific to
   * DataGrip 2016.3.4
   * Atom 1.14.4
   * Sysdig 0.15.0
+
 1. Release 5.1.14
   * Azul JDK is now the default, Oracle is still available if needed
   * Oracle JDK updated to 1.8.0_121
@@ -291,16 +293,19 @@ as inspiration. **Do not blindly copy the customizations as they are specific to
   * Packer updated to 0.12.2
   * Terraform update to 0.8.4
   * Added missing Atlassian repository keys
+
 1. Release 5.1.12
   * VirtualBox 5.1.12 support,
   * RedHat now has a current version of Git installed.
   * Firefox, Chromium and Evince now installed by default.
   * Numerous version upgrades.
+
 1. Release 5.1.10
   * Smaller download,
   * replaced ext4 with xfs,
   * updates to Docker, IntelliJ, PyCharm, WebStorm, Node JS, Atom, Packer
   * VirtualBox 5.1.10 support
+
 1. Release 5.1.8
   * VirtualBox 5.1.8 support
 
