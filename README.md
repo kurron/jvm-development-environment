@@ -246,6 +246,7 @@ See the *Applying Your Own Customizations* section above on how to do that.  You
 as inspiration. **Do not blindly copy the customizations as they are specific to a particular person.**
 
 # Change History
+
 1. Release 5.1.18
   * VirtualBox 5.1.18 support
   * Nomad 0.5.5
