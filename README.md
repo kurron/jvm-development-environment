@@ -119,8 +119,9 @@ export USER_PLAYS=foo/custom-tweaks.git
 1. `echo %USER_PLAYS%` to verify that your new variable has been properly set
 
 ## Gather Docker Container Metrics
-`sudo csysdig -pc` will fire up the sysdig tool.  Use `F2` to switch to the container view and see how each container is using
-system resources.
+`sudo csysdig -pcontainer` will fire up the sysdig tool.  Use `F2` to switch to the container view and see how each container is using
+system resources.  Explore some [examples of how to use Sysdig](http://www.sysdig.org/wiki/sysdig-examples/)
+and see how can aid in troubleshooting.
 
 ## Docker-only Box
 If you don't need a full desktop but just the Docker engine, try using [vagrant-docker-server](https://github.com/kurron/vagrant-docker-server)
