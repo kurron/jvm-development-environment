@@ -248,6 +248,33 @@ as inspiration. **Do not blindly copy the customizations as they are specific to
 
 # Change History
 
+1. Release 5.1.22
+    * VirtualBox 5.1.22 support
+    * Vagrant 1.9.4 support
+    * kernel 4.4.0-75
+    * Zulu JDK to 8.0.131
+    * Docker Engine v17.04.0-ce
+    * Docker Compose 1.12.0
+    * Docker Machine 0.11.0
+    * IntelliJ 2017.1.2
+    * PyCharm 2017.1.2
+    * WebStorm 2017.1.2
+    * Sysdig 0.15.1
+    * VisualVM 1.3.9
+    * Consul to 0.8.1
+    * Consul Template to 0.18.2
+    * Nomad to 0.5.6
+    * Terraform to 0.9.4
+    * Vault to 0.7.0
+    * Charles proxy 4.1.1
+    * kubectl 1.6.2
+    * Python 3.6 (`/usr/bin/python3.6`)
+    * Atom 1.16.0
+    * DataGrip 2017.1.2
+    * logFaces 4.3.2
+    * HTTPie 0.9.9
+    * npm 3.10.10
+    * node v6.10.2
 1. Release 5.1.18
     * VirtualBox 5.1.18 support
     * Nomad 0.5.5
