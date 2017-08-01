@@ -248,6 +248,30 @@ as inspiration. **Do not blindly copy the customizations as they are specific to
 
 # Change History
 
+1. Release 5.1.26
+    * Upgraded: VirtualBox 5.1.26
+    * Upgraded: Vagrant 1.9.7
+    * Upgraded: Docker 17.06.0-ce
+    * Upgraded: Docker Compose 1.15.0
+    * Upgraded: Ansible 2.3.1.0
+    * Upgraded: AWS CLI 1.11.86
+    * Upgraded: Node JS 6.11.1
+    * Upgraded: NPM 3.10.10
+    * Upgraded: Consul 0.9.0
+    * Upgraded: Linux Kernel 4.4.0-87-generic
+    * Upgraded: WebStorm 2017.2
+    * Upgraded: IDEA 2017.2
+    * Upgraded: Kubernetes 1.7.2
+    * Upgraded: PyCharm 2017.2
+    * Upgraded: Atom 1.18.0
+    * Upgraded: DataGrib 2017.2
+    * Added: Serverless Framework
+    * Added: Sysdig's Falco
+    * Removed: docker-py module
+    * Added: Atlassian's localstack (AWS emulator)
+    * Added: Visual Studio Code
+    * Added: MongoDB Compass
+    * Removed: JHipster
 1. Release 5.1.22
     * VirtualBox 5.1.22 support
     * Vagrant 1.9.4 support
