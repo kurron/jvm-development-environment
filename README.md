@@ -76,6 +76,13 @@ Docker containers running common infrastructure are installed in `/home/vagrant/
 file to see what services are currently available to use.  Run the `start.sh` script to install and run the servers.  You can
 also start up a single server, eg `docker-compose up -d mongodb`.
 
+## Juniper VPN Support
+
+1. Change into the `~/vagrant/VPN` folder
+1. edit `jvpn.ini` changing the `username` and `password` values
+1. run `./vpn.sh` to start your session
+1. `ctrl-c` to exit the session
+
 ## Docker-based IDEs
 We've deprecated the use of Docker-based IDEs.  We've found that projects that produce and consume Docker images can be
 challeging when running from within a container.  If Docker in Docker ever becomes mainstream, we'll look into switching back.
@@ -249,6 +256,7 @@ as inspiration. **Do not blindly copy the customizations as they are specific to
 # Change History
 
 1. Release 5.1.26
+    * Juniper VPN support
     * Upgraded: VirtualBox 5.1.26
     * Upgraded: Vagrant 1.9.7
     * Upgraded: Docker 17.06.0-ce
