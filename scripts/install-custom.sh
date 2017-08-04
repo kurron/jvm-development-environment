@@ -6,6 +6,9 @@ then
  exit
 fi
 
+# make sure we can get the apt lock before running the plays
+until sudo apt-get update; do echo "Waiting for apt-get lock"; sleep 5; done
+
 # the GitHub location of the custom Ansible plays to run eg, kurron/ansible-pull-desktop-tweaks.git
 PROJECT=$1
 
