@@ -258,8 +258,8 @@ as inspiration. **Do not blindly copy the customizations as they are specific to
 1. Release 5.1.28
     * Upgraded: VirtualBox 5.1.28
     * Upgraded: Vagrant 2.0.0
-    * Added: Java 9.0.0
-    * Upgraded: Java 1.8.0_144 (kept during transition to Java 9)
+    * Added: Java 9.0.0.15 (now default JDK)
+    * Upgraded: Java 1.8.0_144 (keeping during transition to Java 9)
     * Upgraded: Docker 17.07.0-ce
     * Upgraded: Docker Compose 1.16.1
     * Upgraded: Ansible 2.4.0.0
