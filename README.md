@@ -255,6 +255,28 @@ as inspiration. **Do not blindly copy the customizations as they are specific to
 
 # Change History
 
+1. Release 5.1.28
+    * Upgraded: VirtualBox 5.1.28
+    * Upgraded: Vagrant 2.0.0
+    * Added: Java 9.0.0
+    * Upgraded: Java 1.8.0_144 (kept during transition to Java 9)
+    * Upgraded: Docker 17.07.0-ce
+    * Upgraded: Docker Compose 1.16.1
+    * Upgraded: Ansible 2.4.0.0
+    * Upgraded: Node JS 6.11.3
+    * Upgraded: Consul 0.9.3
+    * Upgraded: Terraform 0.10.6
+    * Upgraded: Linux Kernel 4.4.0-96-generic
+    * Upgraded: WebStorm 2017.2.4
+    * Upgraded: IDEA 2017.2.4
+    * Upgraded: Kubernetes 1.7.6
+    * Upgraded: PyCharm 2017.2.3
+    * Upgraded: Atom 1.20.1
+    * Upgraded: DataGrip 2017.2.2
+    * Upgraded: Atlassian's localstack 0.8.0
+    * Upgraded: Visual Studio Code 1.16.1
+    * Upgraded: MongoDB Compass 1.8.2
+    * Removed: logFACES (broken and nobody was complaining about it)
 1. Release 5.1.26
     * Juniper VPN support
     * Upgraded: VirtualBox 5.1.26
