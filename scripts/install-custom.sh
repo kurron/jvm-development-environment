@@ -6,6 +6,9 @@ then
  exit
 fi
 
+# desperate hack to try and ensure the apt-lock is available
+sleep 60
+
 # make sure we can get the apt lock before running the plays
 until sudo apt-get update; do echo "Waiting for apt-get lock"; sleep 5; done
 
