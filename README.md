@@ -196,6 +196,27 @@ network.
 
 # Troubleshooting
 
+## I've upgrade to kurron/xenial-xubuntu:5.1.28 and things are acting weird
+As of October 1, 2017, the 5.1.28 box has not been officially announced because
+the switch over from JDK 8 to JDK 9 is still undergoing tests.  If you upgraded
+and are seeing odd behavior, there are a few simple edits to fix things.
+
+### IDE Desktop Launchers
+Right mouse click on your IDE's desktop icon and select `Properties` and then the `Launcher`
+tab.  You'll need to edit the `Command` to point to JDK 8. Here is an example for the
+PyCharm launcher `env PYCHARM_JDK=/usr/lib/jvm/jdk-8 /home/vagrant/Software/pycharm/bin/pycharm.sh`.
+If you are **not** doing any JVM development, then this is all you need to do.
+
+### JVM Developers
+JVM developers will need to get `JAVA_HOME` and other environment variables to point to JDK 8.  To do this,
+edit two files:
+
+* /etc/environment
+* /etc/profile.d/default-jdk-environment.sh
+
+Once those are changed, log out and back in again and run `echo $JAVA_HOME` and `java -version` to verify
+your changes. 
+
 ## Where did `/vagrant` go?
 There is [an issue with Windows 10 and VirtualBox 5.1.16](http://stackoverflow.com/questions/42074246/vagrant-error-unable-to-mount-virtualbox-shared-folders-guest-additions-vboxs)
 that prevents Vagrant from starting properly.  As a workaround, we've disabled sharing of folders.  Non-Windows users can
