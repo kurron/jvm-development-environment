@@ -1,3 +1,9 @@
+<a target='_blank' rel='nofollow' href='https://app.codesponsor.io/link/siWgAciQehZbF4oNcgaM2HS9/kurron/jvm-development-environment'>
+  <img alt='Sponsor'
+       width='888'
+       height='68' src='https://app.codesponsor.io/embed/siWgAciQehZbF4oNcgaM2HS9/kurron/jvm-development-environment.svg' />
+</a>
+
 # Overview
 This project is a Vagrant box that is provisioned for sofware development.  It is a Linux-based system and
 has many of the tools needed by a developer already installed.  The provisioning mechanism is based on Ansible
@@ -215,7 +221,7 @@ edit two files:
 * /etc/profile.d/default-jdk-environment.sh
 
 Once those are changed, log out and back in again and run `echo $JAVA_HOME` and `java -version` to verify
-your changes. 
+your changes.
 
 ## Where did `/vagrant` go?
 There is [an issue with Windows 10 and VirtualBox 5.1.16](http://stackoverflow.com/questions/42074246/vagrant-error-unable-to-mount-virtualbox-shared-folders-guest-additions-vboxs)
