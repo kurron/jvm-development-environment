@@ -282,6 +282,9 @@ as inspiration. **Do not blindly copy the customizations as they are specific to
 
 # Change History
 
+1. Release 5.1.29
+    * Upgraded: IDEA 2017.2.5
+    * Upgraded: Made JDK 8 default JVM (JDK 9 is also installed)
 1. Release 5.1.28
     * Upgraded: VirtualBox 5.1.28
     * Upgraded: Vagrant 2.0.0
