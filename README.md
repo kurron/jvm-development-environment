@@ -202,6 +202,18 @@ network.
 
 # Troubleshooting
 
+## My Network Does Not Seem To Be Functionin?
+BY default the box is configured to appear as a node on the network,
+allowing others to connect to services on your machine.  You can try
+putting the box into NAT-only mode to see if that fixes things for you.
+Edit `vagrantfile`, commenting out the `config.vm.network` setting like so:
+
+```
+    # put the box on the network so it can be accessed by others
+#   config.vm.network "public_network"
+
+```
+
 ## I've upgrade to kurron/xenial-xubuntu:5.1.28 and things are acting weird
 As of October 1, 2017, the 5.1.28 box has not been officially announced because
 the switch over from JDK 8 to JDK 9 is still undergoing tests.  If you upgraded
