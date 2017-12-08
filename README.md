@@ -202,7 +202,7 @@ network.
 
 # Troubleshooting
 
-## My Network Does Not Seem To Be Functionin?
+## My Network Does Not Seem To Be Functioning?
 BY default the box is configured to appear as a node on the network,
 allowing others to connect to services on your machine.  You can try
 putting the box into NAT-only mode to see if that fixes things for you.
