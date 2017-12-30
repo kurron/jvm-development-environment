@@ -294,6 +294,32 @@ as inspiration. **Do not blindly copy the customizations as they are specific to
 
 # Change History
 
+1. Release 5.2.5
+    * Upgraded: Kernel 4.4.0-104-generic
+    * Upgraded: OpenJDK 1.8.0_152
+    * Upgraded: Docker 17.12.0-ce, build c97c6d6
+    * Upgraded: Docker Compose version 1.18.0, build 8dd22a9
+    * Upgraded: Docker Machine version 0.13.0, build 9ba6da9
+    * Upgraded: Ansible 2.4.2.0
+    * Upgraded: AWS CLI aws-cli/1.11.125
+    * Upgraded: Kubectl v1.9.0
+    * Upgraded: localstack 0.8.3
+    * Upgraded: Sysdig 0.19.1
+    * Upgraded: Falco 0.8.1
+    * Upgraded: IDEA 2017.3.2
+    * Upgraded: PyCharm 2017.3.2
+    * Upgraded: WebStorm 2017.3.2
+    * Upgraded: DataGrip 2017.3.3
+    * Upgraded: Consul 1.0.2
+    * Upgraded: Packer 1.1.2
+    * Upgraded: Terraform 0.11.1
+    * Upgraded: Vault 0.9.0
+    * Upgraded: Atom 1.23.1
+    * Upgraded: Visual Studio Code 1.19.1
+    * Upgraded: MongoDB Compass 1.11.1
+    * Upgraded: NodeJS v6.12.2
+    * Upgraded: NPM 3.10.10
+    * Upgraded: Charles Proxy 4.2.1
 1. Release 5.1.29
     * Upgraded: IDEA 2017.2.5
     * Upgraded: Made JDK 8 default JVM (JDK 9 is also installed)
