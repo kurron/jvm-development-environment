@@ -299,30 +299,43 @@ as inspiration. **Do not blindly copy the customizations as they are specific to
 
 1. Release 5.2.5
     * Upgraded: Kernel 4.4.0-104-generic
-    * Upgraded: OpenJDK 1.8.0_152
-    * Upgraded: Docker 17.12.0-ce, build c97c6d6
-    * Upgraded: Docker Compose version 1.18.0, build 8dd22a9
-    * Upgraded: Docker Machine version 0.13.0, build 9ba6da9
-    * Upgraded: Ansible 2.4.2.0
-    * Upgraded: AWS CLI aws-cli/1.11.125
-    * Upgraded: Kubectl v1.9.0
+    * Upgraded: JDK 1.8.0_152
+    * Upgraded: SDKMAN! SDKMAN 5.6.0+287
+    * Upgraded: Python Python 3.5.2
+    * Upgraded: Legacy Python Python 2.7.12
+    * Upgraded: Edge Python Python 3.6.4
+    * Upgraded: Virtualenv 15.1.0
+    * Upgraded: Docker Docker version 17.12.0-ce, build c97c6d6
+    * Upgraded: Docker Compose docker-compose version 1.18.0, build 8dd22a9
+    * Upgraded: Docker Machine docker-machine version 0.13.0, build 9ba6da9
+    * Upgraded: AWS CLI aws-cli/1.11.125 Python/2.7.12 Linux/4.4.0-104-generic botocore/1.5.88
+    * Upgraded: Kubectl Client Version: version.Info{Major:"1", Minor:"9", GitVersion:"v1.9.0", GitCommit:"925c127ec6b946659ad0fd596fa959be43f0cc05", GitTreeState:"clean", BuildDate:"2017-12-15T21:07:38Z", GoVersion:"go1.9.2", Compiler:"gc", Platform:"linux/amd64"}
     * Upgraded: localstack 0.8.3
-    * Upgraded: Sysdig 0.19.1
-    * Upgraded: Falco 0.8.1
-    * Upgraded: IDEA 2017.3.2
+    * Upgraded: Sysdig sysdig version 0.19.1
+    * Upgraded: Faco falco version 0.8.1
+    * Upgraded: Consul Consul v1.0.2
+    * Upgraded: Consul Replicate consul-replicate v0.4.0 (886abcc)
+    * Upgraded: Consul Template consul-template v0.19.4 (68b1da2)
+    * Upgraded: Nomad Nomad v0.7.1 (0b295d399d00199cfab4621566babd25987ba06e)
+    * Upgraded: Packer 1.1.3
+    * Upgraded: Terraform Terraform v0.11.1
+    * Upgraded: Vault Vault v0.9.1 ('87b6919dea55da61d7cd444b2442cabb8ede8ab1')
+    * Upgraded: NodeJS v6.12.2
+    * Upgraded: NPM 3.10.10
+    * Upgraded: Yeoman 2.0.0
+    * Upgraded: Bower 1.8.2
+    * Upgraded: Gulp [09:56:42] CLI version 2.0.0
+    * Upgraded: Grunt grunt-cli v1.2.0
+    * Upgraded: Servless 1.25.0
+    * Upgraded: IntelliJ IDEA 2017.3.2
     * Upgraded: PyCharm 2017.3.2
     * Upgraded: WebStorm 2017.3.2
     * Upgraded: DataGrip 2017.3.3
-    * Upgraded: Consul 1.0.2
-    * Upgraded: Packer 1.1.2
-    * Upgraded: Terraform 0.11.1
-    * Upgraded: Vault 0.9.0
+    * Upgraded: Charles Proxy 4.2.1
     * Upgraded: Atom 1.23.1
     * Upgraded: Visual Studio Code 1.19.1
     * Upgraded: MongoDB Compass 1.11.1
-    * Upgraded: NodeJS v6.12.2
-    * Upgraded: NPM 3.10.10
-    * Upgraded: Charles Proxy 4.2.1
+    * Upgraded: VisualVM 1.4
 1. Release 5.1.29
     * Upgraded: IDEA 2017.2.5
     * Upgraded: Made JDK 8 default JVM (JDK 9 is also installed)
