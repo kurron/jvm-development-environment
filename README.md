@@ -25,7 +25,7 @@ moving to different locations or installation processes changing.  When you need
 and you don't have the time to troubleshoot an installation issue.  To combat this problem, we've decided to
 change the build model and bake in much of the software into the base image.  The trade-off we've made to
 ensure quick and stable rebuilds is a larger initial download.  All boxes are currently housed in
-[HashiCorp's Atlas](https://atlas.hashicorp.com) repository.
+[HashiCorp's Vagrant Cloud](https://app.vagrantup.com/kurron) repository.
 
 # Installation
 Use Git to clone this project, go into the project folder and type `vagrant up` and go get a cup of coffee.  The construction time of the box
