@@ -15,8 +15,8 @@ Vagrant.configure("2") do |config|
     config.ssh.password = "vagrant"
     config.ssh.username = "vagrant"
 
-    # put the box on the network so it can be accessed by others
-    config.vm.network "public_network"
+    # uncomment to put the box on the network so it can be accessed by others
+#   config.vm.network "public_network"
 
     # there is a bug with Windows 10 + VirtualBox 5.1.16 that causes Vagrant not to be able to mount the current directory
     # http://stackoverflow.com/questions/42074246/vagrant-error-unable-to-mount-virtualbox-shared-folders-guest-additions-vboxs
