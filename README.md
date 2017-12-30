@@ -292,6 +292,9 @@ You need to specify a custom Git configuration file.  The best way to do that is
 See the *Applying Your Own Customizations* section above on how to do that.  You can use [kurron/ansible-pull-desktop-tweaks.git](https://github.com/kurron/ansible-pull-desktop-tweaks)
 as inspiration. **Do not blindly copy the customizations as they are specific to a particular person.**
 
+## I lost power and now VPN isn't working!
+>I guess this is just an FYI to anybody who might have also had this problem, but if you are using the VPN on the guest boxes, it will edit your `resolv.conf` file to only use TLs nameservers.  If you lose power, these will remain in this state and you will lose DNS the next time you start the machine (seeing that you no longer have a VPN session).  I found just starting and stopping the scripts in `~/VPN` would restore the `resolv.conf` back to normal.
+
 # Change History
 
 1. Release 5.2.5
