@@ -309,6 +309,7 @@ as inspiration. **Do not blindly copy the customizations as they are specific to
     * Upgraded: Docker Compose docker-compose version 1.18.0, build 8dd22a9
     * Upgraded: Docker Machine docker-machine version 0.13.0, build 9ba6da9
     * Upgraded: AWS CLI aws-cli/1.11.125 Python/2.7.12 Linux/4.4.0-104-generic botocore/1.5.88
+    * Upgraded: AWS ECS CLI ecs-cli version 1.2.0 (8d555ea)
     * Upgraded: Kubectl Client Version: version.Info{Major:"1", Minor:"9", GitVersion:"v1.9.0", GitCommit:"925c127ec6b946659ad0fd596fa959be43f0cc05", GitTreeState:"clean", BuildDate:"2017-12-15T21:07:38Z", GoVersion:"go1.9.2", Compiler:"gc", Platform:"linux/amd64"}
     * Upgraded: localstack 0.8.3
     * Upgraded: Sysdig sysdig version 0.19.1
