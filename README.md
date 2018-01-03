@@ -148,7 +148,7 @@ to be included over time.
 ## Installed Software (partial list)
 
 * current [JDK](http://www.oracle.com/technetwork/java/index.html)
-* [SDKMAN!](http://sdkman.io/) to manage various JVM tools, including Groovy, Scala, Clojure, Grails, Gradle, Maven, Ant and Leiningen
+* [SDKMAN!](http://sdkman.io/) to manage various JVM tools, including Groovy, Kotlin, Scala, Clojure, Java, VisualVM, Vert.x, Grails, Gradle, sbt, Maven, Ant and Leiningen
 * [NodeJS](https://nodejs.org/en/) and [npm](https://www.npmjs.com/)
 * [Packer](https://packer.io/)
 * [Terraform](https://terraform.io/)
