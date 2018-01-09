@@ -25,12 +25,13 @@ This project is a Vagrant box that is provisioned for software development.  It 
 * Your corporate VPN running (if you want to apply some work-specific plays)
 
 IMPORTANT: if you don't enable virtualization support in your BIOS, VirtualBox will not run correctly.
+
 IMPORTANT: if you don't install the extension pack, the virtual machine won't come up, complaining about USB errors.
 
 == Building
 All the components of the environment live in repositories on the internet so there is nothing to build.
 
-TIP: some people have experienced issues when rebuilding a box due to flaky networks, online assets moving to different locations or installation processes changing.  When you need your box, you need your box and you don't have the time to troubleshoot an installation issue.  To combat this problem, we've decided to change the build model and bake in much of the software into the base image.  The trade-off we've made to ensure quick and stable rebuilds is a larger initial download.  All boxes are currently housed in https://app.vagrantup.com/kurron[HashiCorp's Vagrant Cloud] repository.
+TIP: Some people have experienced issues when rebuilding a box due to flaky networks, online assets moving to different locations or installation processes changing.  When you need your box, you need your box and you don't have the time to troubleshoot an installation issue.  To combat this problem, we've decided to change the build model and bake in much of the software into the base image.  The trade-off we've made to ensure quick and stable rebuilds is a larger initial download.  All boxes are currently housed in https://app.vagrantup.com/kurron[HashiCorp's Vagrant Cloud] repository.
 
 == Installation
 Use Git to clone this project, go into the project folder and type `vagrant up` and go get a cup of coffee.  The construction time of the box greatly depends on your internet speeds.
@@ -99,7 +100,7 @@ The system will look for an environment variable named `CORPORATE_PLAYS`.  If th
 === Applying Your Personal Customizations
 The system will look for an environment variable named `USER_PLAYS`.  If the shell running Vagrant specifies the variable such that it points to an Ansible project on GitHub, the plays will be run and the changes applied.  For example `export USER_PLAYS=kurron/ansible-pull-desktop-tweaks.git` will result in https://github.com/kurron/ansible-pull-desktop-tweaks[this playbook] getting run.  If the environment variable does not exist, the custom provisioning step is not run.
 
-IMPORTANT: use a **copy** of the project if you decide to apply customizations. If you use the project referenced in the example, you will get somebody else's customizations, including Git configuration, which most certainly you do not want.
+IMPORTANT: Use a **copy** of the project if you decide to apply customizations. If you use the project referenced in the example, you will get somebody else's customizations, including Git configuration, which most certainly you do not want.
 
 === Customizations: Linux Example
 1. create and/or edit `~/.bash_profile`
@@ -131,7 +132,7 @@ export USER_PLAYS=foo/custom-tweaks.git
 If you don't need a full desktop but just the Docker engine, try using https://github.com/kurron/vagrant-docker-server[vagrant-docker-server]
 
 === Sub-Projects
-**Update:** we've moved away from using `ansible-pull` and to using http://docs.ansible.com/ansible/playbooks_roles.html[Ansible Roles], which give us a better mechanism for reusing provisioning logic.  You can find a https://galaxy.ansible.com/kurron/[list of available roles] in my Ansible Galaxy account.  More are sure to be included over time.
+TIP: We've moved away from using `ansible-pull` and to using http://docs.ansible.com/ansible/playbooks_roles.html[Ansible Roles], which give us a better mechanism for reusing provisioning logic.  You can find a https://galaxy.ansible.com/kurron/[list of available roles] in my Ansible Galaxy account.  More are sure to be included over time.
 
 === Installed Software (partial list)
 
@@ -148,7 +149,7 @@ If you don't need a full desktop but just the Docker engine, try using https://g
 * https://github.com/jkbrzt/httpie[httpie] - a more friendly alternative to cURL and wget
 
 === Different Windowing Systems
-CAUTION: currently a work in incubation.
+CAUTION: Currently in incubation.
 
 We have branches that use different window managers that may appeal to you.  Use Git to switch to appropriate branch and run `vagrant up` to try it out.
 
@@ -207,7 +208,7 @@ Once those are changed, log out and back in again and run `echo $JAVA_HOME` and 
 === Where did `/vagrant` go?
 There is http://stackoverflow.com/questions/42074246/vagrant-error-unable-to-mount-virtualbox-shared-folders-guest-additions-vboxs[an issue with Windows 10 and VirtualBox 5.1.16] that prevents Vagrant from starting properly.  As a workaround, we've disabled sharing of folders.  Non-Windows users can edit the `vagrantfile` and re-enable the mount if desired.
 
-TIP: the issue has been resolved in VirtualBox 5.1.18.  The `/vagrant` folder is now mounted as usual.
+TIP: The issue has been resolved in VirtualBox 5.1.18.  The `/vagrant` folder is now mounted as usual.
 
 === Vagrant Asks Me Which Network Interface To Bind To
 By default, the box is configured to join the local network as a fully accessible machine. The `desktop.vm.network "public_network"` in the `vagrantfile` is the key to this.  If you have multiple networks available on your machine, running a VPN for example, Vagrant needs to know which network you want to put your Vagrant box onto and will wait until you give it guidance.
@@ -232,7 +233,7 @@ You should also double check that you have **enabled virtualization support** in
 Sometimes networks fail or mirror sites go down. If you experience a failure, you can attempt to resume the construction by issuing `vagrant provision` at the command line.  Vagrant will attempt to start over, but will skip any provisions that have already taken place.
 
 === Cannot Acquire Repository Lock
-TIP: we've altered some of the installation logic to perform the retry logic described below automatically so you probably don't have to worry about this scenario any longer.
+TIP: We've altered some of the installation logic to perform the retry logic described below automatically so you probably don't have to worry about this scenario any longer.
 
 One of the first steps is to update the APT repositories via `apt-get update` which every once in a while can fail. What appears to happen in those cases is that the Ubuntu GUI has already acquired the lock and is running the update on its own.  The solution is to wait a bit and then reset the environment so that provisioning can continue.  This issue will manifest in "Ansible is not installed" errors.
 
