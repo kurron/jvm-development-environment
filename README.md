@@ -295,6 +295,9 @@ as inspiration. **Do not blindly copy the customizations as they are specific to
 ## I lost power and now VPN isn't working!
 >I guess this is just an FYI to anybody who might have also had this problem, but if you are using the VPN on the guest boxes, it will edit your `resolv.conf` file to only use TLs nameservers.  If you lose power, these will remain in this state and you will lose DNS the next time you start the machine (seeing that you no longer have a VPN session).  I found just starting and stopping the scripts in `~/VPN` would restore the `resolv.conf` back to normal.
 
+## I'm running Windows 7 and Vagrant hangs!
+You need to install a current version of [Windows Management Framework](https://www.microsoft.com/en-us/download/details.aspx?id=40855) and then reboot your machine.  Apparently, there is a compatability issue older PowerShell and newer Vagrant versions.
+
 # Change History
 
 1. Release 5.2.5
