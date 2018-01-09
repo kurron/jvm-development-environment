@@ -13,31 +13,22 @@ Ron Kurr <rkurr@jvmguy.com>
 toc::[]
 
 == Overview
-This project is a Vagrant box that is provisioned for sofware development.  It is a Linux-based system and
-has many of the tools needed by a developer already installed.  The provisioning mechanism is based on Ansible
-and allows for user-specific customizations to be applied.
+This project is a Vagrant box that is provisioned for software development.  It is a Linux-based system and has many of the tools needed by a developer already installed.  The provisioning mechanism is based on Ansible and allows for user-specific customizations to be applied.
 
 == Prerequisites
 
-* [Vagrant](https://www.vagrantup.com/) installed and working
-* [VirtualBox](https://www.virtualbox.org/) installed and working
-* [VirtualBox Extension Pack](https://www.virtualbox.org/wiki/Downloads) installed into VirtualBox
-* **[Virtualization support](https://en.wikipedia.org/wiki/X86_virtualization) enabled in your BIOS**
+* https://www.vagrantup.com/[Vagrant] installed and working
+* https://www.virtualbox.org/[VirtualBox] installed and working
+* https://www.virtualbox.org/wiki/Downloads[VirtualBox Extension Pack] installed into VirtualBox
+* **https://en.wikipedia.org/wiki/X86_virtualization[Virtualization support] enabled in your BIOS**
 * a working internet connection
 * Your corporate VPN running (if you want to apply some work-specific plays)
 
 == Building
-All the components of the environment live in repositories on the internet so there is nothing to build.
-**UPDATE:** some people have experienced issues when rebuilding a box due to flaky networks, online assets
-moving to different locations or installation processes changing.  When you need your box, you need your box
-and you don't have the time to troubleshoot an installation issue.  To combat this problem, we've decided to
-change the build model and bake in much of the software into the base image.  The trade-off we've made to
-ensure quick and stable rebuilds is a larger initial download.  All boxes are currently housed in
-[HashiCorp's Vagrant Cloud](https://app.vagrantup.com/kurron) repository.
+All the components of the environment live in repositories on the internet so there is nothing to build. **UPDATE:** some people have experienced issues when rebuilding a box due to flaky networks, online assets moving to different locations or installation processes changing.  When you need your box, you need your box and you don't have the time to troubleshoot an installation issue.  To combat this problem, we've decided to change the build model and bake in much of the software into the base image.  The trade-off we've made to ensure quick and stable rebuilds is a larger initial download.  All boxes are currently housed in https://app.vagrantup.com/kurron[HashiCorp's Vagrant Cloud] repository.
 
 == Installation
-Use Git to clone this project, go into the project folder and type `vagrant up` and go get a cup of coffee.  The construction time of the box
-greatly depends on your internet speeds.
+Use Git to clone this project, go into the project folder and type `vagrant up` and go get a cup of coffee.  The construction time of the box greatly depends on your internet speeds.
 
 ![xubuntu](xubuntu.png)
 
@@ -60,8 +51,7 @@ xedhat                    not created (virtualbox)
 the Red Hat distribution.  You can run concurrent instances if you have the hardware and the need.
 
 === Upgrading
-Sometimes the Vagrant file changes which can cause some subtle issues, such as creating an orphaned virutal machine.
-The safest upgrade procedure is the following:
+Sometimes the Vagrant file changes which can cause some subtle issues, such as creating an orphaned virtual machine. The safest upgrade procedure is the following:
 
 1. `vagrant destroy` to remove the existing box
 1. `git pull` to download the new files
@@ -70,12 +60,10 @@ The safest upgrade procedure is the following:
 1. `vagrant up` to build the new box
 
 === RAM and CPU Settings
-If you examine the `vagrantfile` file, you will see that the virtual machine is configured to use 6GB of RAM and
-2 CPUs.  Feel free to change these values to match your computer's hardware.
+If you examine the `vagrantfile` file, you will see that the virtual machine is configured to use 6GB of RAM and 2 CPUs.  Feel free to change these values to match your computer's hardware.
 
 === Low Disk Space
-If an environment is used long enough, it is likely to run out of disk space.  The two main culprits are kernal updates
-filling up the `/boot` partition and Docker images filling up the `/var/lib/docker` partition.  You have at least 3 options:
+If an environment is used long enough, it is likely to run out of disk space.  The two main culprits are kernel updates filling up the `/boot` partition and Docker images filling up the `/var/lib/docker` partition.  You have at least 3 options:
 
 * throw away the environment and start fresh
 * clean up the old kernels via `sudo apt-get autoremove`
@@ -86,9 +74,7 @@ filling up the `/boot` partition and Docker images filling up the `/var/lib/dock
 Log into the system with a username of `vagrant` and password of `vagrant`.
 
 === Installed Infrastructure
-Docker containers running common infrastructure are installed in `/home/vagrant/bin/servers`.  Look at the `docker-compose.yml`
-file to see what services are currently available to use.  Run the `start.sh` script to install and run the servers.  You can
-also start up a single server, eg `docker-compose up -d mongodb`.
+Docker containers running common infrastructure are installed in `/home/vagrant/bin/servers`.  Look at the `docker-compose.yml` file to see what services are currently available to use.  Run the `start.sh` script to install and run the servers.  You can also start up a single server, eg `docker-compose up -d mongodb`.
 
 === Juniper VPN Support
 
@@ -98,23 +84,13 @@ also start up a single server, eg `docker-compose up -d mongodb`.
 1. `ctrl-c` to exit the session
 
 === Docker-based IDEs
-We've deprecated the use of Docker-based IDEs.  We've found that projects that produce and consume Docker images can be
-challeging when running from within a container.  If Docker in Docker ever becomes mainstream, we'll look into switching back.
+We've deprecated the use of Docker-based IDEs.  We've found that projects that produce and consume Docker images can be challenging when running from within a container.  If Docker in Docker ever becomes mainstream, we'll look into switching back.
 
 === Applying Your Company Specific Customizations
-The system will look for an environment variable named `CORPORATE_PLAYS`.  If the shell running Vagrant specifies the variable
-such that it points to an Ansible project on GitHub, the plays will be run and the changes applied.  For example
-`export CORPORATE_PLAYS=kurron/ansible-pull-transparent.git` will result in
-[this playbook](https://github.com/kurron/ansible-pull-transparent.git) getting run.  If the environment variable does
-not exist, the custom provisioning step is not run.
+The system will look for an environment variable named `CORPORATE_PLAYS`.  If the shell running Vagrant specifies the variable such that it points to an Ansible project on GitHub, the plays will be run and the changes applied.  For example `export CORPORATE_PLAYS=kurron/ansible-pull-transparent.git` will result in https://github.com/kurron/ansible-pull-transparent.git[this playbook] getting run.  If the environment variable does not exist, the custom provisioning step is not run.
 
 === Applying Your Personal Customizations
-The system will look for an environment variable named `USER_PLAYS`.  If the shell running Vagrant specifies the variable
-such that it points to an Ansible project on GitHub, the plays will be run and the changes applied.  For example
-`export USER_PLAYS=kurron/ansible-pull-desktop-tweaks.git` will result in
-[this playbook](https://github.com/kurron/ansible-pull-desktop-tweaks) getting run.  If the environment variable does
-not exist, the custom provisioning step is not run. **Important: use a copy of the project if you decide to apply customizations.**
-If you reference this project, you will get somebody else's customizations, including Git configuration, which most certainly you do not want.
+The system will look for an environment variable named `USER_PLAYS`.  If the shell running Vagrant specifies the variable such that it points to an Ansible project on GitHub, the plays will be run and the changes applied.  For example `export USER_PLAYS=kurron/ansible-pull-desktop-tweaks.git` will result in https://github.com/kurron/ansible-pull-desktop-tweaks[this playbook] getting run.  If the environment variable does not exist, the custom provisioning step is not run. **Important: use a copy of the project if you decide to apply customizations.** If you reference this project, you will get somebody else's customizations, including Git configuration, which most certainly you do not want.
 
 === Customizations: Linux Example
 1. create and/or edit `~/.bash_profile`
@@ -140,37 +116,32 @@ export USER_PLAYS=foo/custom-tweaks.git
 1. `echo %USER_PLAYS%` to verify that your new variable has been properly set
 
 === Gather Docker Container Metrics
-`sudo csysdig -pcontainer` will fire up the sysdig tool.  Use `F2` to switch to the container view and see how each container is using
-system resources.  Explore some [examples of how to use Sysdig](http://www.sysdig.org/wiki/sysdig-examples/)
-and see how can aid in troubleshooting.
+`sudo csysdig -pcontainer` will fire up the sysdig tool.  Use `F2` to switch to the container view and see how each container is using system resources.  Explore some http://www.sysdig.org/wiki/sysdig-examples/[examples of how to use Sysdig] and see how can aid in troubleshooting.
 
 === Docker-only Box
-If you don't need a full desktop but just the Docker engine, try using [vagrant-docker-server](https://github.com/kurron/vagrant-docker-server)
+If you don't need a full desktop but just the Docker engine, try using https://github.com/kurron/vagrant-docker-server[vagrant-docker-server]
 
 === Sub-Projects
-**Update:** we've moved away from using `ansible-pull` and to using [Ansible Roles](http://docs.ansible.com/ansible/playbooks_roles.html), which give us a better
-mechansim for reusing provisioning logic.  You can find a
-[list of available roles](https://galaxy.ansible.com/kurron/) in my Ansible Galaxy account.  More are sure
-to be included over time.
+**Update:** we've moved away from using `ansible-pull` and to using http://docs.ansible.com/ansible/playbooks_roles.html[Ansible Roles], which give us a better mechanism for reusing provisioning logic.  You can find a https://galaxy.ansible.com/kurron/[list of available roles] in my Ansible Galaxy account.  More are sure to be included over time.
 
 === Installed Software (partial list)
 
-* current [JDK](http://www.oracle.com/technetwork/java/index.html)
-* [SDKMAN!](http://sdkman.io/) to manage various JVM tools, including Groovy, Kotlin, Scala, Clojure, Java, VisualVM, Vert.x, Grails, Gradle, sbt, Maven, Ant and Leiningen
-* [NodeJS](https://nodejs.org/en/) and [npm](https://www.npmjs.com/)
-* [Packer](https://packer.io/)
-* [Terraform](https://terraform.io/)
-* [AWS CLI](https://aws.amazon.com/cli/)
-* [Docker](https://www.docker.com/)
-* [Docker Compose](https://www.docker.com/products/docker-compose)
-* [Docker Machine](https://www.docker.com/products/docker-machine)
-* various [JetBrains IDEs](http://www.jetbrains.com/)
-* [httpie](https://github.com/jkbrzt/httpie) - a more friendly alternative to cURL and wget
+* current http://www.oracle.com/technetwork/java/index.html[JDK]
+* http://sdkman.io/[SDKMAN!] to manage various JVM tools, including Groovy, Kotlin, Scala, Clojure, Java, VisualVM, Vert.x, Grails, Gradle, sbt, Maven, Ant and Leiningen
+* https://nodejs.org/en/[NodeJS] and https://www.npmjs.com/[npm]
+* https://packer.io/[Packer]
+* https://terraform.io/[Terraform]
+* https://aws.amazon.com/cli/[AWS CLI]
+* https://www.docker.com/[Docker]
+* https://www.docker.com/products/docker-compose[Docker Compose]
+* https://www.docker.com/products/docker-machine[Docker Machine]
+* various http://www.jetbrains.com/[JetBrains IDEs]
+* https://github.com/jkbrzt/httpie[httpie] - a more friendly alternative to cURL and wget
 
 === Different Windowing Systems
 *NOTE:* currently a work in incubation.
 
-We have branches that use different window managers that may appeal to you.  Use Git to switch to approriate branch and run `vagrant up` to try it out.
+We have branches that use different window managers that may appeal to you.  Use Git to switch to appropriate branch and run `vagrant up` to try it out.
 
 * Xubuntu
 * Lubuntu
@@ -181,13 +152,7 @@ We have branches that use different window managers that may appeal to you.  Use
 * Unity
 
 === SSH Jump Servers
-Some personal and corporate plays install a custom SSH configuration
-which simplifies access to private machines.  Look in `~/.ssh/config`
-to see what your configuration looks likes.  When I want to access
-an Amazon EC2 instance in a private subnet, I have to proxy through
-a Bastion, aka Jump Server, box.  To do that I need to edit the
-configuration file to make sure I have the proper public address
-of the Bastion box.
+Some personal and corporate plays install a custom SSH configuration which simplifies access to private machines.  Look in `~/.ssh/config` to see what your configuration looks likes.  When I want to access an Amazon EC2 instance in a private subnet, I have to proxy through a Bastion, aka Jump Server, box.  To do that I need to edit the configuration file to make sure I have the proper public address of the Bastion box.
 
 ```
 Host bastion
@@ -203,18 +168,12 @@ Host 10.0.*.*
     ExitOnForwardFailure yes
 ```
 
-To test out the configuration, try `ssh bastion`.  Once that is
-working, try connecting to an internal box `ssh 10.20.30.40` and
-see if that works.  The same setup works for accessing your home
-network.
+To test out the configuration, try `ssh bastion`.  Once that is working, try connecting to an internal box `ssh 10.20.30.40` and see if that works.  The same setup works for accessing your home network.
 
 == Troubleshooting
 
 === My Network Does Not Seem To Be Functioning?
-BY default the box is configured to appear as a node on the network,
-allowing others to connect to services on your machine.  You can try
-putting the box into NAT-only mode to see if that fixes things for you.
-Edit `vagrantfile`, commenting out the `config.vm.network` setting like so:
+BY default the box is configured to appear as a node on the network, allowing others to connect to services on your machine.  You can try putting the box into NAT-only mode to see if that fixes things for you. Edit `vagrantfile`, commenting out the `config.vm.network` setting like so:
 
 ```
     # put the box on the network so it can be accessed by others
@@ -223,38 +182,26 @@ Edit `vagrantfile`, commenting out the `config.vm.network` setting like so:
 ```
 
 === I've upgrade to kurron/xenial-xubuntu:5.1.28 and things are acting weird
-As of October 1, 2017, the 5.1.28 box has not been officially announced because
-the switch over from JDK 8 to JDK 9 is still undergoing tests.  If you upgraded
-and are seeing odd behavior, there are a few simple edits to fix things.
+As of October 1, 2017, the 5.1.28 box has not been officially announced because the switch over from JDK 8 to JDK 9 is still undergoing tests.  If you upgraded and are seeing odd behavior, there are a few simple edits to fix things.
 
 === IDE Desktop Launchers
-Right mouse click on your IDE's desktop icon and select `Properties` and then the `Launcher`
-tab.  You'll need to edit the `Command` to point to JDK 8. Here is an example for the
-PyCharm launcher `env PYCHARM_JDK=/usr/lib/jvm/jdk-8 /home/vagrant/Software/pycharm/bin/pycharm.sh`.
-If you are **not** doing any JVM development, then this is all you need to do.
+Right mouse click on your IDE's desktop icon and select `Properties` and then the `Launcher` tab.  You'll need to edit the `Command` to point to JDK 8. Here is an example for the PyCharm launcher `env PYCHARM_JDK=/usr/lib/jvm/jdk-8 /home/vagrant/Software/pycharm/bin/pycharm.sh`. If you are **not** doing any JVM development, then this is all you need to do.
 
 === JVM Developers
-JVM developers will need to get `JAVA_HOME` and other environment variables to point to JDK 8.  To do this,
-edit two files:
+JVM developers will need to get `JAVA_HOME` and other environment variables to point to JDK 8.  To do this, edit two files:
 
 * /etc/environment
 * /etc/profile.d/default-jdk-environment.sh
 
-Once those are changed, log out and back in again and run `echo $JAVA_HOME` and `java -version` to verify
-your changes.
+Once those are changed, log out and back in again and run `echo $JAVA_HOME` and `java -version` to verify your changes.
 
 ## Where did `/vagrant` go?
-There is [an issue with Windows 10 and VirtualBox 5.1.16](http://stackoverflow.com/questions/42074246/vagrant-error-unable-to-mount-virtualbox-shared-folders-guest-additions-vboxs)
-that prevents Vagrant from starting properly.  As a workaround, we've disabled sharing of folders.  Non-Windows users can
-edit the `vagrantfile` and re-enable the mount if desired.
+There is http://stackoverflow.com/questions/42074246/vagrant-error-unable-to-mount-virtualbox-shared-folders-guest-additions-vboxs[an issue with Windows 10 and VirtualBox 5.1.16] that prevents Vagrant from starting properly.  As a workaround, we've disabled sharing of folders.  Non-Windows users can edit the `vagrantfile` and re-enable the mount if desired.
 
 **UPDATE:** the issue has been resolved in VirtualBox 5.1.18.  The `/vagrant` folder is now mounted as usual.
 
 === Vagrant Asks Me Which Network Interface To Bind To
-By default, the box is configured to join the local network as a fully accessable machine.
-The `desktop.vm.network "public_network"` in the `vagrantfile` is the key to this.  If you have
-multiple networks available on your machine, running a VPN for example, Vagrant needs to know which
-network you want to put your Vagrant box onto and will wait until you give it guidance.
+By default, the box is configured to join the local network as a fully accessible machine. The `desktop.vm.network "public_network"` in the `vagrantfile` is the key to this.  If you have multiple networks available on your machine, running a VPN for example, Vagrant needs to know which network you want to put your Vagrant box onto and will wait until you give it guidance.
 
 ```
 ==> desktop: Setting the name of the VM: jvmguy.desktop
@@ -268,25 +215,17 @@ network you want to put your Vagrant box onto and will wait until you give it gu
 ```
 
 === Vagrant Box Does Not Come Up
-If you find that when you are building a new box that it does not come up, try going into the `Settings->USB` section of your box in the VirtuabBox UI and
-disabling the USB controller. If you want USB support, make sure you have installed
-[VM VirtualBox Extension Pack](https://www.virtualbox.org/wiki/Downloads).
+If you find that when you are building a new box that it does not come up, try going into the `Settings->USB` section of your box in the VirtuabBox UI and disabling the USB controller. If you want USB support, make sure you have installed https://www.virtualbox.org/wiki/Downloads[VM VirtualBox Extension Pack].
 
 You should also double check that you have **enabled virtualization support** in your BIOS.
 
 === Partial Failure
-Sometimes networks fail or mirror sites go down. If you experience a failure, you can attempt to resume the construction
-by issuing `vagrant provision` at the command line.  Vagrant will attempt to start over, but will skip any provisions that
-have already taken place.
+Sometimes networks fail or mirror sites go down. If you experience a failure, you can attempt to resume the construction by issuing `vagrant provision` at the command line.  Vagrant will attempt to start over, but will skip any provisions that have already taken place.
 
 === Cannot Acquire Repository Lock
-**UPDATE:** we've altered some of the installation logic to perform the retry logic described below automatically so
-you probably don't have to worry about this scenario any longer.
+**UPDATE:** we've altered some of the installation logic to perform the retry logic described below automatically so you probably don't have to worry about this scenario any longer.
 
-One of the first steps is to update the APT repositories via `apt-get update` which every once in a while can fail.
-What appears to happen in those cases is that the Ubuntu GUI has already acquired the lock and is running the update
-on its own.  The solution is to wait a bit and then reset the environment so that provisioning can continue.  This issue
-will manifest in "Ansible is not installed" errors.
+One of the first steps is to update the APT repositories via `apt-get update` which every once in a while can fail. What appears to happen in those cases is that the Ubuntu GUI has already acquired the lock and is running the update on its own.  The solution is to wait a bit and then reset the environment so that provisioning can continue.  This issue will manifest in "Ansible is not installed" errors.
 
 1. `vagrant ssh`
 1. `sudo rm /var/lib/dpkg/lock` to remove the lock file
@@ -296,15 +235,13 @@ will manifest in "Ansible is not installed" errors.
 1. `vagrant provision` should resume the provisioning of the box
 
 === My Git settings are all wrong!
-You need to specify a custom Git configuration file.  The best way to do that is to create and apply your own customizations.
-See the *Applying Your Own Customizations* section above on how to do that.  You can use [kurron/ansible-pull-desktop-tweaks.git](https://github.com/kurron/ansible-pull-desktop-tweaks)
-as inspiration. **Do not blindly copy the customizations as they are specific to a particular person.**
+You need to specify a custom Git configuration file.  The best way to do that is to create and apply your own customizations. See the *Applying Your Own Customizations* section above on how to do that.  You can use https://github.com/kurron/ansible-pull-desktop-tweaks[kurron/ansible-pull-desktop-tweaks.git] as inspiration. **Do not blindly copy the customizations as they are specific to a particular person.**
 
 === I lost power and now VPN isn't working!
 >I guess this is just an FYI to anybody who might have also had this problem, but if you are using the VPN on the guest boxes, it will edit your `resolv.conf` file to only use TLs nameservers.  If you lose power, these will remain in this state and you will lose DNS the next time you start the machine (seeing that you no longer have a VPN session).  I found just starting and stopping the scripts in `~/VPN` would restore the `resolv.conf` back to normal.
 
 === I'm running Windows 7 and Vagrant hangs!
-You need to install a current version of [Windows Management Framework](https://www.microsoft.com/en-us/download/details.aspx?id=40855) and then reboot your machine.  Apparently, there is a compatability issue older PowerShell and newer Vagrant versions.
+You need to install a current version of [Windows Management Framework](https://www.microsoft.com/en-us/download/details.aspx?id=40855) and then reboot your machine.  Apparently, there is a compatibility issue older PowerShell and newer Vagrant versions.
 
 == Change History
 
@@ -483,4 +420,4 @@ You need to install a current version of [Windows Management Framework](https://
     * VirtualBox 5.1.8 support
 
 == License and Credits
-This project is licensed under the [Apache License Version 2.0, January 2004](http://www.apache.org/licenses/).
+This project is licensed under the http://www.apache.org/licenses/[Apache License Version 2.0, January 2004].
