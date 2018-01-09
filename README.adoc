@@ -24,15 +24,19 @@ This project is a Vagrant box that is provisioned for software development.  It 
 * a working internet connection
 * Your corporate VPN running (if you want to apply some work-specific plays)
 
+IMPORTANT: if you don't enable virtualization support in your BIOS, VirtualBox will not run correctly.
+
 == Building
 All the components of the environment live in repositories on the internet so there is nothing to build. **UPDATE:** some people have experienced issues when rebuilding a box due to flaky networks, online assets moving to different locations or installation processes changing.  When you need your box, you need your box and you don't have the time to troubleshoot an installation issue.  To combat this problem, we've decided to change the build model and bake in much of the software into the base image.  The trade-off we've made to ensure quick and stable rebuilds is a larger initial download.  All boxes are currently housed in https://app.vagrantup.com/kurron[HashiCorp's Vagrant Cloud] repository.
 
 == Installation
 Use Git to clone this project, go into the project folder and type `vagrant up` and go get a cup of coffee.  The construction time of the box greatly depends on your internet speeds.
 
-![xubuntu](xubuntu.png)
+.Xubuntu
+image::xubuntu.png[Xubuntu]
 
-![xedora](xedora.png)
+.Xedora
+image::xedora.png[Xedora]
 
 == Tips and Tricks
 
@@ -90,7 +94,9 @@ We've deprecated the use of Docker-based IDEs.  We've found that projects that p
 The system will look for an environment variable named `CORPORATE_PLAYS`.  If the shell running Vagrant specifies the variable such that it points to an Ansible project on GitHub, the plays will be run and the changes applied.  For example `export CORPORATE_PLAYS=kurron/ansible-pull-transparent.git` will result in https://github.com/kurron/ansible-pull-transparent.git[this playbook] getting run.  If the environment variable does not exist, the custom provisioning step is not run.
 
 === Applying Your Personal Customizations
-The system will look for an environment variable named `USER_PLAYS`.  If the shell running Vagrant specifies the variable such that it points to an Ansible project on GitHub, the plays will be run and the changes applied.  For example `export USER_PLAYS=kurron/ansible-pull-desktop-tweaks.git` will result in https://github.com/kurron/ansible-pull-desktop-tweaks[this playbook] getting run.  If the environment variable does not exist, the custom provisioning step is not run. **Important: use a copy of the project if you decide to apply customizations.** If you reference this project, you will get somebody else's customizations, including Git configuration, which most certainly you do not want.
+The system will look for an environment variable named `USER_PLAYS`.  If the shell running Vagrant specifies the variable such that it points to an Ansible project on GitHub, the plays will be run and the changes applied.  For example `export USER_PLAYS=kurron/ansible-pull-desktop-tweaks.git` will result in https://github.com/kurron/ansible-pull-desktop-tweaks[this playbook] getting run.  If the environment variable does not exist, the custom provisioning step is not run.
+
+IMPORTANT: use a **copy** of the project if you decide to apply customizations. If you reference this project, you will get somebody else's customizations, including Git configuration, which most certainly you do not want.
 
 === Customizations: Linux Example
 1. create and/or edit `~/.bash_profile`
@@ -126,7 +132,7 @@ If you don't need a full desktop but just the Docker engine, try using https://g
 
 === Installed Software (partial list)
 
-* current http://www.oracle.com/technetwork/java/index.html[JDK]
+* current http://zulu.org/[JDK]
 * http://sdkman.io/[SDKMAN!] to manage various JVM tools, including Groovy, Kotlin, Scala, Clojure, Java, VisualVM, Vert.x, Grails, Gradle, sbt, Maven, Ant and Leiningen
 * https://nodejs.org/en/[NodeJS] and https://www.npmjs.com/[npm]
 * https://packer.io/[Packer]
@@ -195,7 +201,7 @@ JVM developers will need to get `JAVA_HOME` and other environment variables to p
 
 Once those are changed, log out and back in again and run `echo $JAVA_HOME` and `java -version` to verify your changes.
 
-## Where did `/vagrant` go?
+=== Where did `/vagrant` go?
 There is http://stackoverflow.com/questions/42074246/vagrant-error-unable-to-mount-virtualbox-shared-folders-guest-additions-vboxs[an issue with Windows 10 and VirtualBox 5.1.16] that prevents Vagrant from starting properly.  As a workaround, we've disabled sharing of folders.  Non-Windows users can edit the `vagrantfile` and re-enable the mount if desired.
 
 **UPDATE:** the issue has been resolved in VirtualBox 5.1.18.  The `/vagrant` folder is now mounted as usual.
