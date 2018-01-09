@@ -245,7 +245,9 @@ One of the first steps is to update the APT repositories via `apt-get update` wh
 1. `vagrant provision` should resume the provisioning of the box
 
 === My Git settings are all wrong!
-You need to specify a custom Git configuration file.  The best way to do that is to create and apply your own customizations. See the *Applying Your Own Customizations* section above on how to do that.  You can use https://github.com/kurron/ansible-pull-desktop-tweaks[kurron/ansible-pull-desktop-tweaks.git] as inspiration. CAUTION: Do not blindly copy the customizations as they are specific to a particular person.
+You need to specify a custom Git configuration file.  The best way to do that is to create and apply your own customizations. See the *Applying Your Own Customizations* section above on how to do that.  You can use https://github.com/kurron/ansible-pull-desktop-tweaks[kurron/ansible-pull-desktop-tweaks.git] as inspiration.
+
+CAUTION: Do not blindly copy the customizations as they are specific to a particular person.
 
 === I lost power and now VPN isn't working!
 .From Nick
