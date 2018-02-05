@@ -261,6 +261,45 @@ You need to install a current version of https://www.microsoft.com/en-us/downloa
 
 == Change History
 
+1. Release 5.2.6
+    * Added: AWS Shell
+    * Upgraded: VirtualBox 5.2.8
+    * Upgraded: Kernel 4.4.0-112-generic
+    * Upgraded: JDK1.8.0_162
+    * Upgraded: SDKMAN! 5.6.1+290
+    * Upgraded: Python Python 3.5.2
+    * Upgraded: Legacy Python 2.7.12
+    * Upgraded: Edge Python Python 3.6.4
+    * Upgraded: Virtualenv 15.1.0
+    * Upgraded: Docker 18.01.0-ce
+    * Upgraded: Docker Compose 1.18.0
+    * Upgraded: Docker Machine 0.13.0
+    * Upgraded: AWS CLI 1.14.32
+    * Upgraded: AWS ECS CLI 1.3.0
+    * Upgraded: Kubectl v1.9.2
+    * Upgraded: localstack 0.8.4
+    * Upgraded: Sysdig 0.20.0
+    * Upgraded: Faco  0.9.0
+    * Upgraded: Consul Consul v1.0.3
+    * Upgraded: Consul Replicate v0.4.0
+    * Upgraded: Consul Template v0.19.4
+    * Upgraded: Nomad v0.7.1
+    * Upgraded: Packer 1.1.3
+    * Upgraded: Terraform v0.11.3
+    * Upgraded: Vault v0.9.3
+    * Upgraded: NodeJS v6.12.3
+    * Upgraded: NPM 3.10.10
+    * Upgraded: Yeoman 2.0.1
+    * Upgraded: Bower 1.8.2
+    * Upgraded: Gulp 2.0.1
+    * Upgraded: Grunt grunt-cli v1.2.0
+    * Upgraded: Servless 1.26.0
+    * Upgraded: IntelliJ IDEA 2017.3.4
+    * Upgraded: PyCharm 2017.3.3
+    * Upgraded: Charles Proxy 4.2.1
+    * Upgraded: Atom 1.23.3
+    * Upgraded: Visual Studio Code 1.19.3
+    * Upgraded: MongoDB Compass 1.11.1
 1. Release 5.2.5
     * Upgraded: Kernel 4.4.0-104-generic
     * Upgraded: JDK 1.8.0_152
