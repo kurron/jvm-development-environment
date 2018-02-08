@@ -265,7 +265,7 @@ You need to install a current version of https://www.microsoft.com/en-us/downloa
     * Added: AWS Shell
     * Added: Meld (graphical diff tool)
     * Removed: WebStorm IDE
-    * Removed: WebStorm IDE
+    * Removed: DataGrip IDE
     * Removed: VisualVM
     * Upgraded: VirtualBox 5.2.8
     * Upgraded: Vagrant 2.0.2
