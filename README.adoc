@@ -263,6 +263,7 @@ You need to install a current version of https://www.microsoft.com/en-us/downloa
 
 1. Release 5.2.6
     * Added: AWS Shell
+    * Added: Meld (graphical diff tool)
     * Upgraded: VirtualBox 5.2.8
     * Upgraded: Vagrant 2.0.2
     * Upgraded: Kernel 4.4.0-112-generic
