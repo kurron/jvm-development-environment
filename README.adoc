@@ -275,7 +275,7 @@ The error message is shown below:
 The requested URL returned error: 404 Not Found
 ----
 
-The solution is to `vagrant destroy` the existing box and then `vagrant box remove kurron/xenial-xubuntu`.
+The solution is to `vagrant destroy xubuntu` followed by `vagrant box remove kurron/xenial-xubuntu`.  The update should work properly now.
 
 == Change History
 
