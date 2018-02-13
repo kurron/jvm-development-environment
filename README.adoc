@@ -259,6 +259,24 @@ ____
 === I'm running Windows 7 and Vagrant hangs!
 You need to install a current version of https://www.microsoft.com/en-us/download/details.aspx?id=40855[Windows Management Framework] and then reboot your machine.  Apparently, there is a compatibility issue older PowerShell and newer Vagrant versions.
 
+=== When updating my box, I get a metadata error!
+Some people have seen the following error:
+
+----
+$ vagrant box update
+==> xedhat: Box 'kurron/maipo-xedhat' not installed, can't check for updates.
+==> xubuntu: Checking for updates to 'kurron/xenial-xubuntu'
+    xubuntu: Latest installed version: 5.1.29
+    xubuntu: Version constraints:
+    xubuntu: Provider: virtualbox
+There was an error while downloading the metadata for this box.
+The error message is shown below:
+
+The requested URL returned error: 404 Not Found
+----
+
+The solution is to `vagrant destroy` the existing box and then `vagrant box remove kurron/xenial-xubuntu`.
+
 == Change History
 
 1. Release 5.2.6
