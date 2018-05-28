@@ -200,7 +200,7 @@ To test out the configuration, try `ssh bastion`.  Once that is working, try con
 
 === My Favorite App Is Missing!
 Due to ever increasing image size, some applications no longer come pre-installed.  See the section on installing applications via Snap for more details.
-?
+
 === My Network Does Not Seem To Be Functioning?
 BY default the box is configured to appear as a node on the network, allowing others to connect to services on your machine.  You can try putting the box into NAT-only mode to see if that fixes things for you. Edit `vagrantfile`, commenting out the `config.vm.network` setting like so:
 
