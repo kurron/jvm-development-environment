@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 if [ "$1" = "" ]
 then
@@ -10,8 +10,8 @@ fi
 PROJECT=$1
 
 ansible-pull --checkout master \
-             --directory /opt/ansible-pull-corporate \
-             --inventory-file=/tmp/inventory \
+             --directory /tmp/ansible-pull-corporate \
+             --inventory=localhost, \
              --module-name=git \
              --url=https://github.com/${PROJECT} \
              --verbose \
