@@ -44,6 +44,24 @@ image::xedora.png[Xedora]
 
 == Tips and Tricks
 
+=== Using Snap To Install Applications
+Due to the ever increasing image size, some applications no longer come pre-installed.  Those applications, however, can be easily installed via Snap.  You can think of a Snap as a Docker image for GUI applications.  You can find the popular applications in the https://snapcraft.io/store[Snap Store]:
+
+* Visual Studio Code
+* Atom
+* Skype
+* Chromium
+* Firefox
+* Brave
+* Eclipse
+* RubyMine 
+* PyCharm 
+* DataGrip 
+* PhpStorm 
+* IDEA 
+* GoLand 
+* GIMP 
+ 
 === Choice Of Distributions
 We now support multiple Linux distributions.  If you run `vagrant status` you should see something like this:
 
@@ -180,6 +198,9 @@ To test out the configuration, try `ssh bastion`.  Once that is working, try con
 
 == Troubleshooting
 
+=== My Favorite App Is Missing!
+Due to ever increasing image size, some applications no longer come pre-installed.  See the section on installing applications via Snap for more details.
+?
 === My Network Does Not Seem To Be Functioning?
 BY default the box is configured to appear as a node on the network, allowing others to connect to services on your machine.  You can try putting the box into NAT-only mode to see if that fixes things for you. Edit `vagrantfile`, commenting out the `config.vm.network` setting like so:
 
@@ -277,6 +298,17 @@ The solution is to `vagrant destroy xubuntu` followed by `vagrant box remove kur
 
 == Change History
 
+1. Release XXX 
+    * Removed: Windows support (I no longer have access to a Window 10 box and can no longer diagnose Windows issues)
+    * Removed: VPN support (it no longer installs and I don't have access to a VPN account to diagnose issues)
+    * Removed: Python 3 PPA (it no longer installs and the offical repository contains a recent version)
+    * Removed: Atom (see section on Snap for installation instructions)
+    * Removed: Visual Studio Code (see section on Snap for installation instructions)
+    * Removed: Chromium (see section on Snap for installation instructions)
+    * Removed: HipChat (lack of use)
+    * Removed: JDK 9 (replaced by JDK 10)
+    * Removed: Hashicorp Consul (lack of use)
+    * Removed: Hashicorp Serf (lack of use)
 1. Release 5.2.8
     * Upgraded: Kernel 4.4.0-116-generic
     * Upgraded: JDK 1.8.0_163
