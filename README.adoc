@@ -299,7 +299,7 @@ The solution is to `vagrant destroy xubuntu` followed by `vagrant box remove kur
 == Change History
 
 1. Release XXX 
-    * Removed: Windows support (I no longer have access to a Window 10 box, prevenging me from diagnosing Windows issues)
+    * Removed: Windows support (I no longer have access to a Window 10 box, preventing me from diagnosing Windows issues)
     * Removed: VPN support (it no longer installs and I don't have access to a VPN account to diagnose issues)
     * Removed: Python 3 PPA (it no longer installs and the offical repository contains a recent version)
     * Removed: Atom (see section on Snap for installation instructions)
