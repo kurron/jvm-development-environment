@@ -312,9 +312,10 @@ The solution is to `vagrant destroy xubuntu` followed by `vagrant box remove kur
     * Removed: JDK 9 (replaced by JDK 10)
     * Removed: Hashicorp Consul (lack of use)
     * Removed: Hashicorp Serf (lack of use)
+    * Removed: Support for Ubuntu 16.04 Xenial Xerus (replaced with Bionic Beaver)
     * Warning: Vagrant customization scripts no longer run as root, adjust playbooks accordingly.
+    * Added: Support for Ubuntu 18.04 Bionic Beaver
     * Added: VMWare Support (Fusion used regularly but other flavors should work as well)
-    * Added: WebStorm 2018.1.4
     * Added: WebStorm 2018.1.4
     * Added: audio support.  We no longer used the trimmed down kernel so sound is now fully supported!
     * Upgraded: Kernel 4.15.0-22-generic
