@@ -203,7 +203,7 @@ To test out the configuration, try `ssh bastion`.  Once that is working, try con
 == Troubleshooting
 
 === My Favorite App Is Missing!
-Due to ever increasing image size, some applications no longer come pre-installed.  See the section on installing applications via Snap for more details.
+Due to ever increasing image size, some applications no longer come pre-installed.  See <<Using Snap To Install Applications>> for more details.
 
 === My Customization Script No Longer Works!
 The custom Ansible playbooks are now launched using the normal user account instead of the `root` account.  You should check your playbook to ensure that `Become: True` are on the plays that require them.  Another place to check is the Ansible code itself.  The newest release has moved beyond deprecation and has removed some constructs.  I noticed it with some of my plays that use iteration.
@@ -271,9 +271,7 @@ One of the first steps is to update the APT repositories via `apt-get update` wh
 1. `vagrant provision` should resume the provisioning of the box
 
 === My Git settings are all wrong!
-You need to specify a custom Git configuration file.  The best way to do that is to create and apply your own customizations. See the *Applying Your Own Customizations* section above on how to do that.  You can use https://github.com/kurron/ansible-pull-desktop-tweaks[kurron/ansible-pull-desktop-tweaks.git] as inspiration.
-
-CAUTION: Do not blindly copy the customizations as they are specific to a particular person.
+You need to specify a custom Git configuration file.  The best way to do that is to create and apply your own customizations. See the <<Applying Your Own Customizations>> section above on how to do that.
 
 === I lost power and now VPN isn't working!
 .From Nick
@@ -309,15 +307,15 @@ The solution is to `vagrant destroy xubuntu` followed by `vagrant box remove kur
     * Removed: Windows support (I no longer have access to a Window 10 box, preventing me from diagnosing issues)
     * Removed: VPN support (it no longer installs and I don't have access to a VPN account to diagnose issues)
     * Removed: Python 3 PPA (it no longer installs and the official repository contains a recent version)
-    * Removed: Atom (see section on Snap for installation instructions)
-    * Removed: Visual Studio Code (see section on Snap for installation instructions)
-    * Removed: Chromium (see section on Snap for installation instructions)
+    * Removed: Atom (see <<Using Snap To Install Applications>> for installation instructions)
+    * Removed: Visual Studio Code (see <<Using Snap To Install Applications>> for installation instructions)
+    * Removed: Chromium (see <<Using Snap To Install Applications>> for installation instructions)
     * Removed: HipChat (lack of use)
     * Removed: JDK 9 (replaced by JDK 10)
     * Removed: Hashicorp Consul (lack of use)
     * Removed: Hashicorp Serf (lack of use)
     * Removed: Support for Ubuntu 16.04 Xenial Xerus (replaced with Bionic Beaver)
-    * Warning: Vagrant customization scripts no longer run as root, adjust playbooks accordingly.
+    * **Warning:** Vagrant customization scripts no longer run as root, adjust playbooks accordingly.
     * Added: Support for Ubuntu 18.04 Bionic Beaver
     * Added: VMWare Support (Fusion used regularly but other flavors should work as well)
     * Added: WebStorm 2018.1.4
