@@ -39,9 +39,6 @@ Use Git to clone this project, go into the project folder and type `vagrant up` 
 .Xubuntu
 image::xubuntu.png[Xubuntu]
 
-.Xedora
-image::xedora.png[Xedora]
-
 == Tips and Tricks
 
 === I Want To Customize My Box But I'm Not Comfortable With Ansible Yet
