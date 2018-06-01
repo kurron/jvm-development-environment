@@ -63,20 +63,6 @@ Due to the ever increasing image size, some applications no longer come pre-inst
 * GoLand
 * GIMP
 
-=== Choice Of Distributions
-We now support multiple Linux distributions.  If you run `vagrant status` you should see something like this:
-
-```
-vagrant status
-Current machine states:
-
-xubuntu                   not created (virtualbox)
-xedhat                    not created (virtualbox)
-```
-
-`xubuntu` is the default but you can also run `vagrant up xedhat` to run
-the Red Hat distribution.  You can run concurrent instances if you have the hardware and the need.
-
 === Upgrading
 Sometimes the Vagrant file changes which can cause some subtle issues, such as creating an orphaned virtual machine. The safest upgrade procedure is the following:
 
