@@ -96,7 +96,7 @@ We've deprecated the use of Docker-based IDEs.  We've found that projects that p
 The system will look for an environment variable named `CORPORATE_PLAYS`.  If the shell running Vagrant specifies the variable such that it points to an Ansible project on GitHub, the plays will be run and the changes applied.  For example `export CORPORATE_PLAYS=kurron/ansible-pull-transparent.git` will result in https://github.com/kurron/ansible-pull-transparent.git[this playbook] getting run.  If the environment variable does not exist, the custom provisioning step is not run.
 
 === Applying Your Personal Customizations
-The system will look for an environment variable named `USER_PLAYS`.  If the shell running Vagrant specifies the variable such that it points to an Ansible project on GitHub, the plays will be run and the changes applied.  For example `export USER_PLAYS=myaccount/my-custom-tweaks.git` will result in the playbook getting run.  If the environment variable does not exist, the custom provisioning step is not run. See <<I Want To Customize My Box But I’m Not Comfortable With Ansible Yet>> for tips on how to customize your box.
+The system will look for an environment variable named `USER_PLAYS`.  If the shell running Vagrant specifies the variable such that it points to an Ansible project on GitHub, the plays will be run and the changes applied.  For example `export USER_PLAYS=myaccount/my-custom-tweaks.git` will result in the playbook getting run.  If the environment variable does not exist, the custom provisioning step is not run.
 
 === Customizations: Linux Example
 1. create and/or edit `~/.bash_profile`
