@@ -89,21 +89,14 @@ Log into the system with a username of `vagrant` and password of `vagrant`.
 === Installed Infrastructure
 Docker containers running common infrastructure are installed in `/home/vagrant/bin/servers`.  Look at the `docker-compose.yml` file to see what services are currently available to use.  Run the `start.sh` script to install and run the servers.  You can also start up a single server, eg `docker-compose up -d mongodb`.
 
-=== Juniper VPN Support
-
-1. Change into the `~/vagrant/VPN` folder
-1. edit `jvpn.ini` changing the `username` and `password` values
-1. run `./vpn.sh` to start your session
-1. `ctrl-c` to exit the session
-
 === Docker-based IDEs
-We've deprecated the use of Docker-based IDEs.  We've found that projects that produce and consume Docker images can be challenging when running from within a container.  If Docker in Docker ever becomes mainstream, we'll look into switching back.
+We've deprecated the use of Docker-based IDEs.  We've found that projects that produce and consume Docker images can be challenging when running from within a container.  If Docker in Docker ever becomes mainstream, we'll look into switching back. See <<Using Snap To Install Applications>> for a better alternative.
 
 === Applying Your Company Specific Customizations
 The system will look for an environment variable named `CORPORATE_PLAYS`.  If the shell running Vagrant specifies the variable such that it points to an Ansible project on GitHub, the plays will be run and the changes applied.  For example `export CORPORATE_PLAYS=kurron/ansible-pull-transparent.git` will result in https://github.com/kurron/ansible-pull-transparent.git[this playbook] getting run.  If the environment variable does not exist, the custom provisioning step is not run.
 
 === Applying Your Personal Customizations
-The system will look for an environment variable named `USER_PLAYS`.  If the shell running Vagrant specifies the variable such that it points to an Ansible project on GitHub, the plays will be run and the changes applied.  For example `export USER_PLAYS=myaccount/my-custom-tweaks.git` will result in https://github.com/myaccount/my-custom-tweaks[this playbook] getting run.  If the environment variable does not exist, the custom provisioning step is not run.
+The system will look for an environment variable named `USER_PLAYS`.  If the shell running Vagrant specifies the variable such that it points to an Ansible project on GitHub, the plays will be run and the changes applied.  For example `export USER_PLAYS=myaccount/my-custom-tweaks.git` will result in the playbook getting run.  If the environment variable does not exist, the custom provisioning step is not run. See <<I Want To Customize My Box But I’m Not Comfortable With Ansible Yet>> for tips on how to customize your box.
 
 === Customizations: Linux Example
 1. create and/or edit `~/.bash_profile`
@@ -131,9 +124,6 @@ export USER_PLAYS=foo/custom-tweaks.git
 === Gather Docker Container Metrics
 `sudo csysdig -pcontainer` will fire up the sysdig tool.  Use `F2` to switch to the container view and see how each container is using system resources.  Explore some http://www.sysdig.org/wiki/sysdig-examples/[examples of how to use Sysdig] and see how can aid in troubleshooting.
 
-=== Docker-only Box
-If you don't need a full desktop but just the Docker engine, try using https://github.com/kurron/vagrant-docker-server[vagrant-docker-server]
-
 === Sub-Projects
 TIP: We've moved away from using `ansible-pull` and to using http://docs.ansible.com/ansible/playbooks_roles.html[Ansible Roles], which give us a better mechanism for reusing provisioning logic.  You can find a https://galaxy.ansible.com/kurron/[list of available roles] in my Ansible Galaxy account.  More are sure to be included over time.
 
@@ -151,38 +141,6 @@ TIP: We've moved away from using `ansible-pull` and to using http://docs.ansible
 * various http://www.jetbrains.com/[JetBrains IDEs]
 * https://github.com/jkbrzt/httpie[httpie] - a more friendly alternative to cURL and wget
 
-=== Different Windowing Systems
-CAUTION: Currently in incubation.
-
-We have branches that use different window managers that may appeal to you.  Use Git to switch to appropriate branch and run `vagrant up` to try it out.
-
-* Xubuntu
-* Lubuntu
-* Gnome
-* Kubuntu
-* Mate
-* Cinnamon
-* Unity
-
-=== SSH Jump Servers
-Some personal and corporate plays install a custom SSH configuration which simplifies access to private machines.  Look in `~/.ssh/config` to see what your configuration looks likes.  When I want to access an Amazon EC2 instance in a private subnet, I have to proxy through a Bastion, aka Jump Server, box.  To do that I need to edit the configuration file to make sure I have the proper public address of the Bastion box.
-
-```
-Host bastion
-    User ec2-user
-    HostName ec2-54-218-52-2.us-west-2.compute.amazonaws.com
-    IdentityFile ~/Bitbucket/Operations/aws-ssh-keys/us-west-2/asgard-lite-test.pem
-    ForwardAgent yes
-
-Host 10.0.*.*
-    User ec2-user
-    IdentityFile ~/Bitbucket/Operations/aws-ssh-keys/us-west-2/asgard-lite-test.pem
-    ProxyCommand ssh bastion -W %h:%p
-    ExitOnForwardFailure yes
-```
-
-To test out the configuration, try `ssh bastion`.  Once that is working, try connecting to an internal box `ssh 10.20.30.40` and see if that works.  The same setup works for accessing your home network.
-
 == Troubleshooting
 
 === My Favorite App Is Missing!
@@ -190,48 +148,6 @@ Due to ever increasing image size, some applications no longer come pre-installe
 
 === My Customization Script No Longer Works!
 The custom Ansible playbooks are now launched using the normal user account instead of the `root` account.  You should check your playbook to ensure that `Become: True` are on the plays that require them.  Another place to check is the Ansible code itself.  The newest release has moved beyond deprecation and has removed some constructs.  I noticed it with some of my plays that use iteration.
-
-=== My Network Does Not Seem To Be Functioning?
-BY default the box is configured to appear as a node on the network, allowing others to connect to services on your machine.  You can try putting the box into NAT-only mode to see if that fixes things for you. Edit `vagrantfile`, commenting out the `config.vm.network` setting like so:
-
-```
-    # put the box on the network so it can be accessed by others
-#   config.vm.network "public_network"
-
-```
-
-=== I've upgrade to kurron/xenial-xubuntu:5.1.28 and things are acting weird
-As of October 1, 2017, the 5.1.28 box has not been officially announced because the switch over from JDK 8 to JDK 9 is still undergoing tests.  If you upgraded and are seeing odd behavior, there are a few simple edits to fix things.
-
-=== IDE Desktop Launchers
-Right mouse click on your IDE's desktop icon and select `Properties` and then the `Launcher` tab.  You'll need to edit the `Command` to point to JDK 8. Here is an example for the PyCharm launcher `env PYCHARM_JDK=/usr/lib/jvm/jdk-8 /home/vagrant/Software/pycharm/bin/pycharm.sh`. If you are **not** doing any JVM development, then this is all you need to do.
-
-=== JVM Developers
-JVM developers will need to get `JAVA_HOME` and other environment variables to point to JDK 8.  To do this, edit two files:
-
-* /etc/environment
-* /etc/profile.d/default-jdk-environment.sh
-
-Once those are changed, log out and back in again and run `echo $JAVA_HOME` and `java -version` to verify your changes.
-
-=== Where did `/vagrant` go?
-There is http://stackoverflow.com/questions/42074246/vagrant-error-unable-to-mount-virtualbox-shared-folders-guest-additions-vboxs[an issue with Windows 10 and VirtualBox 5.1.16] that prevents Vagrant from starting properly.  As a workaround, we've disabled sharing of folders.  Non-Windows users can edit the `vagrantfile` and re-enable the mount if desired.
-
-TIP: The issue has been resolved in VirtualBox 5.1.18.  The `/vagrant` folder is now mounted as usual.
-
-=== Vagrant Asks Me Which Network Interface To Bind To
-By default, the box is configured to join the local network as a fully accessible machine. The `desktop.vm.network "public_network"` in the `vagrantfile` is the key to this.  If you have multiple networks available on your machine, running a VPN for example, Vagrant needs to know which network you want to put your Vagrant box onto and will wait until you give it guidance.
-
-```
-==> desktop: Setting the name of the VM: jvmguy.desktop
-==> desktop: Clearing any previously set network interfaces...
-==> desktop: Available bridged network interfaces:
-1) Intel(R) 82579V Gigabit Network Connection
-2) Juniper Networks Virtual Adapter
-==> desktop: When choosing an interface, it is usually the one that is
-==> desktop: being used to connect to the internet.
-    desktop: Which interface should the network bridge to?
-```
 
 === Vagrant Box Does Not Come Up
 If you find that when you are building a new box that it does not come up, try going into the `Settings->USB` section of your box in the VirtuabBox UI and disabling the USB controller. If you want USB support, make sure you have installed https://www.virtualbox.org/wiki/Downloads[VM VirtualBox Extension Pack].
@@ -255,13 +171,6 @@ One of the first steps is to update the APT repositories via `apt-get update` wh
 
 === My Git settings are all wrong!
 You need to specify a custom Git configuration file.  The best way to do that is to create and apply your own customizations. See the <<Applying Your Own Customizations>> section above on how to do that.
-
-=== I lost power and now VPN isn't working!
-.From Nick
-[quote]
-____
-I guess this is just an FYI to anybody who might have also had this problem, but if you are using the VPN on the guest boxes, it will edit your `resolv.conf` file to only use TLs nameservers.  If you lose power, these will remain in this state and you will lose DNS the next time you start the machine (seeing that you no longer have a VPN session).  I found just starting and stopping the scripts in `~/VPN` would restore the `resolv.conf` back to normal.
-____
 
 === I'm running Windows 7 and Vagrant hangs!
 You need to install a current version of https://www.microsoft.com/en-us/download/details.aspx?id=40855[Windows Management Framework] and then reboot your machine.  Apparently, there is a compatibility issue older PowerShell and newer Vagrant versions.
