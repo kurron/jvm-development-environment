@@ -170,7 +170,7 @@ One of the first steps is to update the APT repositories via `apt-get update` wh
 1. `vagrant provision` should resume the provisioning of the box
 
 === My Git settings are all wrong!
-You need to specify a custom Git configuration file.  The best way to do that is to create and apply your own customizations. See the <<Applying Your Own Customizations>> section above on how to do that.
+You need to specify a custom Git configuration file.  The best way to do that is to create and apply your own customizations.
 
 === I'm running Windows 7 and Vagrant hangs!
 You need to install a current version of https://www.microsoft.com/en-us/download/details.aspx?id=40855[Windows Management Framework] and then reboot your machine.  Apparently, there is a compatibility issue older PowerShell and newer Vagrant versions.
