@@ -199,6 +199,7 @@ The solution is to `vagrant destroy xubuntu` followed by `vagrant box remove kur
     * Removed: MongoDB Compass (lack of use)
     * Removed: WebStorm (easy install via Snap Store)
     * Removed: Charles Proxy (lack of use)
+    * Added: https://docs.aws.amazon.com/eks/latest/userguide/getting-started.html[IAM Authenticator for EKS]
     * Added: https://github.com/localstack/awscli-local[localstack CLI]
     * Upgraded: Kernel 4.15.0-22-generic
     * Upgraded: SDKMAN! SDKMAN 5.7.2+323
