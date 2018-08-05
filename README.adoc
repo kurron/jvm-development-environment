@@ -195,6 +195,40 @@ The solution is to `vagrant destroy xubuntu` followed by `vagrant box remove kur
 
 == Change History
 
+1. Release 2018.08.0400
+    * Removed: MongoDB Compass (lack of use)
+    * Removed: WebStorm (easy install via Snap Store)
+    * Removed: Charles Proxy (lack of use)
+    * Added: https://github.com/localstack/awscli-local[localstack CLI]
+    * Upgraded: Kernel 4.15.0-22-generic
+    * Upgraded: SDKMAN! SDKMAN 5.7.2+323
+    * Upgraded: Python 3.6.5
+    * Upgraded: Legacy Python 2.7.15rc1
+    * Upgraded: Edge Python Python 3.6.5
+    * Upgraded: Virtualenv 16.0.0
+    * Upgraded: Docker Docker version 18.06.0-ce, build 0ffa825
+    * Upgraded: Docker Compose docker-compose version 1.22.0, build f46880fe
+    * Upgraded: Docker Machine docker-machine version 0.15.0, build b48dc28d
+    * Upgraded: AWS CLI aws-cli/1.15.71 Python/2.7.15rc1 Linux/4.15.0-22-generic botocore/1.10.70
+    * Upgraded: AWS ECS CLI ecs-cli version 1.7.0 (61f83b2e)
+    * Upgraded: Kubectl Client Version: v1.11.1
+    * Upgraded: Helm v2.9.1
+    * Upgraded: localstack 0.8.7
+    * Upgraded: Sysdig sysdig version 0.22.1
+    * Upgraded: Falco falco version 0.11.1
+    * Upgraded: Nomad Nomad v0.8.4 (dbee1d7d051619e90a809c23cf7e55750900742a)
+    * Upgraded: Packer 1.2.5
+    * Upgraded: Terraform Terraform v0.11.7
+    * Upgraded: Vault Vault v0.10.4 ('e21712a687889de1125e0a12a980420b1a4f72d3')
+    * Upgraded: NodeJS v8.11.3
+    * Upgraded: NPM 5.6.0
+    * Upgraded: Yeoman 2.0.5
+    * Upgraded: Bower 1.8.4
+    * Upgraded: Gulp [13:25:09] CLI version 2.0.1
+    * Upgraded: Grunt grunt-cli v1.2.0
+    * Upgraded: Serverless 1.29.2
+    * Upgraded: IntelliJ IDEA 2018.2
+    * Upgraded: PyCharm 2018.2
 1. Release 2018.05.2801
     * Removed: Windows support (I no longer have access to a Window 10 box, preventing me from diagnosing issues)
     * Removed: VPN support (it no longer installs and I don't have access to a VPN account to diagnose issues)
