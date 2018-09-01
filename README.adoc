@@ -198,7 +198,7 @@ The solution is to `vagrant destroy xubuntu` followed by `vagrant box remove kur
 1. Release 2018.09.01
     * Upgraded: Kernel 4.15.0-33-generic
     * Upgraded: SDKMAN! 5.7.2+323
-    * Upgraded: ython 3.6.5
+    * Upgraded: Python 3.6.5
     * Upgraded: Legacy Python 2.7.15rc1
     * Upgraded: Virtualenv 16.0.0
     * Upgraded: Docker version 18.06.1-ce, build e68fc7a
