@@ -34,7 +34,7 @@ All the components of the environment live in repositories on the internet so th
 TIP: Some people have experienced issues when rebuilding a box due to flaky networks, online assets moving to different locations or installation processes changing.  When you need your box, you need your box and you don't have the time to troubleshoot an installation issue.  To combat this problem, we've decided to change the build model and bake in much of the software into the base image.  The trade-off we've made to ensure quick and stable rebuilds is a larger initial download.  All boxes are currently housed in https://app.vagrantup.com/kurron[HashiCorp's Vagrant Cloud] repository.
 
 == Installation
-Use Git to clone this project, go into the project folder and type `vagrant up` and go get a cup of coffee.  The construction time of the box greatly depends on your internet speeds.
+Use Git to clone this project, go into the project folder,  type `vagrant up` and go get a cup of coffee.  The construction time of the box greatly depends on your internet speeds.
 
 .Xubuntu
 image::xubuntu.png[Xubuntu]
