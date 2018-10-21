@@ -195,7 +195,40 @@ The solution is to `vagrant destroy xubuntu` followed by `vagrant box remove kur
 
 == Change History
 
-1. Release 2018.09.01
+1. Release 2018.10.1700
+    * Upgraded: Kernel 4.15.0-36-generic
+    * Upgraded: OpenJDK Runtime Environment Zulu11.1+23 (build 11-ea+22)
+    * Upgraded: OpenJDK Runtime Environment (Zulu 8.31.0.1-linux64) (build 1.8.0_181-b02)
+    * Upgraded: SDKMAN! 5.7.3+337
+    * Upgraded: Python 3.6.6
+    * Upgraded: Legacy Python 2.7.15rc1
+    * Upgraded: Virtualenv 16.0.0
+    * Upgraded: Docker version 18.06.1-ce, build e68fc7a
+    * Upgraded: docker-compose version 1.22.0, build f46880fe
+    * Upgraded: docker-machine version 0.15.0, build b48dc28d
+    * Upgraded: aws-cli/1.16.38 Python/2.7.15rc1 Linux/4.15.0-36-generic botocore/1.12.28
+    * Upgraded: AWS ecs-cli version 1.9.0 (a426586)
+    * Upgraded: Kubectl Client Version: v1.11.2
+    * Upgraded: Helm Client: v2.10.0+g9ad53aa
+    * Upgraded: localstack 0.8.7
+    * Upgraded: sysdig version 0.24.1
+    * Upgraded: falco version 0.12.1
+    * Upgraded: Nomad v0.8.6
+    * Upgraded: Packer 1.3.1
+    * Upgraded: Terraform v0.11.9
+    * Upgraded: Vault v0.11.3
+    * Upgraded: NodeJS v8.12.0
+    * Upgraded: NPM 6.4.1
+    * Upgraded: Yeoman 2.0.5
+    * Upgraded: Bower 1.8.4
+    * Upgraded: Gulp [18:48:21] CLI version 2.0.1
+    * Upgraded: Grunt grunt-cli v1.3.1
+    * Upgraded: Serverless 1.32.0
+    * Upgraded: IntelliJ IDEA 2018.2.5
+    * Upgraded: PyCharm 2018.2.4
+    * Upgraded: Support for VirtualBox 5.2.20
+    * Upgraded: Support for VMWare Fusion 10.1.3
+1. Release 2018.09.0100
     * Upgraded: Kernel 4.15.0-33-generic
     * Upgraded: SDKMAN! 5.7.2+323
     * Upgraded: Python 3.6.5
