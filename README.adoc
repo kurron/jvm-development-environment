@@ -45,6 +45,7 @@ The articles https://opensource.com/article/18/3/manage-workstation-ansible[How 
 === Using Snap To Install Applications
 Due to the ever increasing image size, some applications no longer come pre-installed.  Those applications, however, can be easily installed via Snap.  You can think of a Snap as a Docker image for GUI applications.  You can find the popular applications in the https://snapcraft.io/store[Snap Store]:
 
+* MicroK8s
 * Visual Studio Code
 * Atom
 * Skype
