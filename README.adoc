@@ -19,14 +19,12 @@ This project is a Vagrant box that is provisioned for software development.  It 
 
 * https://www.vagrantup.com/[Vagrant] installed and working
 * https://www.virtualbox.org/[VirtualBox] or https://www.vmware.com/products/fusion.html[VMware Fusion] installed and working
-* [line-through]https://www.virtualbox.org/wiki/Downloads[VirtualBox Extension Pack] installed into VirtualBox
 * https://en.wikipedia.org/wiki/X86_virtualization[Virtualization support] enabled in your BIOS
 * a working internet connection
 * Your corporate VPN running (if you want to apply some work-specific plays)
 
 IMPORTANT: if you don't enable virtualization support in your BIOS, VirtualBox will not run correctly.
 
-[line-through]IMPORTANT: if you don't install the extension pack, the virtual machine won't come up, complaining about USB errors.
 
 == Building
 All the components of the environment live in repositories on the internet so there is nothing to build.
