@@ -199,6 +199,24 @@ The solution is to `vagrant destroy xubuntu` followed by `vagrant box remove kur
 
 == Change History
 
+1. Release 2019.11.1535
+* Upgraded: Kernel 4.15.0-72-generic
+* Upgraded: JDK 0
+* Upgraded: SDKMAN! 0
+* Upgraded: Python 3.6.9
+* Upgraded: Legacy Python 2.7.15+
+* Upgraded: Docker version 19.03.5, build 633a0ea838
+* Upgraded: docker-compose version 1.24.1, build 4667896b
+* Upgraded: docker-machine version 0.16.2, build bd45ab13
+$ Upgraded aws-cli/1.16.290 Python/2.7.15+ Linux/4.15.0-72-generic botocore/1.13.26
+* Upgraded: AWS ecs-cli version 1.18.0 (3970a6c)
+* Upgraded: Nomad v0.9.5 (1cbb2b9a81b5715be2f201a4650293c9ae517b87)
+* Upgraded: Packer 1.4.3
+* Upgraded: Terraform v0.11.14
+* Upgraded: Vault v1.2.3
+* Upgraded: Support for VirtualBox 6.0.18
+* Upgraded: Support for VMWare Fusion 10.1.6
+
 1. Release 2019.05.1452
     * Upgraded: Kernel 4.15.0-50-generic
     * Upgraded: JDK 1.8.0_212
