@@ -18,7 +18,7 @@ This project is a Vagrant box that is provisioned for software development.  It 
 == Prerequisites
 
 * https://www.vagrantup.com/[Vagrant] installed and working
-* https://www.virtualbox.org/[VirtualBox] or https://www.vmware.com/products/fusion.html[VMware Fusion] installed and working
+* https://www.virtualbox.org/[VirtualBox] installed and working
 * https://en.wikipedia.org/wiki/X86_virtualization[Virtualization support] enabled in your BIOS
 * a working internet connection
 * Your corporate VPN running (if you want to apply some work-specific plays)
