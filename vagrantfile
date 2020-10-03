@@ -1,11 +1,11 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
 
-Vagrant.require_version ">= 2.2.7"
+Vagrant.require_version ">= 2.2.10"
 
 Vagrant.configure("2") do |config|
     config.vagrant.host = :detect
-    config.vm.box = "kurron/bionic-xubuntu"
+    config.vm.box = "kurron/focal-xubuntu"
     config.vm.boot_timeout = 300
     config.vm.box_check_update = true
     config.vm.graceful_halt_timeout = 60
@@ -60,14 +60,7 @@ Vagrant.configure("2") do |config|
             v.gui = true
             v.name = "jvmguy.xubuntu"
             v.memory = 6144
-            v.cpus = 3
-        end
-        xubuntu.vm.provider "vmware_desktop" do |v|
-            v.gui = true
-#           v.name = "jvmguy.xubuntu"
-            v.memory = 8192
-            v.cpus = 3
-            v.port_forward_network_pause = 60
+            v.cpus = 2
         end
     end
 
