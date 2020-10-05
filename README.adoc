@@ -206,10 +206,6 @@ The solution is to `vagrant destroy xubuntu` followed by `vagrant box remove kur
     * Upgraded: Python 3.8.2
     * Upgraded: Docker version 19.03.13, build 4484c46d9d
     * Upgraded: docker-compose version 1.27.4, build 40524192
-    * Upgraded: docker-machine version 0.16.2, build bd45ab13
-    * Upgraded: Nomad v0.10.4 (f750636ca68e17dcd2445c1ab9c5a34f9ac69345)
-    * Upgraded: Packer 1.5.4
-    * Upgraded: Vault v1.3.2
     * Upgraded: Support for VirtualBox 6.1.14 r140239
 1. Release 2020.02.2200
     * Upgraded: Kernel 4.15.0-76-generic
