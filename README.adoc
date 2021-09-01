@@ -39,6 +39,9 @@ image::xubuntu.png[Xubuntu]
 
 == Tips and Tricks
 
+=== All I see is a black box!
+Some are reporting that when the box is first started, everything is black.  The cause is unknown but the work around is to switch from full screen to windowed and back. So far, this behavior has only been reported on Windows 10 running VirtualBox.
+
 === Where is my JDK?
 Recent changes to the JDK release schedule have resulted in numerous versions of the JDK available for download, making it difficult to select a version that will meet your needs.  We now use https://sdkman.io/[SDK Man!] to manage JVM installation. The `~/bin` folder contains a script that will help you list out the available JVMs and how to install them. The key is to select the proper JVM identifier from the list and use it when invoking the installation command. The `JAVA_HOME` and `JDK_HOME` environment variables already point to the location that SDK Man! installs the JDK.
  
