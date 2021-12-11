@@ -202,6 +202,8 @@ The solution is to `vagrant destroy xubuntu` followed by `vagrant box remove kur
 
 == Change History
 
+1. Release 2021.09.1100
+    * Upgraded: based on current Ubuntu release which contains many package updates and a new kernel. 
 1. Release 2020.10.2800
     * Changed: Docker installed on demand via `~/bin/install-docker.sh`
 1. Release 2020.10.0300
